@@ -32,7 +32,7 @@
 ## Notes
 
 - Clarifications resolved:
-  - Today: Show text "Today", background matches icon color, slightly darker border.
+  - Today: Show text "Today", background matches entry color, slightly darker border.
   - Time zone: Use device’s current time zone; day boundaries at local midnight.
 
 
