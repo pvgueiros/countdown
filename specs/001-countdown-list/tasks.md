@@ -21,8 +21,11 @@
 - [ ] T002 Add SwiftLint config in `.swiftlint.yml` at repo root
 - [ ] T003 Add SwiftFormat config in `.swiftformat` at repo root
 - [ ] T004 Enable “Treat warnings as errors” in `Countdown.xcodeproj/project.pbxproj` (Debug + Release)
-- [ ] T005 Enable code coverage collection in scheme `Countdown` (modify `Countdown.xcodeproj/` scheme)
+- [ ] T005 Enable code coverage collection in scheme `Countdown` by editing `Countdown.xcodeproj/xcshareddata/xcschemes/Countdown.xcscheme`
 - [ ] T006 [P] Add logging utility using OSLog in `Countdown/Presentation/Logging/Log.swift`
+- [ ] T047 Add GitHub Actions workflow to build and test with coverage in `.github/workflows/ios-ci.yml` (xcodebuild with code coverage enabled)
+- [ ] T048 [P] Add CI script `scripts/ci/build-and-test.sh` to run `xcodebuild` with warnings-as-errors and produce an `.xcresult` with coverage
+- [ ] T049 Parse coverage from `.xcresult` and fail CI if coverage < 80% in `scripts/ci/check-coverage.sh`
 
 ---
 
@@ -98,12 +101,12 @@
 
 ### Tests for User Story 5
 
-- [ ] T028 [P] [US5] Unit test partition/sort logic in `CountdownTests/UseCases/GetDatesPartitionedUseCaseTests.swift`
+- [ ] T028 [P] [US5] Unit test partition/sort logic (including same-date tie-breaker by `createdAt`) in `CountdownTests/UseCases/GetDatesPartitionedUseCaseTests.swift`
 - [ ] T029 [P] [US5] UI test tabs behavior in `CountdownUITests/TabsOrderingTests.swift`
 
 ### Implementation for User Story 5
 
-- [ ] T030 [US5] Add `SegmentedControl`/Tab UI to `CountdownListScreen` in `Countdown/UI/Screens/CountdownListScreen.swift`
+- [ ] T030 [US5] Add two tabs (using `SegmentedControl`) to `CountdownListScreen` in `Countdown/UI/Screens/CountdownListScreen.swift`
 - [ ] T031 [US5] Expose partitioned sections from `DateListViewModel` in `Countdown/Presentation/ViewModels/DateListViewModel.swift`
 
 **Checkpoint**: P1 scope complete and demoable
@@ -154,7 +157,7 @@
 
 **Purpose**: Improvements that affect multiple user stories
 
-- [ ] T040 Apply “liquid glass” style components in `Countdown/UI/Components/GlassBackground.swift` and integrate in screens
+- [ ] T040 Apply “liquid glass” style in `Countdown/UI/Components/GlassBackground.swift` and integrate in `Countdown/UI/Screens/CountdownListScreen.swift`
 - [ ] T041 Accessibility: ensure contrast for entry-colored labels; Dynamic Type support in all views
 - [ ] T042 Localization: add `Localizable.strings` and use format strings for “%d days left”, “%d days ago”, “Today”, title/subtitle
 - [ ] T043 [P] Add additional unit tests in `CountdownTests/` to raise coverage ≥80%

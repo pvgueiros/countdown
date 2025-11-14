@@ -131,9 +131,10 @@ As a user, I can switch between two tabs: Upcoming (Today and future dates) and 
   - Past dates: "X days ago"  
   - MUST use the user’s current locale calendar and device time zone; day boundaries occur at local midnight and counts may adjust when traveling.
   - If the target date is today, the label MUST read "Today" instead of "0", the background color MUST match the entry color, and the label MUST have a slightly darker border for contrast.
+  - Strings MUST be localized with correct pluralization for the user’s locale.
 - **FR-007**: The date text MUST be formatted legibly according to the user’s locale and be left-aligned; the countdown label MUST be right-aligned within the row.
 - **FR-008**: When no dates are available, the screen MUST display a clear empty state message in place of the list.
-- **FR-009**: Visual presentation SHOULD be consistent with the provided design reference while not requiring pixel-perfect matching.
+- **FR-009**: Visual presentation SHOULD be consistent with the provided design reference while not requiring pixel-perfect matching; use SwiftUI material (e.g., `.ultraThinMaterial`) for list or row backgrounds to achieve the “liquid glass” style and ensure text contrast passes accessibility checks.
 - **FR-010**: The interface MUST maintain sufficient contrast for readability of the countdown label on both colored and gray backgrounds.
 - **FR-011**: The app MUST persist dates of interest on-device (e.g., UserDefaults or Core Data) so entries survive app relaunches.
 - **FR-012**: The app MUST support basic add and edit operations for dates of interest (no delete required for MVP).
