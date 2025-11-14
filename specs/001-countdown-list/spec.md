@@ -11,6 +11,8 @@
 
 - Q: What is the MVP data source and persistence level? → A: On-device persistence (e.g., UserDefaults/Core Data) with basic add/edit.
 - Q: Which icon set will be used? → A: SF Symbols (system icons).
+- Q: How should list ordering and grouping be presented? → A: Two tabs: Upcoming (Today + future) sorted ascending by date; Past sorted descending by date.
+- Q: What is the tie-breaker for items with the same date within a tab? → A: Creation time (oldest→newest).
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -91,12 +93,29 @@ As a user, I can add a new date of interest and edit an existing one, and the ch
 
 [Add more user stories as needed, each with an assigned priority]
 
+### User Story 5 - Browse Upcoming and Past tabs (Priority: P1)
+
+As a user, I can switch between two tabs: Upcoming (Today and future dates) and Past (past dates), where Upcoming is sorted ascending by date and Past is sorted descending by date.
+
+**Why this priority**: Ensures users can focus on imminent events while keeping history accessible and organized.
+
+**Independent Test**: With multiple items spanning past, today, and future, verify that items appear under the correct tab and are ordered per the rules.
+
+**Acceptance Scenarios**:
+
+1. Given items with dates in the past, today, and future, when viewing Upcoming, then it shows today and future items only, sorted by date ascending (nearest first).
+2. Given items with dates in the past, today, and future, when viewing Past, then it shows past items only, sorted by date descending (most recent first).
+3. Given two items on the same date, when displayed within a tab, then their relative order is creation time ascending (oldest→newest).
+
+---
+
 ### Edge Cases
 
 - Date is today: Display the countdown label text as "Today"; background uses the item’s icon color with a slightly darker border for contrast.
 - Time zone differences: Use the device’s current time zone for day calculations; day boundaries occur at local midnight and counts may adjust when traveling.
 - Very large date ranges (years away or years past): display should remain legible; numeric value may grow large but must not overflow layout.
 - SF Symbols availability: If a chosen symbol is unavailable on the minimum iOS target, use a compatible fallback symbol.
+- Sorting tie-breakers: When multiple items share the same calendar date within a tab, order by creation time ascending (oldest→newest).
 
 ## Requirements *(mandatory)*
 
@@ -119,6 +138,9 @@ As a user, I can add a new date of interest and edit an existing one, and the ch
 - **FR-011**: The app MUST persist dates of interest on-device (e.g., UserDefaults or Core Data) so entries survive app relaunches.
 - **FR-012**: The app MUST support basic add and edit operations for dates of interest (no delete required for MVP).
 - **FR-013**: Icons MUST use SF Symbols; each item stores an SF Symbol name and applies the assigned color (multi-color or tinted) while ensuring the countdown label background matches the icon’s color for future dates.
+- **FR-014**: The main list MUST be split into two tabs: Upcoming (includes Today and future) and Past (includes strictly past).
+- **FR-015**: Upcoming MUST be ordered by calendar date ascending (nearest first). Past MUST be ordered by calendar date descending (most recent first).
+- **FR-016**: For items with the same calendar date within a tab, the app MUST order by creation time ascending (oldest→newest).
 
 *Clarifications resolved:*
 - “Today”: show text "Today", use icon color background, add slightly darker border.
