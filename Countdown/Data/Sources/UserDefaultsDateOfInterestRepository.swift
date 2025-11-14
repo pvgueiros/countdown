@@ -1,24 +1,24 @@
 import Foundation
 
 public actor UserDefaultsDateOfInterestRepository: DateOfInterestRepository {
-    private let defaults: UserDefaults
     private let key = "datesOfInterest"
     private let encoder = JSONEncoder()
     private let decoder = JSONDecoder()
 
-    public init(defaults: UserDefaults = .standard) {
-        self.defaults = defaults
+    public init() {
         self.encoder.dateEncodingStrategy = .iso8601
         self.decoder.dateDecodingStrategy = .iso8601
     }
 
     public func fetchAll() async throws -> [DateOfInterest] {
+        let defaults = UserDefaults.standard
         guard let data = defaults.data(forKey: key) else { return [] }
         let dtos = try decoder.decode([DateOfInterestMapper.DTO].self, from: data)
         return dtos.map { DateOfInterestMapper.fromDTO($0) }
     }
 
     private func saveAll(_ items: [DateOfInterest]) throws {
+        let defaults = UserDefaults.standard
         let dtos = items.map { DateOfInterestMapper.toDTO($0) }
         let data = try encoder.encode(dtos)
         defaults.set(data, forKey: key)

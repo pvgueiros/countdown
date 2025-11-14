@@ -1,7 +1,7 @@
 import Foundation
 
 // Placeholder mapper for potential DTO conversions.
-public enum DateOfInterestMapper {
+public nonisolated enum DateOfInterestMapper {
     public struct DTO: Codable, Equatable, Identifiable {
         public let id: UUID
         public var title: String
