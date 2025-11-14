@@ -1,6 +1,6 @@
 import Foundation
 
-public struct DateOfInterest: Codable, Equatable, Identifiable {
+public struct DateOfInterest: Equatable, Identifiable {
     public let id: UUID
     public var title: String
     public var date: Date

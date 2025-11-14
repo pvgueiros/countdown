@@ -14,11 +14,13 @@ public actor UserDefaultsDateOfInterestRepository: DateOfInterestRepository {
 
     public func fetchAll() async throws -> [DateOfInterest] {
         guard let data = defaults.data(forKey: key) else { return [] }
-        return try decoder.decode([DateOfInterest].self, from: data)
+        let dtos = try decoder.decode([DateOfInterestMapper.DTO].self, from: data)
+        return dtos.map { DateOfInterestMapper.fromDTO($0) }
     }
 
     private func saveAll(_ items: [DateOfInterest]) throws {
-        let data = try encoder.encode(items)
+        let dtos = items.map { DateOfInterestMapper.toDTO($0) }
+        let data = try encoder.encode(dtos)
         defaults.set(data, forKey: key)
     }
 
