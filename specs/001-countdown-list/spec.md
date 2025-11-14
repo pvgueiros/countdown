@@ -54,7 +54,7 @@ As a user, I can quickly understand how many days remain until a future date or 
 
 **Acceptance Scenarios**:
 
-1. Given a date 10 calendar days in the future, when displayed, then the countdown label shows "in 10 days" and the label background color matches the entry color.
+1. Given a date 10 calendar days in the future, when displayed, then the countdown label shows "10 days left" and the label background color matches the entry color.
 2. Given a date 3 calendar days in the past, when displayed, then the countdown label shows "3 days ago" and the label background color is gray.
 3. Given a date equal to today, when displayed, then the countdown label reads "Today", the label background color matches the entry color, and the label shows a slightly darker border for contrast.
 
@@ -127,7 +127,7 @@ As a user, I can switch between two tabs: Upcoming (Today and future dates) and 
 - **FR-004**: For future dates, the countdown label’s background color MUST visually match the associated entry color.
 - **FR-005**: For past dates, the countdown label’s background color MUST be gray.
 - **FR-006**: The countdown label MUST show the number of whole calendar days between “today” and the target date, using the following wording:  
-  - Future dates: "in X days"  
+  - Future dates: "X days left"  
   - Past dates: "X days ago"  
   - MUST use the user’s current locale calendar and device time zone; day boundaries occur at local midnight and counts may adjust when traveling.
   - If the target date is today, the label MUST read "Today" instead of "0", the background color MUST match the entry color, and the label MUST have a slightly darker border for contrast.

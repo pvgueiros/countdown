@@ -39,7 +39,7 @@
 - [ ] T011 Create use case `GetDatesPartitionedUseCase` in `Countdown/UseCases/GetDatesPartitionedUseCase.swift` (upcoming/past, sorting + tie-breaker)
 - [ ] T012 Create use case `AddDateOfInterestUseCase` in `Countdown/UseCases/AddDateOfInterestUseCase.swift`
 - [ ] T013 Create use case `UpdateDateOfInterestUseCase` in `Countdown/UseCases/UpdateDateOfInterestUseCase.swift`
-- [ ] T014 [P] Create `CountdownFormatter` in `Countdown/Presentation/Formatters/CountdownFormatter.swift` ("in X days"/"X days ago"/"Today", device time zone)
+- [ ] T014 [P] Create `CountdownFormatter` in `Countdown/Presentation/Formatters/CountdownFormatter.swift` ("X days left"/"X days ago"/"Today", device time zone)
 - [ ] T015 [P] Create `DateFormatterProvider` in `Countdown/Presentation/Formatters/DateFormatterProvider.swift` (localized date)
 - [ ] T016 Create Coordinator base + AppCoordinator in `Countdown/Presentation/Coordinators/AppCoordinator.swift`
 - [ ] T017 [P] Add color utility `EntryColor+Hex.swift` in `Countdown/Presentation/Colors/EntryColor+Hex.swift` (parse `entryColorHex` to Color; gray fallback)
@@ -74,7 +74,7 @@
 
 **Goal**: Correct countdown phrasing and background per entry color
 
-**Independent Test**: With future and past dates, verify labels show “in X days” / “X days ago”; backgrounds match entry color for future, gray for past.
+**Independent Test**: With future and past dates, verify labels show “X days left” / “X days ago”; backgrounds match entry color for future, gray for past.
 
 ### Tests for User Story 2
 
@@ -156,7 +156,7 @@
 
 - [ ] T040 Apply “liquid glass” style components in `Countdown/UI/Components/GlassBackground.swift` and integrate in screens
 - [ ] T041 Accessibility: ensure contrast for entry-colored labels; Dynamic Type support in all views
-- [ ] T042 Localization: add `Localizable.strings` and use format strings for “in %d days”, “%d days ago”, “Today”, title/subtitle
+- [ ] T042 Localization: add `Localizable.strings` and use format strings for “%d days left”, “%d days ago”, “Today”, title/subtitle
 - [ ] T043 [P] Add additional unit tests in `CountdownTests/` to raise coverage ≥80%
 - [ ] T044 [P] Add additional UI tests in `CountdownUITests/` for primary flows
 - [ ] T045 Performance: verify smooth scrolling in list with 100 items

@@ -27,7 +27,7 @@ Branch: 001-countdown-list
 - isPast / isToday / isFuture based on local calendar day
 - daysDelta: integer number of calendar days from today
 - countdownText:
-  - future: "in X days"
+  - future: "X days left"
   - past: "X days ago"
   - today: "Today"
 

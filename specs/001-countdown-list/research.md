@@ -21,7 +21,7 @@ Branch: 001-countdown-list
 - Alternatives: Custom blur stacks. Rejected for complexity.
 
 ### Time semantics
-- Decision: Device time zone; local midnight day boundaries; “Today” special-cased with icon color and darker border.
+- Decision: Device time zone; local midnight day boundaries; “Today” special-cased with entry color and darker border.
 - Rationale: Matches user expectations; clarity for 0-day case.
 - Alternatives: UTC or fixed TZ; rejected for potential confusion.
 
@@ -32,6 +32,6 @@ Branch: 001-countdown-list
 
 ## Open Items (none blocking)
 - Accessibility: Verify contrast for colored countdown labels and borders (WCAG AA).
-- Localization: Confirm phrasing “in X days” / “X days ago” for pluralization.
+- Localization: Confirm phrasing “X days left” / “X days ago” for pluralization.
 
 
