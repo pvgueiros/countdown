@@ -17,15 +17,15 @@
 
 **Purpose**: Project initialization and basic structure
 
-- [ ] T001 Create CLEAN/MVVM+Coordinator directories in `Countdown/{Domain,UseCases,Data/{Sources,Mappers},Presentation/{ViewModels,Coordinators},UI/{Components,Screens}}/`
-- [ ] T002 Add SwiftLint config in `.swiftlint.yml` at repo root
-- [ ] T003 Add SwiftFormat config in `.swiftformat` at repo root
-- [ ] T004 Enable “Treat warnings as errors” in `Countdown.xcodeproj/project.pbxproj` (Debug + Release)
-- [ ] T005 Enable code coverage collection in scheme `Countdown` by editing `Countdown.xcodeproj/xcshareddata/xcschemes/Countdown.xcscheme`
-- [ ] T006 [P] Add logging utility using OSLog in `Countdown/Presentation/Logging/Log.swift`
-- [ ] T047 Add GitHub Actions workflow to build and test with coverage in `.github/workflows/ios-ci.yml` (xcodebuild with code coverage enabled)
-- [ ] T048 [P] Add CI script `scripts/ci/build-and-test.sh` to run `xcodebuild` with warnings-as-errors and produce an `.xcresult` with coverage
-- [ ] T049 Parse coverage from `.xcresult` and fail CI if coverage < 80% in `scripts/ci/check-coverage.sh`
+- [x] T001 Create CLEAN/MVVM+Coordinator directories in `Countdown/{Domain,UseCases,Data/{Sources,Mappers},Presentation/{ViewModels,Coordinators},UI/{Components,Screens}}/`
+- [x] T002 Add SwiftLint config in `.swiftlint.yml` at repo root
+- [x] T003 Add SwiftFormat config in `.swiftformat` at repo root
+- [x] T004 Enable “Treat warnings as errors” in `Countdown.xcodeproj/project.pbxproj` (Debug + Release)
+- [x] T005 Enable code coverage collection in scheme `Countdown` by editing `Countdown.xcodeproj/xcshareddata/xcschemes/Countdown.xcscheme`
+- [x] T006 [P] Add logging utility using OSLog in `Countdown/Presentation/Logging/Log.swift`
+- [x] T047 Add GitHub Actions workflow to build and test with coverage in `.github/workflows/ios-ci.yml` (xcodebuild with code coverage enabled)
+- [x] T048 [P] Add CI script `scripts/ci/build-and-test.sh` to run `xcodebuild` with warnings-as-errors and produce an `.xcresult` with coverage
+- [x] T049 Parse coverage from `.xcresult` and fail CI if coverage < 80% in `scripts/ci/check-coverage.sh`
 
 ---
 
@@ -35,17 +35,17 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T007 Create entity `DateOfInterest` in `Countdown/Domain/Entities/DateOfInterest.swift` (id, title, date, iconSymbolName, entryColorHex, createdAt)
-- [ ] T008 Create repository protocol in `Countdown/Domain/Repositories/DateOfInterestRepository.swift` (CRUD: list/add/update)
-- [ ] T009 Implement UserDefaults repository `UserDefaultsDateOfInterestRepository` in `Countdown/Data/Sources/UserDefaultsDateOfInterestRepository.swift` (JSON encode/decode under key `datesOfInterest`)
-- [ ] T010 [P] Create mapper helpers in `Countdown/Data/Mappers/DateOfInterestMapper.swift` (entity <-> DTO)
-- [ ] T011 Create use case `GetDatesPartitionedUseCase` in `Countdown/UseCases/GetDatesPartitionedUseCase.swift` (upcoming/past, sorting + tie-breaker)
-- [ ] T012 Create use case `AddDateOfInterestUseCase` in `Countdown/UseCases/AddDateOfInterestUseCase.swift`
-- [ ] T013 Create use case `UpdateDateOfInterestUseCase` in `Countdown/UseCases/UpdateDateOfInterestUseCase.swift`
-- [ ] T014 [P] Create `CountdownFormatter` in `Countdown/Presentation/Formatters/CountdownFormatter.swift` ("X days left"/"X days ago"/"Today", device time zone)
-- [ ] T015 [P] Create `DateFormatterProvider` in `Countdown/Presentation/Formatters/DateFormatterProvider.swift` (localized date)
-- [ ] T016 Create Coordinator base + AppCoordinator in `Countdown/Presentation/Coordinators/AppCoordinator.swift`
-- [ ] T017 [P] Add color utility `EntryColor+Hex.swift` in `Countdown/Presentation/Colors/EntryColor+Hex.swift` (parse `entryColorHex` to Color; gray fallback)
+- [x] T007 Create entity `DateOfInterest` in `Countdown/Domain/Entities/DateOfInterest.swift` (id, title, date, iconSymbolName, entryColorHex, createdAt)
+- [x] T008 Create repository protocol in `Countdown/Domain/Repositories/DateOfInterestRepository.swift` (CRUD: list/add/update)
+- [x] T009 Implement UserDefaults repository `UserDefaultsDateOfInterestRepository` in `Countdown/Data/Sources/UserDefaultsDateOfInterestRepository.swift` (JSON encode/decode under key `datesOfInterest`)
+- [x] T010 [P] Create mapper helpers in `Countdown/Data/Mappers/DateOfInterestMapper.swift` (entity <-> DTO)
+- [x] T011 Create use case `GetDatesPartitionedUseCase` in `Countdown/UseCases/GetDatesPartitionedUseCase.swift` (upcoming/past, sorting + tie-breaker)
+- [x] T012 Create use case `AddDateOfInterestUseCase` in `Countdown/UseCases/AddDateOfInterestUseCase.swift`
+- [x] T013 Create use case `UpdateDateOfInterestUseCase` in `Countdown/UseCases/UpdateDateOfInterestUseCase.swift`
+- [x] T014 [P] Create `CountdownFormatter` in `Countdown/Presentation/Formatters/CountdownFormatter.swift` ("X days left"/"X days ago"/"Today", device time zone)
+- [x] T015 [P] Create `DateFormatterProvider` in `Countdown/Presentation/Formatters/DateFormatterProvider.swift` (localized date)
+- [x] T016 Create Coordinator base + AppCoordinator in `Countdown/Presentation/Coordinators/AppCoordinator.swift`
+- [x] T017 [P] Add color utility `EntryColor+Hex.swift` in `Countdown/Presentation/Colors/EntryColor+Hex.swift` (parse `entryColorHex` to Color; gray fallback)
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
