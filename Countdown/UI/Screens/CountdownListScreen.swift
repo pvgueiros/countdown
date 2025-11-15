@@ -39,6 +39,12 @@ public struct CountdownListScreen: View {
                             date: Calendar.current.date(byAdding: .day, value: 7, to: Date()) ?? Date(),
                             iconSymbolName: "calendar",
                             entryColorHex: "#0A84FF"
+                        ),
+                        DateOfInterest(
+                            title: "Travel",
+                            date: Date().addingTimeInterval(-60 * 60 * 24 * 41),
+                            iconSymbolName: "airplane.up.right",
+                            entryColorHex: "#00C300"
                         )
                     ]
                     viewModel.setItems(samples)
@@ -62,6 +68,12 @@ public struct CountdownListScreen: View {
             date: Date().addingTimeInterval(60 * 60 * 24 * 7),
             iconSymbolName: "calendar",
             entryColorHex: "#0A84FF"
+        ),
+        DateOfInterest(
+            title: "Travel",
+            date: Date().addingTimeInterval(-60 * 60 * 24 * 41),
+            iconSymbolName: "airplane.up.right",
+            entryColorHex: "#00C300"
         )
     ])
     return CountdownListScreen(

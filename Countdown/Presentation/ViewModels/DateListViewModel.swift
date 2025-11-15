@@ -12,6 +12,10 @@ public final class DateListViewModel: ObservableObject {
         public let dateText: String
         public let countdownText: String
         public let entryColorHex: String
+        // New fields for richer UI
+        public let daysNumberText: String
+        public let daysQualifierText: String   // "days left" / "days ago" / "Today"
+        public let isFutureOrToday: Bool
     }
 
     // MARK: - Dependencies
@@ -50,14 +54,35 @@ public final class DateListViewModel: ObservableObject {
 
     // MARK: - Mapping
     private func mapRows(from items: [DateOfInterest]) -> [Row] {
-        items.map { item in
-            Row(
+        let calendar = Calendar.current
+        let startOfToday = calendar.startOfDay(for: Date())
+        func startOfDay(_ date: Date) -> Date { calendar.startOfDay(for: date) }
+        return items.map { item in
+            let startTarget = startOfDay(item.date)
+            let delta = calendar.dateComponents([.day], from: startOfToday, to: startTarget).day ?? 0
+            let isToday = startTarget == startOfToday
+            let isFuture = delta > 0
+            let isFutureOrToday = isFuture || isToday
+            let daysNumber = isToday ? 0 : abs(delta)
+            let daysNumberText = "\(daysNumber)"
+            let qualifier: String
+            if isToday {
+                qualifier = "Today"
+            } else if isFuture {
+                qualifier = "days left"
+            } else {
+                qualifier = "days ago"
+            }
+            return Row(
                 id: item.id,
                 iconSymbolName: item.iconSymbolName,
                 title: item.title,
                 dateText: dateString(item.date),
                 countdownText: countdownString(item.date),
-                entryColorHex: item.entryColorHex
+                entryColorHex: item.entryColorHex,
+                daysNumberText: daysNumberText,
+                daysQualifierText: qualifier,
+                isFutureOrToday: isFutureOrToday
             )
         }
     }

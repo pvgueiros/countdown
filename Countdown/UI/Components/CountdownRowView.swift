@@ -8,38 +8,79 @@ public struct CountdownRowView: View {
     }
 
     public var body: some View {
-        HStack(spacing: 12) {
-            Image(systemName: row.iconSymbolName)
-                .foregroundStyle(.primary)
-                .frame(width: 28, height: 28, alignment: .center)
-                .padding(8)
-                .background(
-                    Group {
-                        if let color = Color(hex: row.entryColorHex) {
-                            color.opacity(0.15)
-                        } else {
-                            Color.gray.opacity(0.15)
-                        }
-                    }
-                )
-                .clipShape(.rect(cornerRadius: 8))
+        HStack(spacing: 14) {
+            iconContainer
 
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: 6) {
                 Text(row.title)
                     .font(.headline)
-                Text(row.dateText)
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                HStack(spacing: 6) {
+                    Image(systemName: "calendar")
+                        .font(.footnote.weight(.semibold))
+                        .foregroundStyle(.secondary)
+                    Text(row.dateText)
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                }
             }
 
             Spacer(minLength: 12)
 
-            Text(row.countdownText)
-                .font(.subheadline.weight(.semibold))
-                .multilineTextAlignment(.trailing)
-                .foregroundStyle(.primary)
+            VStack(alignment: .trailing, spacing: 6) {
+                HStack(spacing: 6) {
+                    if row.isFutureOrToday && row.daysNumberText != "0" {
+                        Image(systemName: "clock")
+                            .font(.caption.weight(.semibold))
+                    }
+                    Text(row.daysNumberText)
+                        .font(.subheadline.weight(.semibold))
+                        .monospacedDigit()
+                }
+                .foregroundStyle(badgeForeground)
+                .padding(.horizontal, 12)
+                .padding(.vertical, 8)
+                .background(badgeBackground)
+                .clipShape(Capsule())
+
+                Text(row.daysQualifierText)
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+            }
         }
         .padding(.vertical, 6)
+    }
+
+    private var entryColor: Color {
+        Color(hex: row.entryColorHex) ?? .gray
+    }
+
+    private var iconContainer: some View {
+        let bg = LinearGradient(
+            colors: [entryColor.opacity(0.9), entryColor.opacity(0.6)],
+            startPoint: .topLeading, endPoint: .bottomTrailing
+        )
+        return Image(systemName: row.iconSymbolName)
+            .font(.system(size: 20, weight: .semibold))
+            .foregroundStyle(.white)
+            .frame(width: 28, height: 28, alignment: .center)
+            .padding(14)
+            .background(bg)
+            .overlay(
+                RoundedRectangle(cornerRadius: 16)
+                    .stroke(.white.opacity(0.15), lineWidth: 1)
+            )
+            .clipShape(.rect(cornerRadius: 16))
+            .shadow(color: entryColor.opacity(0.25), radius: 8, x: 0, y: 4)
+    }
+
+    private var badgeBackground: some ShapeStyle {
+        let color = row.isFutureOrToday ? entryColor : .gray
+        return AnyShapeStyle(color.opacity(0.15))
+    }
+
+    private var badgeForeground: some ShapeStyle {
+        let color = row.isFutureOrToday ? entryColor : .gray
+        return AnyShapeStyle(color)
     }
 }
 
@@ -47,11 +88,14 @@ public struct CountdownRowView: View {
     CountdownRowView(
         row: .init(
             id: UUID(),
-            iconSymbolName: "calendar",
+            iconSymbolName: "airplane",
             title: "Sample Event",
             dateText: "Jan 1, 2025",
             countdownText: "10 days left",
-            entryColorHex: "#3366FF"
+            entryColorHex: "#3366FF",
+            daysNumberText: "10",
+            daysQualifierText: "days left",
+            isFutureOrToday: true
         )
     )
     .padding()
