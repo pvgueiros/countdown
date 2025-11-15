@@ -59,15 +59,15 @@
 
 ### Tests for User Story 1
 
-- [ ] T018 [P] [US1] Unit test mapping model→row VM in `CountdownTests/Presentation/DateListViewModelTests.swift`
-- [ ] T019 [P] [US1] UI test for list rendering in `CountdownUITests/CountdownListRenderingTests.swift`
+- [x] T018 [P] [US1] Unit test mapping model→row VM in `CountdownTests/Presentation/DateListViewModelTests.swift`
+- [x] T019 [P] [US1] UI test for list rendering in `CountdownUITests/CountdownListRenderingTests.swift`
 
 ### Implementation for User Story 1
 
-- [ ] T020 [US1] Create `DateListViewModel` in `Countdown/Presentation/ViewModels/DateListViewModel.swift` (observable state, rows)
-- [ ] T021 [P] [US1] Create `CountdownRowView` in `Countdown/UI/Components/CountdownRowView.swift` (layouts, alignment)
-- [ ] T022 [US1] Create `CountdownListScreen` in `Countdown/UI/Screens/CountdownListScreen.swift` (title/subtitle + list)
-- [ ] T023 [US1] Wire AppCoordinator to initial screen in `Countdown/Presentation/Coordinators/AppCoordinator.swift`
+- [x] T020 [US1] Create `DateListViewModel` in `Countdown/Presentation/ViewModels/DateListViewModel.swift` (observable state, rows)
+- [x] T021 [P] [US1] Create `CountdownRowView` in `Countdown/UI/Components/CountdownRowView.swift` (layouts, alignment)
+- [x] T022 [US1] Create `CountdownListScreen` in `Countdown/UI/Screens/CountdownListScreen.swift` (title/subtitle + list)
+- [x] T023 [US1] Wire AppCoordinator to initial screen in `Countdown/Presentation/Coordinators/AppCoordinator.swift`
 
 **Checkpoint**: US1 independently testable
 

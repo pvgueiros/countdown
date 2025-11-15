@@ -7,12 +7,57 @@
 
 import SwiftUI
 import SwiftData
+import Foundation
+internal import os
 
 @main
 struct CountdownApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootView()
+        }
+    }
+}
+
+private struct RootView: View {
+    init() {
+        // Preload data for UI tests if requested
+        if ProcessInfo.processInfo.arguments.contains("UITEST_PRELOAD_DATA") {
+            TestDataPreloader.preloadSampleData()
+        }
+    }
+    var body: some View {
+        AppCoordinator().rootView()
+    }
+}
+
+private enum TestDataPreloader {
+    static func preloadSampleData() {
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .iso8601
+        let items: [DateOfInterestMapper.DTO] = [
+            .init(
+                id: UUID(),
+                title: "My Birthday",
+                date: Calendar.current.date(byAdding: .day, value: 10, to: Date()) ?? Date(),
+                iconSymbolName: "gift.fill",
+                entryColorHex: "#FF3B30",
+                createdAt: Date()
+            ),
+            .init(
+                id: UUID(),
+                title: "Conference",
+                date: Calendar.current.date(byAdding: .day, value: 30, to: Date()) ?? Date(),
+                iconSymbolName: "calendar",
+                entryColorHex: "#0A84FF",
+                createdAt: Date()
+            )
+        ]
+        do {
+            let data = try encoder.encode(items)
+            UserDefaults.standard.set(data, forKey: "datesOfInterest")
+        } catch {
+            Log.general.error("Failed to preload test data: \(String(describing: error), privacy: .public)")
         }
     }
 }

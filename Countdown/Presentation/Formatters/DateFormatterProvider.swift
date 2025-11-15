@@ -1,6 +1,6 @@
 import Foundation
 
-public enum DateFormatterProvider {
+public nonisolated enum DateFormatterProvider {
     public static func mediumLocaleFormatter() -> DateFormatter {
         let df = DateFormatter()
         df.dateStyle = .medium
