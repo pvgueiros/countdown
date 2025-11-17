@@ -24,7 +24,7 @@ final class DateListViewModelTests: XCTestCase {
             createdAt: Date(timeIntervalSince1970: 1_733_318_400)
         )
         let repo = FakeRepository(items: [sample])
-        let vm = DateListViewModel(
+        let vm = await DateListViewModel(
             repository: repo,
             dateString: { _ in "DATE" },
             countdownString: { _ in "COUNTDOWN" }
@@ -32,17 +32,26 @@ final class DateListViewModelTests: XCTestCase {
 
         // When
         await vm.load()
+        let rows = await vm.rows
 
         // Then
-        XCTAssertEqual(vm.rows.count, 1)
-        let row = vm.rows[0]
-        XCTAssertEqual(row.id, sample.id)
-        XCTAssertEqual(row.title, "Sample Event")
-        XCTAssertEqual(row.iconSymbolName, "calendar")
-        XCTAssertEqual(row.entryColorHex, "#3366FF")
-        XCTAssertEqual(row.dateText, "DATE")
-        XCTAssertEqual(row.countdownText, "COUNTDOWN")
+        assertRows(rows, matching: sample)
+    }
+
+    // MARK: - Helpers (synchronous)
+    private func assertRows(
+        _ rows: [DateListViewModel.Row],
+        matching sample: DateOfInterest,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        XCTAssertEqual(rows.count, 1, file: file, line: line)
+        let row = rows[0]
+        XCTAssertEqual(row.id, sample.id, file: file, line: line)
+        XCTAssertEqual(row.title, "Sample Event", file: file, line: line)
+        XCTAssertEqual(row.iconSymbolName, "calendar", file: file, line: line)
+        XCTAssertEqual(row.entryColorHex, "#3366FF", file: file, line: line)
+        XCTAssertEqual(row.dateText, "DATE", file: file, line: line)
+        XCTAssertEqual(row.countdownText, "COUNTDOWN", file: file, line: line)
     }
 }
-
-
