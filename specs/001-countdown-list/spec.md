@@ -3,7 +3,7 @@
 **Feature Branch**: `001-countdown-list`  
 **Created**: 2025-11-14  
 **Status**: Draft  
-**Input**: User description: "Create a simple Countdown app. The main screen will have the title \"Countdown\" and the subtitle \"Track your special moments\". It should show a list of dates of interest: one per row. Each row will display an icon, title, date (left justified) and a \"countdown label\" (how many days are left until that date - right justified). Date entries can have multiple colors. If the date is in the future, the countdown label background should follow the entry color. If it is in the past, it should be gray. For a design reference (not to be identical), refer to the prototype in https://soft-banana-87494529.figma.site."
+**Input**: User description: "Create a simple Countdown app. The main screen will have the title \"Countdown\" and the subtitle \"Track your special moments\". It should show a list of dates of interest: one per row. Each row will display an icon, title, date (left justified) and a \"countdown pill\" (right justified). Date entries can have multiple colors. If the date is in the future, the countdown pill background should follow the entry color. If it is in the past, it should be gray. For a design reference (not to be identical), refer to the prototype in https://soft-banana-87494529.figma.site."
 
 ## Clarifications
 
@@ -31,7 +31,7 @@
 
 ### User Story 1 - View countdown list (Priority: P1)
 
-As a user, I open the app and see a titled screen with a subtitle and a list of my dates of interest, each showing an icon, a title, a date (left-aligned), and a right-aligned label indicating the number of days remaining (or elapsed).
+As a user, I open the app and see a titled screen with a subtitle and a list of my dates of interest, each showing an icon, a title, a date (left-aligned), and a right-aligned countdown pill.
 
 **Why this priority**: This is the core value proposition of the app and must function as the MVP.
 
@@ -40,7 +40,8 @@ As a user, I open the app and see a titled screen with a subtitle and a list of 
 **Acceptance Scenarios**:
 
 1. Given the app launches, when the main screen loads, then the title reads "Countdown" and the subtitle reads "Track your special moments".
-2. Given at least one date of interest exists, when the list renders, then each row shows an icon, a title, a left-justified date, and a right-justified countdown label.
+2. Given at least one date of interest exists, when the list renders, then each row shows an icon, a title, a left-justified date, and a right-justified countdown pill.
+3. Note: US1 verifies presence and alignment only; the exact pill semantics (number vs “Today”, colors) are finalized in US2.
 
 ---
 
@@ -50,13 +51,13 @@ As a user, I can quickly understand how many days remain until a future date or 
 
 **Why this priority**: Clear communication of time remaining/past is essential to the feature’s usefulness.
 
-**Independent Test**: With one future and one past date, verify the numeric day counts and that the future item’s countdown background color matches the entry color, while the past item’s countdown background is gray.
+**Independent Test**: With one future, one today, and one past date, verify the day representations (future shows a positive number, today shows “Today”, past shows a leading “-”) and that the future/today item’s countdown background color matches the entry color, while the past item’s countdown background is gray.
 
 **Acceptance Scenarios**:
 
-1. Given a date 10 calendar days in the future, when displayed, then the countdown label shows "10 days left" and the label background color matches the entry color.
-2. Given a date 3 calendar days in the past, when displayed, then the countdown label shows "3 days ago" and the label background color is gray.
-3. Given a date equal to today, when displayed, then the countdown label reads "Today", the label background color matches the entry color, and the label shows a slightly darker border for contrast.
+1. Given a date 10 calendar days in the future, when displayed, then the countdown pill shows "10" and the background color matches the entry color (no qualifier label).
+2. Given a date 3 calendar days in the past, when displayed, then the countdown pill shows "-3" and the background color is gray (no qualifier label).
+3. Given a date equal to today, when displayed, then the countdown pill shows "Today", and the pill background color matches the entry color, with a slightly darker border for contrast.
 
 ---
 
@@ -111,7 +112,7 @@ As a user, I can switch between two tabs: Upcoming (Today and future dates) and 
 
 ### Edge Cases
 
-- Date is today: Display the countdown label text as "Today"; background uses the item’s entry color with a slightly darker border for contrast.
+ - Date is today: Display the countdown pill as "Today"; background uses the item’s entry color with a slightly darker border for contrast.
 - Time zone differences: Use the device’s current time zone for day calculations; day boundaries occur at local midnight and counts may adjust when traveling.
 - Very large date ranges (years away or years past): display should remain legible; numeric value may grow large but must not overflow layout.
 - SF Symbols availability: If a chosen symbol is unavailable on the minimum iOS target, use a compatible fallback symbol.
@@ -122,20 +123,17 @@ As a user, I can switch between two tabs: Upcoming (Today and future dates) and 
 ### Functional Requirements
 
 - **FR-001**: The main screen MUST display the title "Countdown" and subtitle "Track your special moments".
-- **FR-002**: The main screen MUST show a list of dates of interest; each row MUST display: an icon, a title, a left-justified date, and a right-justified countdown label.
+- **FR-002**: The main screen MUST show a list of dates of interest; each row MUST display: an icon, a title, a left-justified date, and a right-justified countdown pill.
 - **FR-003**: Entries MUST support an entry color per item; icons may remain monochrome while UI elements (e.g., row or countdown label background) use the entry color.
-- **FR-004**: For future dates, the countdown label’s background color MUST visually match the associated entry color.
-- **FR-005**: For past dates, the countdown label’s background color MUST be gray.
-- **FR-006**: The countdown label MUST show the number of whole calendar days between “today” and the target date, using the following wording:  
-  - Future dates: "X days left"  
-  - Past dates: "X days ago"  
+- **FR-004**: For future dates, the countdown pill’s background color MUST visually match the associated entry color.
+- **FR-005**: For past dates, the countdown pill’s background color MUST be gray.
+- **FR-006**: The countdown pill MUST show the number of whole calendar days between “today” and the target date as a NUMBER ONLY; past dates MUST be prefixed with “-”. If the target date is today, the pill MUST display the string “Today” instead of a number.  
   - MUST use the user’s current locale calendar and device time zone; day boundaries occur at local midnight and counts may adjust when traveling.
-  - If the target date is today, the label MUST read "Today" instead of "0", the background color MUST match the entry color, and the label MUST have a slightly darker border for contrast.
-  - Strings MUST be localized with correct pluralization for the user’s locale.
-- **FR-007**: The date text MUST be formatted legibly according to the user’s locale and be left-aligned; the countdown label MUST be right-aligned within the row.
+  - If the target date is today, the pill MUST show "Today", the background color MUST match the entry color, and the pill MUST have a slightly darker border for contrast.
+- **FR-007**: The date text MUST be formatted legibly according to the user’s locale and be left-aligned; the countdown pill MUST be right-aligned within the row.
 - **FR-008**: When no dates are available, the screen MUST display a clear empty state message in place of the list.
 - **FR-009**: Visual presentation SHOULD be consistent with the provided design reference while not requiring pixel-perfect matching; use SwiftUI material (e.g., `.ultraThinMaterial`) for list or row backgrounds to achieve the “liquid glass” style and ensure text contrast passes accessibility checks.
-- **FR-010**: The interface MUST maintain sufficient contrast for readability of the countdown label on both colored and gray backgrounds.
+- **FR-010**: The interface MUST maintain sufficient contrast for readability of the countdown pill on both colored and gray backgrounds.
 - **FR-011**: The app MUST persist dates of interest on-device (e.g., UserDefaults or Core Data) so entries survive app relaunches.
 - **FR-012**: The app MUST support basic add and edit operations for dates of interest (no delete required for MVP).
 - **FR-013**: Icons MUST use SF Symbols; each item stores an SF Symbol name and an entry color. The countdown label background MUST match the entry color for future dates (icons may remain monochrome).

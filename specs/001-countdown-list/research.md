@@ -21,7 +21,7 @@ Branch: 001-countdown-list
 - Alternatives: Custom blur stacks. Rejected for complexity.
 
 ### Time semantics
-- Decision: Device time zone; local midnight day boundaries; “Today” special-cased with entry color and darker border.
+- Decision: Device time zone; local midnight day boundaries; countdown shown as a number-only pill. Past values include a leading “-”; “Today” shown as "Today" with entry-colored background and darker border.
 - Rationale: Matches user expectations; clarity for 0-day case.
 - Alternatives: UTC or fixed TZ; rejected for potential confusion.
 

@@ -42,7 +42,7 @@
 - [x] T011 Create use case `GetDatesPartitionedUseCase` in `Countdown/UseCases/GetDatesPartitionedUseCase.swift` (upcoming/past, sorting + tie-breaker)
 - [x] T012 Create use case `AddDateOfInterestUseCase` in `Countdown/UseCases/AddDateOfInterestUseCase.swift`
 - [x] T013 Create use case `UpdateDateOfInterestUseCase` in `Countdown/UseCases/UpdateDateOfInterestUseCase.swift`
-- [x] T014 [P] Create `CountdownFormatter` in `Countdown/Presentation/Formatters/CountdownFormatter.swift` ("X days left"/"X days ago"/"Today", device time zone)
+- [x] T014 [P] Create `CountdownFormatter` in `Countdown/Presentation/Formatters/CountdownFormatter.swift` ("X"/"-X"/"Today", device time zone)
 - [x] T015 [P] Create `DateFormatterProvider` in `Countdown/Presentation/Formatters/DateFormatterProvider.swift` (localized date)
 - [x] T016 Create Coordinator base + AppCoordinator in `Countdown/Presentation/Coordinators/AppCoordinator.swift`
 - [x] T017 [P] Add color utility `EntryColor+Hex.swift` in `Countdown/Presentation/Colors/EntryColor+Hex.swift` (parse `entryColorHex` to Color; gray fallback)
@@ -75,19 +75,19 @@
 
 ## Phase 4: User Story 2 - Understand time remaining (Priority: P1)
 
-**Goal**: Correct countdown phrasing and background per entry color
+**Goal**: Correct numeric countdown (number-only; “-” for past) and background per entry color
 
-**Independent Test**: With future and past dates, verify labels show “X days left” / “X days ago”; backgrounds match entry color for future, gray for past.
+**Independent Test**: With future and past dates, verify pills show “X” (future), “-X” (past), or "Today" (today); backgrounds match entry color for future/today, gray for past.
 
 ### Tests for User Story 2
 
-- [ ] T024 [P] [US2] Unit test `CountdownFormatter` edges (past/future/today) in `CountdownTests/Presentation/CountdownFormatterTests.swift`
+- [ ] T024 [P] [US2] Unit test countdown number mapping (future “X”, today “Today”, past “-X”) in `CountdownTests/Presentation/CountdownNumberTests.swift`
 - [ ] T025 [P] [US2] Unit test color/background mapping in `CountdownTests/Presentation/RowStylingTests.swift`
 
 ### Implementation for User Story 2
 
-- [ ] T026 [US2] Integrate `CountdownFormatter` into `DateListViewModel` in `Countdown/Presentation/ViewModels/DateListViewModel.swift`
-- [ ] T027 [US2] Apply entry color logic in `CountdownRowView` in `Countdown/UI/Components/CountdownRowView.swift`
+- [ ] T026 [US2] Compute countdown number and sign in `DateListViewModel` in `Countdown/Presentation/ViewModels/DateListViewModel.swift`
+- [ ] T027 [US2] Update `CountdownRowView` to remove qualifier label and show number-only pill in `Countdown/UI/Components/CountdownRowView.swift`
 
 **Checkpoint**: US1 + US2 independently testable
 
@@ -159,7 +159,7 @@
 
 - [ ] T040 Apply “liquid glass” style in `Countdown/UI/Components/GlassBackground.swift` and integrate in `Countdown/UI/Screens/CountdownListScreen.swift`
 - [ ] T041 Accessibility: ensure contrast for entry-colored labels; Dynamic Type support in all views
-- [ ] T042 Localization: add `Localizable.strings` and use format strings for “%d days left”, “%d days ago”, “Today”, title/subtitle
+- [ ] T042 Localization: add `Localizable.strings` for title/subtitle and other UI copy (countdown pill is numeric or "Today")
 - [ ] T043 [P] Add additional unit tests in `CountdownTests/` to raise coverage ≥80%
 - [ ] T044 [P] Add additional UI tests in `CountdownUITests/` for primary flows
 - [ ] T045 Performance: verify smooth scrolling in list with 100 items

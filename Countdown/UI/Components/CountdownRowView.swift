@@ -27,27 +27,24 @@ public struct CountdownRowView: View {
             Spacer(minLength: 12)
 
             VStack(alignment: .trailing, spacing: 6) {
-                HStack(spacing: 6) {
-                    if row.isFutureOrToday && row.daysNumberText != "0" {
+                HStack(spacing: 8) {
+                    if row.isFutureOrToday && row.daysNumberText != "Today" {
                         Image(systemName: "clock")
-                            .font(.caption.weight(.semibold))
+                            .font(.headline.weight(.semibold))
                     }
                     Text(row.daysNumberText)
-                        .font(.subheadline.weight(.semibold))
+                        .font(.title2.weight(.bold))
                         .monospacedDigit()
                 }
                 .foregroundStyle(badgeForeground)
-                .padding(.horizontal, 12)
-                .padding(.vertical, 8)
+                .padding(.horizontal, 16)
+                .padding(.vertical, 10)
                 .background(badgeBackground)
                 .clipShape(Capsule())
-
-                Text(row.daysQualifierText)
-                    .font(.footnote)
-                    .foregroundStyle(.secondary)
             }
         }
-        .padding(.vertical, 6)
+        .padding(.vertical, 14)
+        .frame(minHeight: 88)
     }
 
     private var entryColor: Color {
@@ -94,7 +91,6 @@ public struct CountdownRowView: View {
             countdownText: "10 days left",
             entryColorHex: "#3366FF",
             daysNumberText: "10",
-            daysQualifierText: "days left",
             isFutureOrToday: true
         )
     )

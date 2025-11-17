@@ -7,7 +7,7 @@
 
 ## Summary
 
-Display a SwiftUI-based list of user “Dates of Interest” with two tabs: Upcoming (Today + future, ascending) and Past (past, descending). Each row shows an SF Symbol icon, title, left-aligned date, and a right-aligned countdown (“X days left” / “X days ago” / “Today”). Adopt SwiftUI’s glass material (“liquid glass”) aesthetics. Persist items on-device (UserDefaults for MVP; consider SwiftData if model complexity grows). Architecture: CLEAN with MVVM + Coordinator. CI gates: warnings-as-errors, SwiftLint/SwiftFormat, ≥80% coverage.
+Display a SwiftUI-based list of user “Dates of Interest” with two tabs: Upcoming (Today + future, ascending) and Past (past, descending). Each row shows an SF Symbol icon, title, left-aligned date, and a right-aligned countdown pill (future: “X”, past: “-X”, today: “Today”). Adopt SwiftUI’s glass material (“liquid glass”) aesthetics. Persist items on-device (UserDefaults for MVP; consider SwiftData if model complexity grows). Architecture: CLEAN with MVVM + Coordinator. CI gates: warnings-as-errors, SwiftLint/SwiftFormat, ≥80% coverage.
 
 ## Technical Context
 

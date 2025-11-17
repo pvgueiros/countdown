@@ -32,17 +32,17 @@ public struct CountdownListScreen: View {
                             title: "My Birthday",
                             date: Calendar.current.date(byAdding: .day, value: 30, to: Date()) ?? Date(),
                             iconSymbolName: "gift.fill",
-                            entryColorHex: "#FF3B30"
+                            entryColorHex: "#FF4D9F"
                         ),
                         DateOfInterest(
                             title: "Conference",
-                            date: Calendar.current.date(byAdding: .day, value: 7, to: Date()) ?? Date(),
+                            date: Calendar.current.date(byAdding: .day, value: 0, to: Date()) ?? Date(),
                             iconSymbolName: "calendar",
                             entryColorHex: "#0A84FF"
                         ),
                         DateOfInterest(
                             title: "Travel",
-                            date: Date().addingTimeInterval(-60 * 60 * 24 * 41),
+                            date: Calendar.current.date(byAdding: .day, value: -7, to: Date()) ?? Date(),
                             iconSymbolName: "airplane.up.right",
                             entryColorHex: "#00C300"
                         )
@@ -61,7 +61,7 @@ public struct CountdownListScreen: View {
             title: "My Birthday",
             date: Date().addingTimeInterval(60 * 60 * 24 * 30),
             iconSymbolName: "gift.fill",
-            entryColorHex: "#FF3B30"
+            entryColorHex: "#FF4D9F"
         ),
         DateOfInterest(
             title: "Conference",
