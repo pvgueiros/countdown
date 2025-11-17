@@ -2,6 +2,7 @@ import SwiftUI
 
 public struct CountdownListScreen: View {
     @StateObject private var viewModel: DateListViewModel
+    @State private var selectedTab: Int = 0
 
     public init(viewModel: DateListViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -12,11 +13,17 @@ public struct CountdownListScreen: View {
             VStack(alignment: .leading, spacing: 12) {
                 Text("Countdowns")
                     .font(.largeTitle.bold())
-                Text("Track important dates")
+                Text("Track your special moments")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
 
-                List(viewModel.rows) { row in
+                Picker("Sections", selection: $selectedTab) {
+                    Text("Upcoming").tag(0)
+                    Text("Past").tag(1)
+                }
+                .pickerStyle(.segmented)
+
+                List(currentRows) { row in
                     CountdownRowView(row: row)
                         .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
                 }
@@ -30,19 +37,19 @@ public struct CountdownListScreen: View {
                     let samples: [DateOfInterest] = [
                         DateOfInterest(
                             title: "My Birthday",
-                            date: Calendar.current.date(byAdding: .day, value: 30, to: Date()) ?? Date(),
+                            date: Date().addingTimeInterval(60 * 60 * 24 * 30),
                             iconSymbolName: "gift.fill",
                             entryColorHex: "#FF4D9F"
                         ),
                         DateOfInterest(
                             title: "Conference",
-                            date: Calendar.current.date(byAdding: .day, value: 0, to: Date()) ?? Date(),
+                            date: Date().addingTimeInterval(60 * 60 * 24 * 7),
                             iconSymbolName: "calendar",
                             entryColorHex: "#0A84FF"
                         ),
                         DateOfInterest(
                             title: "Travel",
-                            date: Calendar.current.date(byAdding: .day, value: -7, to: Date()) ?? Date(),
+                            date: Date().addingTimeInterval(-60 * 60 * 24 * 41),
                             iconSymbolName: "airplane.up.right",
                             entryColorHex: "#00C300"
                         )
@@ -52,6 +59,10 @@ public struct CountdownListScreen: View {
                 #endif
             }
         }
+    }
+
+    private var currentRows: [DateListViewModel.Row] {
+        selectedTab == 0 ? viewModel.upcomingRows : viewModel.pastRows
     }
 }
 

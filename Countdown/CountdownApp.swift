@@ -51,6 +51,14 @@ private enum TestDataPreloader {
                 iconSymbolName: "calendar",
                 entryColorHex: "#0A84FF",
                 createdAt: Date()
+            ),
+            .init(
+                id: UUID(),
+                title: "Travel",
+                date: Calendar.current.date(byAdding: .day, value: -7, to: Date()) ?? Date(),
+                iconSymbolName: "airplane.up.right",
+                entryColorHex: "#00C300",
+                createdAt: Date()
             )
         ]
         do {

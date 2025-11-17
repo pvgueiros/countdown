@@ -75,19 +75,19 @@
 
 ## Phase 4: User Story 2 - Understand time remaining (Priority: P1)
 
-**Goal**: Correct numeric countdown (number-only; “-” for past) and background per entry color
+**Goal**: Correct numeric countdown (number-only; “- ” for past) and background per entry color
 
-**Independent Test**: With future and past dates, verify pills show “X” (future), “-X” (past), or "Today" (today); backgrounds match entry color for future/today, gray for past.
+**Independent Test**: With future and past dates, verify pills show “X” (future), “- X” (past), or "Today" (today); backgrounds match entry color for future/today, gray for past.
 
 ### Tests for User Story 2
 
-- [ ] T024 [P] [US2] Unit test countdown number mapping (future “X”, today “Today”, past “-X”) in `CountdownTests/Presentation/CountdownNumberTests.swift`
-- [ ] T025 [P] [US2] Unit test color/background mapping in `CountdownTests/Presentation/RowStylingTests.swift`
+- [x] T024 [P] [US2] Unit test countdown number mapping (future “X”, today “Today”, past “- X”) in `CountdownTests/Presentation/CountdownNumberTests.swift`
+- [x] T025 [P] [US2] Unit test color/background mapping in `CountdownTests/Presentation/RowStylingTests.swift`
 
 ### Implementation for User Story 2
 
-- [ ] T026 [US2] Compute countdown number and sign in `DateListViewModel` in `Countdown/Presentation/ViewModels/DateListViewModel.swift`
-- [ ] T027 [US2] Update `CountdownRowView` to remove qualifier label and show number-only pill in `Countdown/UI/Components/CountdownRowView.swift`
+- [x] T026 [US2] Compute countdown number and sign in `DateListViewModel` in `Countdown/Presentation/ViewModels/DateListViewModel.swift`
+- [x] T027 [US2] Update `CountdownRowView` to remove qualifier label and show number-only pill in `Countdown/UI/Components/CountdownRowView.swift`
 
 **Checkpoint**: US1 + US2 independently testable
 
@@ -101,13 +101,13 @@
 
 ### Tests for User Story 5
 
-- [ ] T028 [P] [US5] Unit test partition/sort logic (including same-date tie-breaker by `createdAt`) in `CountdownTests/UseCases/GetDatesPartitionedUseCaseTests.swift`
-- [ ] T029 [P] [US5] UI test tabs behavior in `CountdownUITests/TabsOrderingTests.swift`
+- [x] T028 [P] [US5] Unit test partition/sort logic (including same-date tie-breaker by `createdAt`) in `CountdownTests/UseCases/GetDatesPartitionedUseCaseTests.swift`
+- [x] T029 [P] [US5] UI test tabs behavior in `CountdownUITests/TabsOrderingTests.swift`
 
 ### Implementation for User Story 5
 
-- [ ] T030 [US5] Add two tabs (using `SegmentedControl`) to `CountdownListScreen` in `Countdown/UI/Screens/CountdownListScreen.swift`
-- [ ] T031 [US5] Expose partitioned sections from `DateListViewModel` in `Countdown/Presentation/ViewModels/DateListViewModel.swift`
+- [x] T030 [US5] Add two tabs (using `SegmentedControl`) to `CountdownListScreen` in `Countdown/UI/Screens/CountdownListScreen.swift`
+- [x] T031 [US5] Expose partitioned sections from `DateListViewModel` in `Countdown/Presentation/ViewModels/DateListViewModel.swift`
 
 **Checkpoint**: P1 scope complete and demoable
 

@@ -26,8 +26,7 @@ final class DateListViewModelTests: XCTestCase {
         let repo = FakeRepository(items: [sample])
         let vm = await DateListViewModel(
             repository: repo,
-            dateString: { _ in "DATE" },
-            countdownString: { _ in "COUNTDOWN" }
+            dateString: { _ in "DATE" }
         )
 
         // When
@@ -52,6 +51,5 @@ final class DateListViewModelTests: XCTestCase {
         XCTAssertEqual(row.iconSymbolName, "calendar", file: file, line: line)
         XCTAssertEqual(row.entryColorHex, "#3366FF", file: file, line: line)
         XCTAssertEqual(row.dateText, "DATE", file: file, line: line)
-        XCTAssertEqual(row.countdownText, "COUNTDOWN", file: file, line: line)
     }
 }

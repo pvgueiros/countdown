@@ -8,7 +8,7 @@ final class CountdownListRenderingTests: XCTestCase {
 
         // Title/subtitle exist
         XCTAssertTrue(app.staticTexts["Countdowns"].waitForExistence(timeout: 5))
-        XCTAssertTrue(app.staticTexts["Track important dates"].exists)
+        XCTAssertTrue(app.staticTexts["Track your special moments"].exists)
 
         // At least one known row appears
         XCTAssertTrue(app.staticTexts["My Birthday"].waitForExistence(timeout: 5))

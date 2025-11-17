@@ -28,7 +28,7 @@ public struct CountdownRowView: View {
 
             VStack(alignment: .trailing, spacing: 6) {
                 HStack(spacing: 8) {
-                    if row.isFutureOrToday && row.daysNumberText != "Today" {
+                    if row.hasClockIcon {
                         Image(systemName: "clock")
                             .font(.headline.weight(.semibold))
                     }
@@ -71,12 +71,12 @@ public struct CountdownRowView: View {
     }
 
     private var badgeBackground: some ShapeStyle {
-        let color = row.isFutureOrToday ? entryColor : .gray
+        let color = Color(hex: row.backgroundColorHex) ?? .gray
         return AnyShapeStyle(color.opacity(0.15))
     }
 
     private var badgeForeground: some ShapeStyle {
-        let color = row.isFutureOrToday ? entryColor : .gray
+        let color = Color(hex: row.backgroundColorHex) ?? .gray
         return AnyShapeStyle(color)
     }
 }
@@ -87,14 +87,12 @@ public struct CountdownRowView: View {
             id: UUID(),
             iconSymbolName: "airplane",
             title: "Sample Event",
-            dateText: "Jan 1, 2025",
-            countdownText: "10 days left",
+            dateText: "Jan 1, 2026",
             entryColorHex: "#3366FF",
             daysNumberText: "10",
-            isFutureOrToday: true
+            backgroundColorHex: "#3366FF",
+            hasClockIcon: true
         )
     )
     .padding()
 }
-
-
