@@ -22,7 +22,11 @@ struct CountdownApp: App {
 private struct RootView: View {
     init() {
         // Preload data for UI tests if requested
-        if ProcessInfo.processInfo.arguments.contains("UITEST_PRELOAD_DATA") {
+        let args = ProcessInfo.processInfo.arguments
+        if args.contains("UITEST_CLEAR_DATA") {
+            UserDefaults.standard.removeObject(forKey: "datesOfInterest")
+        }
+        if args.contains("UITEST_PRELOAD_DATA") {
             TestDataPreloader.preloadSampleData()
         }
     }

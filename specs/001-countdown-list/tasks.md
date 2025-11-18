@@ -121,11 +121,11 @@
 
 ### Tests for User Story 3
 
-- [ ] T032 [P] [US3] UI test empty state in `CountdownUITests/EmptyStateTests.swift`
+- [x] T032 [P] [US3] UI test empty state in `CountdownUITests/EmptyStateTests.swift`
 
 ### Implementation for User Story 3
 
-- [ ] T033 [US3] Add empty state view to `CountdownListScreen` in `Countdown/UI/Screens/CountdownListScreen.swift`
+- [x] T033 [US3] Add empty state view to `CountdownListScreen` in `Countdown/UI/Screens/CountdownListScreen.swift`
 
 **Checkpoint**: US3 independently testable
 

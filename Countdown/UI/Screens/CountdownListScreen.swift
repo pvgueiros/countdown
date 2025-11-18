@@ -17,45 +17,59 @@ public struct CountdownListScreen: View {
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
 
-                Picker("Sections", selection: $selectedTab) {
-                    Text("Upcoming").tag(0)
-                    Text("Past").tag(1)
-                }
-                .pickerStyle(.segmented)
+                if isEmpty {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("No countdowns yet")
+                            .font(.headline)
+                        Text("Add your first date to get started")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                    }
+                    .padding(.top, 12)
+                    .accessibilityElement()
+                    .accessibilityIdentifier("empty_state_message")
+                } else {
+                    Picker("Sections", selection: $selectedTab) {
+                        Text("Upcoming").tag(0)
+                        Text("Past").tag(1)
+                    }
+                    .pickerStyle(.segmented)
 
-                List(currentRows) { row in
-                    CountdownRowView(row: row)
-                        .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+                    List(currentRows) { row in
+                        CountdownRowView(row: row)
+                            .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+                    }
+                    .listStyle(.plain)
                 }
-                .listStyle(.plain)
             }
             .padding(.horizontal, 16)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             .task {
                 await viewModel.load()
                 #if DEBUG
-                if viewModel.rows.isEmpty {
-                    let samples: [DateOfInterest] = [
-                        DateOfInterest(
-                            title: "My Birthday",
-                            date: Date().addingTimeInterval(60 * 60 * 24 * 30),
-                            iconSymbolName: "gift.fill",
-                            entryColorHex: "#FF4D9F"
-                        ),
-                        DateOfInterest(
-                            title: "Conference",
-                            date: Date().addingTimeInterval(60 * 60 * 24 * 7),
-                            iconSymbolName: "calendar",
-                            entryColorHex: "#0A84FF"
-                        ),
-                        DateOfInterest(
-                            title: "Travel",
-                            date: Date().addingTimeInterval(-60 * 60 * 24 * 41),
-                            iconSymbolName: "airplane.up.right",
-                            entryColorHex: "#00C300"
-                        )
-                    ]
-                    viewModel.setItems(samples)
-                }
+                if viewModel.rows.isEmpty && !ProcessInfo.processInfo.arguments.contains("UITEST_CLEAR_DATA") {
+                   let samples: [DateOfInterest] = [
+                       DateOfInterest(
+                           title: "My Birthday",
+                           date: Date().addingTimeInterval(60 * 60 * 24 * 30),
+                           iconSymbolName: "gift.fill",
+                           entryColorHex: "#FF4D9F"
+                       ),
+                       DateOfInterest(
+                           title: "Conference",
+                           date: Date().addingTimeInterval(60 * 60 * 24 * 7),
+                           iconSymbolName: "calendar",
+                           entryColorHex: "#0A84FF"
+                       ),
+                       DateOfInterest(
+                           title: "Travel",
+                           date: Date().addingTimeInterval(-60 * 60 * 24 * 41),
+                           iconSymbolName: "airplane.up.right",
+                           entryColorHex: "#00C300"
+                       )
+                   ]
+                   viewModel.setItems(samples)
+               }
                 #endif
             }
         }
@@ -63,6 +77,10 @@ public struct CountdownListScreen: View {
 
     private var currentRows: [DateListViewModel.Row] {
         selectedTab == 0 ? viewModel.upcomingRows : viewModel.pastRows
+    }
+
+    private var isEmpty: Bool {
+        viewModel.upcomingRows.isEmpty && viewModel.pastRows.isEmpty
     }
 }
 
