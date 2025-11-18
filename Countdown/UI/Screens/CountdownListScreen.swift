@@ -28,7 +28,6 @@ public struct CountdownListScreen: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                 .task {
                     await viewModel.load()
-//                mockData()
                 }
 
                 // Floating '+' button
@@ -83,34 +82,6 @@ public struct CountdownListScreen: View {
         }
     }
 
-    private func mockData() {
-#if DEBUG
-        if viewModel.rows.isEmpty && !ProcessInfo.processInfo.arguments.contains("UITEST_CLEAR_DATA") {
-            let samples: [DateOfInterest] = [
-                DateOfInterest(
-                    title: "My Birthday",
-                    date: Date().addingTimeInterval(60 * 60 * 24 * 30),
-                    iconSymbolName: "gift.fill",
-                    entryColorHex: "#FF4D9F"
-                ),
-                DateOfInterest(
-                    title: "Conference",
-                    date: Date().addingTimeInterval(60 * 60 * 24 * 7),
-                    iconSymbolName: "calendar",
-                    entryColorHex: "#0A84FF"
-                ),
-                DateOfInterest(
-                    title: "Travel",
-                    date: Date().addingTimeInterval(-60 * 60 * 24 * 41),
-                    iconSymbolName: "airplane.up.right",
-                    entryColorHex: "#00C300"
-                )
-            ]
-            viewModel.setItems(samples)
-        }
-#endif
-    }
-
     @ViewBuilder
     private var headerView: some View {
         Text("Countdowns")
@@ -137,12 +108,13 @@ public struct CountdownListScreen: View {
             .buttonStyle(.plain)
             .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
             .swipeActions {
-                Button(role: .destructive) {
+                Button {
                     pendingDeleteId = row.id
                     showingDeleteAlert = true
                 } label: {
                     Label("Delete", systemImage: "trash")
                 }
+                .tint(.red)
             }
         }
         .listStyle(.plain)

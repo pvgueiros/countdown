@@ -45,6 +45,8 @@ public struct CountdownRowView: View {
         }
         .padding(.vertical, 14)
         .frame(minHeight: 88)
+        // Make the entire row (including empty space) tappable when wrapped in a Button
+        .contentShape(Rectangle())
     }
 
     private var entryColor: Color {
