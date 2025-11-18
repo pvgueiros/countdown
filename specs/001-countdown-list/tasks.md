@@ -160,8 +160,7 @@
 
 **Purpose**: Improvements that affect multiple user stories
 
-- [ ] T040 Apply “liquid glass” style in `Countdown/UI/Components/GlassBackground.swift` and integrate in `Countdown/UI/Screens/CountdownListScreen.swift`
-- [ ] T041 Accessibility: ensure contrast for entry-colored labels; Dynamic Type support in all views
+ - [x] T041 Accessibility: ensure contrast for entry-colored labels; Dynamic Type support in all views
 - [ ] T042 Localization: add `Localizable.strings` for title/subtitle and other UI copy (countdown pill is numeric or "Today")
 - [ ] T043 [P] Add additional unit tests in `CountdownTests/` to raise coverage ≥80%
 - [ ] T044 [P] Add additional UI tests in `CountdownUITests/` for primary flows
