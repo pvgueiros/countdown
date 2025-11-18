@@ -139,15 +139,18 @@
 
 ### Tests for User Story 4
 
-- [ ] T034 [P] [US4] Unit test Add/Update use cases in `CountdownTests/UseCases/AddUpdateUseCasesTests.swift`
-- [ ] T035 [P] [US4] UI test add/edit flow in `CountdownUITests/AddEditFlowTests.swift`
+- [x] T034 [P] [US4] Unit test Add/Update use cases in `CountdownTests/UseCases/AddUpdateUseCasesTests.swift`
+- [x] T035 [P] [US4] UI test add/edit flow in `CountdownUITests/AddEditFlowTests.swift`
 
 ### Implementation for User Story 4
 
-- [ ] T036 [US4] Add `AddEditDateViewModel` in `Countdown/Presentation/ViewModels/AddEditDateViewModel.swift`
-- [ ] T037 [P] [US4] Add `AddEditDateSheet` in `Countdown/UI/Screens/AddEditDateSheet.swift` (fields: title, date, iconSymbolName, entryColor)
-- [ ] T038 [US4] Wire add/edit actions in `DateListViewModel` and `AppCoordinator` (`Countdown/Presentation/ViewModels/DateListViewModel.swift`, `Countdown/Presentation/Coordinators/AppCoordinator.swift`)
-- [ ] T039 [US4] Persist via repository; set `createdAt` when adding; update fields when editing in `Countdown/Data/Sources/UserDefaultsDateOfInterestRepository.swift`
+- [x] T036 [US4] Add `AddEditDateViewModel` in `Countdown/Presentation/ViewModels/AddEditDateViewModel.swift`
+- [x] T037 [P] [US4] Add `AddEditDateSheet` in `Countdown/UI/Screens/AddEditDateSheet.swift` (fields: title, date, iconSymbolName, entryColor)
+- [x] T038 [US4] Wire add/edit actions in `DateListViewModel` and `AppCoordinator` (`Countdown/Presentation/ViewModels/DateListViewModel.swift`, `Countdown/Presentation/Coordinators/AppCoordinator.swift`)
+- [x] T039 [US4] Persist via repository; set `createdAt` when adding; update fields when editing in `Countdown/Data/Sources/UserDefaultsDateOfInterestRepository.swift`
+ - [x] T050 [US4] Add delete to repository protocol and implementation in `DateOfInterestRepository` and `UserDefaultsDateOfInterestRepository`
+ - [x] T051 [US4] Add swipe-to-delete with confirmation alert on rows in `Countdown/UI/Screens/CountdownListScreen.swift`
+ - [x] T052 [US4] Tap row to open edit sheet with adjusted header/CTA in `Countdown/UI/Screens/CountdownListScreen.swift` and `AddEditDateSheet`
 
 **Checkpoint**: US4 independently testable
 

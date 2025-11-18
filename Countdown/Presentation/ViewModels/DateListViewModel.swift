@@ -30,6 +30,7 @@ public final class DateListViewModel: ObservableObject {
     @Published public private(set) var rows: [Row] = []
     @Published public private(set) var upcomingRows: [Row] = []
     @Published public private(set) var pastRows: [Row] = []
+    @Published public private(set) var items: [DateOfInterest] = []
 
     // MARK: - Init
     
@@ -47,6 +48,7 @@ public final class DateListViewModel: ObservableObject {
         do {
             let items = try await repository.fetchAll()
             self.rows = mapRows(from: items)
+            self.items = items
             
             let partitions = GetDatesPartitionedUseCase().execute(items: items)
             self.upcomingRows = mapRows(from: partitions.upcoming)
@@ -54,6 +56,7 @@ public final class DateListViewModel: ObservableObject {
         } catch {
             Log.general.error("Failed to load items: \(String(describing: error), privacy: .public)")
             self.rows = []
+            self.items = []
             self.upcomingRows = []
             self.pastRows = []
         }
@@ -61,6 +64,7 @@ public final class DateListViewModel: ObservableObject {
 
     public func setItems(_ items: [DateOfInterest]) {
         self.rows = mapRows(from: items)
+        self.items = items
         
         let partitions = GetDatesPartitionedUseCase().execute(items: items)
         self.upcomingRows = mapRows(from: partitions.upcoming)
@@ -95,6 +99,20 @@ public final class DateListViewModel: ObservableObject {
                 backgroundColorHex: backgroundColorHex,
                 hasClockIcon: isFuture
             )
+        }
+    }
+
+    // MARK: - Actions
+    public func item(for id: UUID) -> DateOfInterest? {
+        items.first(where: { $0.id == id })
+    }
+
+    public func delete(id: UUID) async {
+        do {
+            try await repository.delete(id)
+            await load()
+        } catch {
+            Log.general.error("Failed to delete: \(String(describing: error), privacy: .public)")
         }
     }
 }

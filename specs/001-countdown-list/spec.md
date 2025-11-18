@@ -79,16 +79,17 @@ As a user with no saved dates of interest, I see a friendly empty state message 
 
 ### User Story 4 - Manage dates (Priority: P2)
 
-As a user, I can add a new date of interest and edit an existing one, and the changes persist across app launches.
+As a user, I can add a new date of interest, edit an existing one by tapping its row, and delete an entry via swipe with confirmation. Changes persist across app launches.
 
 **Why this priority**: Basic manageability of the list supports real-world usefulness while keeping scope small.
 
-**Independent Test**: Add a new item and relaunch the app to confirm persistence; edit an item and verify the row updates accordingly.
+**Independent Test**: Add a new item and relaunch to confirm persistence; edit an item (open same sheet with edit labels) and verify the row updates; delete an item via swipe and confirm removal after relaunch.
 
 **Acceptance Scenarios**:
 
 1. Given a valid new date entry, when I add it, then it appears in the list and is present after relaunch.
-2. Given an existing entry, when I edit its title/date/icon/color, then the corresponding row updates and persists after relaunch.
+2. Given an existing entry, when I tap its row, then I see the same sheet configured for Edit (header/CTA reflect editing) and when I save, the corresponding row updates and persists after relaunch.
+3. Given an existing entry, when I swipe left on its row and choose Delete, then I’m asked to confirm; when I confirm, the item is removed and remains removed after relaunch.
 
 ---
 
@@ -136,6 +137,9 @@ As a user, I can switch between two tabs: Upcoming (Today and future dates) and 
 - **FR-010**: The interface MUST maintain sufficient contrast for readability of the countdown pill on both colored and gray backgrounds.
 - **FR-011**: The app MUST persist dates of interest on-device (e.g., UserDefaults or Core Data) so entries survive app relaunches.
 - **FR-012**: The app MUST support basic add and edit operations for dates of interest (no delete required for MVP).
+  - Update: Delete is now required. Users MUST be able to delete an entry via swipe with a confirmation alert.
+- **FR-017**: Tapping a row MUST open the add/edit sheet in Edit mode with fields pre-filled; header and CTA strings SHOULD reflect Edit (“Edit Countdown”, “Save Changes”).
+- **FR-018**: In the add/edit sheet, the selected icon tile background MUST reflect the currently selected color choice.
 - **FR-013**: Icons MUST use SF Symbols; each item stores an SF Symbol name and an entry color. The countdown label background MUST match the entry color for future dates (icons may remain monochrome).
 - **FR-014**: The main list MUST be split into two tabs: Upcoming (includes Today and future) and Past (includes strictly past).
 - **FR-015**: Upcoming MUST be ordered by calendar date ascending (nearest first). Past MUST be ordered by calendar date descending (most recent first).

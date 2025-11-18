@@ -37,6 +37,12 @@ public actor UserDefaultsDateOfInterestRepository: DateOfInterestRepository {
             try saveAll(items)
         }
     }
+
+    public func delete(_ id: UUID) async throws {
+        var items = try await fetchAll()
+        items.removeAll { $0.id == id }
+        try saveAll(items)
+    }
 }
 
 

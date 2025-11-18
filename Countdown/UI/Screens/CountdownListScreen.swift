@@ -3,6 +3,10 @@ import SwiftUI
 public struct CountdownListScreen: View {
     @StateObject private var viewModel: DateListViewModel
     @State private var selectedTab: Int = 0
+    @State private var showingAddSheet: Bool = false
+    @State private var editingItem: DateOfInterest? = nil
+    @State private var pendingDeleteId: UUID? = nil
+    @State private var showingDeleteAlert: Bool = false
 
     public init(viewModel: DateListViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -10,24 +14,75 @@ public struct CountdownListScreen: View {
 
     public var body: some View {
         NavigationView {
-            VStack(alignment: .leading, spacing: 12) {
-                headerView
+            ZStack(alignment: .topTrailing) {
+                VStack(alignment: .leading, spacing: 12) {
+                    headerView
 
-                if isEmpty {
-                    emptyStateView
-                } else {
-                    listView
+                    if isEmpty {
+                        emptyStateView
+                    } else {
+                        listView
+                    }
                 }
-            }
-            .padding(.horizontal, 16)
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-            .task {
-                await viewModel.load()
+                .padding(.horizontal, 16)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                .task {
+                    await viewModel.load()
 //                mockData()
+                }
+
+                // Floating '+' button
+                Button(action: { showingAddSheet = true }) {
+                    ZStack {
+                        Circle()
+                            .fill(LinearGradient(colors: [Color.purple, Color.pink], startPoint: .topLeading, endPoint: .bottomTrailing))
+                            .frame(width: 48, height: 48)
+                            .shadow(color: .pink.opacity(0.3), radius: 8, x: 0, y: 4)
+                        Image(systemName: "plus")
+                            .font(.headline.weight(.bold))
+                            .foregroundStyle(.white)
+                    }
+                }
+                .padding(.trailing, 20)
+                .padding(.top, 8)
+                .accessibilityIdentifier("add_button")
             }
         }
+        .sheet(isPresented: $showingAddSheet, onDismiss: {
+            Task { await viewModel.load() }
+        }) {
+            AddEditDateSheet(
+                viewModel: AddEditDateViewModel(
+                    repository: UserDefaultsDateOfInterestRepository(),
+                    mode: .add,
+                    onCompleted: { showingAddSheet = false }
+                )
+            )
+        }
+        .sheet(item: $editingItem, onDismiss: {
+            Task { await viewModel.load() }
+        }) { item in
+            AddEditDateSheet(
+                viewModel: AddEditDateViewModel(
+                    repository: UserDefaultsDateOfInterestRepository(),
+                    mode: .edit(item),
+                    onCompleted: { editingItem = nil }
+                )
+            )
+        }
+        .alert("Delete Countdown?", isPresented: $showingDeleteAlert) {
+            Button("Delete", role: .destructive) {
+                if let id = pendingDeleteId {
+                    Task { await viewModel.delete(id: id) }
+                }
+                pendingDeleteId = nil
+            }
+            Button("Cancel", role: .cancel) { pendingDeleteId = nil }
+        } message: {
+            Text("This action cannot be undone.")
+        }
     }
-    
+
     private func mockData() {
 #if DEBUG
         if viewModel.rows.isEmpty && !ProcessInfo.processInfo.arguments.contains("UITEST_CLEAR_DATA") {
@@ -55,7 +110,7 @@ public struct CountdownListScreen: View {
         }
 #endif
     }
-    
+
     @ViewBuilder
     private var headerView: some View {
         Text("Countdowns")
@@ -64,7 +119,7 @@ public struct CountdownListScreen: View {
             .font(.subheadline)
             .foregroundStyle(.secondary)
     }
-   
+
     @ViewBuilder
     private var listView: some View {
         Picker("Sections", selection: $selectedTab) {
@@ -74,12 +129,25 @@ public struct CountdownListScreen: View {
         .pickerStyle(.segmented)
 
         List(currentRows) { row in
-            CountdownRowView(row: row)
-                .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+            Button {
+                if let item = viewModel.item(for: row.id) { editingItem = item }
+            } label: {
+                CountdownRowView(row: row)
+            }
+            .buttonStyle(.plain)
+            .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+            .swipeActions {
+                Button(role: .destructive) {
+                    pendingDeleteId = row.id
+                    showingDeleteAlert = true
+                } label: {
+                    Label("Delete", systemImage: "trash")
+                }
+            }
         }
         .listStyle(.plain)
     }
-    
+
     private var emptyStateView: some View {
         VStack(alignment: .center, spacing: 16) {
             Text("No Countdowns Yet")
@@ -91,9 +159,7 @@ public struct CountdownListScreen: View {
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
 
-            Button(action: {
-                // Placeholder action for now; will be wired in US4 (add/edit).
-            }) {
+            Button(action: { showingAddSheet = true }) {
                 Text("Create Countdown")
                     .font(.headline)
                     .foregroundStyle(.white)
@@ -163,12 +229,13 @@ public struct CountdownListScreen: View {
 }
 
 // MARK: - Previews Support
-private struct PreviewRepository: DateOfInterestRepository {
+internal struct PreviewRepository: DateOfInterestRepository {
     let items: [DateOfInterest]
     init(items: [DateOfInterest]) { self.items = items }
     func fetchAll() async throws -> [DateOfInterest] { items }
     func add(_ item: DateOfInterest) async throws {}
     func update(_ item: DateOfInterest) async throws {}
+    func delete(_ id: UUID) async throws {}
 }
 
 
