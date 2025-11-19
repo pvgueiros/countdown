@@ -86,6 +86,7 @@ public struct CountdownListScreen: View {
     private var headerView: some View {
         Text("Countdowns")
             .font(.largeTitle.bold())
+            .padding(.trailing, 72) // Reserve space for floating '+' button
         Text("Track your special moments")
             .font(.subheadline)
             .foregroundStyle(.secondary)
@@ -106,7 +107,7 @@ public struct CountdownListScreen: View {
                 CountdownRowView(row: row)
             }
             .buttonStyle(.plain)
-            .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+            .listRowInsets(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
             .swipeActions {
                 Button {
                     pendingDeleteId = row.id

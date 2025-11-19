@@ -32,9 +32,16 @@ public struct CountdownRowView: View {
                         Image(systemName: "clock")
                             .font(.headline.weight(.semibold))
                     }
-                    Text(row.daysNumberText)
-                        .font(.title2.weight(.bold))
-                        .monospacedDigit()
+                    
+                    if row.daysNumberText == "Today" {
+                        Text("Today")
+                            .font(.title2.weight(.bold))
+                            .monospacedDigit()
+                    } else {
+                        Text(row.daysNumberText)
+                            .font(.title2.weight(.bold))
+                            .monospacedDigit()
+                    }
                 }
                 .foregroundStyle(badgeForeground)
                 .padding(.horizontal, 16)
@@ -45,7 +52,6 @@ public struct CountdownRowView: View {
         }
         .padding(.vertical, 14)
         .frame(minHeight: 88)
-        // Make the entire row (including empty space) tappable when wrapped in a Button
         .contentShape(Rectangle())
     }
 

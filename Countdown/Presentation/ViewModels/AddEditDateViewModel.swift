@@ -38,7 +38,8 @@ public final class AddEditDateViewModel: ObservableObject {
 
         switch mode {
         case .add:
-            break
+            // Accept today's date by default for add mode
+            self.hasCustomDate = true
         case .edit(let item):
             self.title = item.title
             self.date = item.date

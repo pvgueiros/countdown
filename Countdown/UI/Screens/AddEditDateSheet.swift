@@ -23,7 +23,7 @@ public struct AddEditDateSheet: View {
         NavigationView {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
-                    Text(viewModel.headerTitle)
+                    Text(LocalizedStringKey(viewModel.headerTitle))
                         .font(.title2.weight(.bold))
                         .frame(maxWidth: .infinity, alignment: .center)
                     Text(viewModel.isEditMode ? "Update this countdown’s title, date, icon, and color." : "Create a new countdown with a title, date, icon, and color.")
@@ -111,7 +111,7 @@ public struct AddEditDateSheet: View {
                     Button {
                         Task { await viewModel.submit() }
                     } label: {
-                        Text(viewModel.ctaTitle)
+                        Text(LocalizedStringKey(viewModel.ctaTitle))
                             .font(.headline)
                             .foregroundStyle(.white)
                             .frame(maxWidth: .infinity)
