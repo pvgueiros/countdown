@@ -165,7 +165,7 @@
 - [x] T042a Localization: add Portuguese (Brazil) to `Localizable.xcstrings`
 - [x] T043 [P] Add additional unit tests in `CountdownTests/` to raise coverage ≥80%
 - [x] T044 [P] Add additional UI tests in `CountdownUITests/` for primary flows
-- [ ] T045 Performance: verify smooth scrolling in list with 100 items
+- [x] T045 Performance: verify smooth scrolling in list with 100 items
 - [x] T046 Validate quickstart.md steps and update if needed in `specs/001-countdown-list/quickstart.md`
 - [x] T047 Create a nice README.md file
 

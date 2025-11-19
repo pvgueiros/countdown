@@ -13,11 +13,11 @@ final class AddEditDateSheetTests: XCTestCase {
     func testBodyRendersInAddAndEditModes() async {
         let repo = DummyRepo()
         let addVM = await AddEditDateViewModel(repository: repo, mode: .add, onCompleted: {})
-        _ = AddEditDateSheet(viewModel: addVM).body
+        _ = await AddEditDateSheet(viewModel: addVM).body
         
         let item = DateOfInterest(title: "X", date: Date(), iconSymbolName: "star", entryColorHex: "#FF9500")
         let editVM = await AddEditDateViewModel(repository: repo, mode: .edit(item), onCompleted: {})
-        _ = AddEditDateSheet(viewModel: editVM).body
+        _ = await AddEditDateSheet(viewModel: editVM).body
         
         XCTAssertTrue(true)
     }
