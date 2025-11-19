@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		CA787D0D2ECD4E4E000CD02A /* TestPlan.xctestplan in Resources */ = {isa = PBXBuildFile; fileRef = CA787D0C2ECD4E4E000CD02A /* TestPlan.xctestplan */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		CA2FCC0B2E90A004006F8324 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +31,7 @@
 		CA2FCBFB2E90A001006F8324 /* Countdown.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Countdown.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA2FCC0A2E90A004006F8324 /* CountdownTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CountdownTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA2FCC142E90A004006F8324 /* CountdownUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CountdownUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA787D0C2ECD4E4E000CD02A /* TestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestPlan.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -75,6 +80,7 @@
 		CA2FCBF22E90A001006F8324 = {
 			isa = PBXGroup;
 			children = (
+				CA787D0C2ECD4E4E000CD02A /* TestPlan.xctestplan */,
 				CA2FCBFD2E90A001006F8324 /* Countdown */,
 				CA2FCC0D2E90A004006F8324 /* CountdownTests */,
 				CA2FCC172E90A004006F8324 /* CountdownUITests */,
@@ -213,6 +219,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA787D0D2ECD4E4E000CD02A /* TestPlan.xctestplan in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

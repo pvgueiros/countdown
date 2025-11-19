@@ -3,6 +3,7 @@ import XCTest
 
 final class CountdownNumberTests: XCTestCase {
     private actor FakeRepository: DateOfInterestRepository {
+        func delete(_ id: UUID) async throws {}
         let items: [DateOfInterest]
         init(items: [DateOfInterest]) { self.items = items }
         func fetchAll() async throws -> [DateOfInterest] { items }

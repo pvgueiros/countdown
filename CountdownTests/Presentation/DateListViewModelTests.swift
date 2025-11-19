@@ -11,6 +11,7 @@ final class DateListViewModelTests: XCTestCase {
         func fetchAll() async throws -> [DateOfInterest] { items }
         func add(_ item: DateOfInterest) async throws {}
         func update(_ item: DateOfInterest) async throws {}
+        func delete(_ id: UUID) async throws {}
     }
 
     func testMappingModelToRowViewModel_usesInjectedFormatters() async throws {
