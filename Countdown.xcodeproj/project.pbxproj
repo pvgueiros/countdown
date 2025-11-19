@@ -34,6 +34,23 @@
 		CA787D0C2ECD4E4E000CD02A /* TestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestPlan.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		CA787D202ECE2816000CD02A /* Exceptions for "CountdownTests" folder in "Countdown" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Helpers/TestLaunchConfigurator.swift,
+			);
+			target = CA2FCBFA2E90A001006F8324 /* Countdown */;
+		};
+		CA787D212ECE2816000CD02A /* Exceptions for "CountdownTests" folder in "CountdownTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Helpers/TestLaunchConfigurator.swift,
+			);
+			target = CA2FCC092E90A004006F8324 /* CountdownTests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		CA2FCBFD2E90A001006F8324 /* Countdown */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
@@ -42,6 +59,10 @@
 		};
 		CA2FCC0D2E90A004006F8324 /* CountdownTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				CA787D202ECE2816000CD02A /* Exceptions for "CountdownTests" folder in "Countdown" target */,
+				CA787D212ECE2816000CD02A /* Exceptions for "CountdownTests" folder in "CountdownTests" target */,
+			);
 			path = CountdownTests;
 			sourceTree = "<group>";
 		};

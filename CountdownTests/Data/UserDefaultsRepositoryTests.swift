@@ -15,7 +15,7 @@ final class UserDefaultsRepositoryTests: XCTestCase {
     }
     
     func testAddFetchUpdateDelete() async throws {
-        let repo = UserDefaultsDateOfInterestRepository()
+        let repo = await UserDefaultsDateOfInterestRepository()
         
         // Initially empty
         var items = try await repo.fetchAll()
