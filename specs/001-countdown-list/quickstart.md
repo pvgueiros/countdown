@@ -31,11 +31,4 @@
 - `UITEST_PRELOAD_100`: loads 100 mixed items to validate scrolling performance
 - `UITEST_AUTO_DATE`: Add/Edit sheet treats the date as already chosen
 
-## CI (GitHub Actions)
-- Workflow: `.github/workflows/ios-ci.yml`
-- Steps:
-  - Build and test with coverage via `scripts/ci/build-and-test.sh`
-  - Enforce minimum coverage with `scripts/ci/check-coverage.sh` (80%)
-  - Upload `TestResults.xcresult` as an artifact
-
-
+ 

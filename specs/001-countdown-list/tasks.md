@@ -23,7 +23,6 @@
 - [x] T004 Enable “Treat warnings as errors” in `Countdown.xcodeproj/project.pbxproj` (Debug + Release)
 - [x] T005 Enable code coverage collection in scheme `Countdown` by editing `Countdown.xcodeproj/xcshareddata/xcschemes/Countdown.xcscheme`
 - [x] T006 [P] Add logging utility using OSLog in `Countdown/Presentation/Logging/Log.swift`
-- [x] T047 Add GitHub Actions workflow to build and test with coverage in `.github/workflows/ios-ci.yml` (xcodebuild with code coverage enabled)
 - [x] T048 [P] Add CI script `scripts/ci/build-and-test.sh` to run `xcodebuild` with warnings-as-errors and produce an `.xcresult` with coverage
 - [x] T049 Parse coverage from `.xcresult` and fail CI if coverage < 80% in `scripts/ci/check-coverage.sh`
 
