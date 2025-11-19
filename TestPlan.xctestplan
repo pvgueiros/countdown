@@ -9,7 +9,16 @@
     }
   ],
   "defaultOptions" : {
-    "testTimeoutsEnabled" : true
+    "testTimeoutsEnabled" : true,
+    "codeCoverage" : {
+      "targets" : [
+        {
+          "containerPath" : "container:Countdown.xcodeproj",
+          "identifier" : "CA2FCBFA2E90A001006F8324",
+          "name" : "Countdown"
+        }
+      ]
+    }
   },
   "testTargets" : [
     {
