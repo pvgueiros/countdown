@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-SCHEME="Countdown"
+SCHEME="CountdownTests"
 PROJECT="Countdown.xcodeproj"
-DESTINATION="platform=iOS Simulator,name=iPhone 15,OS=17.5"
+DESTINATION="platform=iOS Simulator,name=iPhone 15"
 DERIVED_DATA="$(pwd)/DerivedData"
 RESULT_BUNDLE="$(pwd)/TestResults.xcresult"
 
@@ -13,14 +13,11 @@ xcodebuild \
   -scheme "$SCHEME" \
   -destination "$DESTINATION" \
   -derivedDataPath "$DERIVED_DATA" \
+  -resultBundlePath "$RESULT_BUNDLE" \
   -enableCodeCoverage YES \
   build test \
   GCC_TREAT_WARNINGS_AS_ERRORS=YES \
   | xcpretty || true
-
-# Attach result bundle if present
-if [ -d "$DERIVED_DATA/Logs/Test" ]; then
-  find "$DERIVED_DATA/Logs/Test" -name "*.xcresult" -exec cp -R {} "$RESULT_BUNDLE" \; || true
-fi
+ 
 
 
