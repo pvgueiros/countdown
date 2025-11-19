@@ -67,3 +67,16 @@ fastlane/test_output
 
 # Cursor
 .cursor
+ 
+# Swift/Xcode extras
+DerivedData/
+.swiftpm/
+Packages/
+
+# Editor/IDE
+.vscode/
+.idea/
+
+# Logs and env files
+*.log
+.env*

@@ -1,0 +1,13 @@
+included:
+  - Countdown
+line_length:
+  warning: 120
+  error: 140
+identifier_name:
+  min_length: 2
+  excluded: ["id", "x", "y"]
+disabled_rules:
+  - trailing_whitespace
+  - todo
+
+
