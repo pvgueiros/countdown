@@ -3,10 +3,29 @@ set -euo pipefail
 
 SCHEME="CountdownTests"
 PROJECT="Countdown.xcodeproj"
-DESTINATION="platform=iOS Simulator,name=iPhone 15"
 DERIVED_DATA="$(pwd)/DerivedData"
 RESULT_BUNDLE="$(pwd)/TestResults.xcresult"
 TEST_PLAN="TestPlan"
+
+# Resolve a stable simulator destination (prefer the newest available iPhone)
+FOUND_UDID="$(xcrun simctl list devices available -j | /usr/bin/python3 - <<'PY' || true
+import sys, json
+data = json.load(sys.stdin)
+# Sort runtimes descending to prefer newest
+for runtime in sorted(data.get("devices", {}).keys(), reverse=True):
+    for d in data["devices"][runtime]:
+        if d.get("isAvailable") and "iPhone" in d.get("name",""):
+            print(d["udid"])
+            raise SystemExit(0)
+raise SystemExit(1)
+PY
+)"
+if [ -z "$FOUND_UDID" ]; then
+  echo "Failed to locate an available iPhone simulator" >&2
+  xcrun simctl list
+  exit 1
+fi
+DESTINATION="platform=iOS Simulator,id=$FOUND_UDID"
 
 rm -rf "$DERIVED_DATA" "$RESULT_BUNDLE"
 xcodebuild \
