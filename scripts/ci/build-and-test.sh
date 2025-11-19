@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
+set -x
 
 SCHEME="CountdownTests"
 PROJECT="Countdown.xcodeproj"
@@ -27,6 +28,9 @@ if [ -z "$FOUND_UDID" ]; then
 fi
 DESTINATION="platform=iOS Simulator,id=$FOUND_UDID"
 
+# Show available schemes for diagnostics
+xcodebuild -list -project "$PROJECT" | sed -n '/Schemes:/,/^$/p' || true
+
 rm -rf "$DERIVED_DATA" "$RESULT_BUNDLE"
 xcodebuild \
   -project "$PROJECT" \
@@ -36,9 +40,17 @@ xcodebuild \
   -derivedDataPath "$DERIVED_DATA" \
   -resultBundlePath "$RESULT_BUNDLE" \
   -enableCodeCoverage YES \
+  -sdk iphonesimulator \
+  -only-testing:CountdownTests \
   build test \
   GCC_TREAT_WARNINGS_AS_ERRORS=YES \
   | xcpretty || true
  
-
+# Fallback: if no direct result bundle, try to copy from DerivedData logs
+if [ ! -d "$RESULT_BUNDLE" ] && [ -d "$DERIVED_DATA/Logs/Test" ]; then
+  FOUND_RESULT="$(find "$DERIVED_DATA/Logs/Test" -name "*.xcresult" | head -n1 || true)"
+  if [ -n "$FOUND_RESULT" ]; then
+    cp -R "$FOUND_RESULT" "$RESULT_BUNDLE" || true
+  fi
+fi
 
