@@ -2,7 +2,14 @@
   "sourceLanguage" : "en",
   "strings" : {
     "%@" : {
-
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@"
+          }
+        }
+      }
     },
     "Add Event" : {
       "extractionState" : "manual",
@@ -15,8 +22,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Adicionar contagem regressiva"
+            "state" : "translated",
+            "value" : "Adicionar evento"
           }
         }
       }
@@ -32,8 +39,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Adicione sua primeira contagem regressiva para começar"
+            "state" : "translated",
+            "value" : "Adicione seu primeiro evento para começar"
           }
         }
       }
@@ -73,7 +80,14 @@
       }
     },
     "Choose a saved event to display." : {
-
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Escolha um evento salvo para exibir."
+          }
+        }
+      }
     },
     "Color" : {
       "extractionState" : "manual",
@@ -92,24 +106,31 @@
         }
       }
     },
-    "Configuration" : {
-
-    },
     "Countdown" : {
-
-    },
-    "Countdown widget for %@, %@, %@ days remaining" : {
       "localizations" : {
-        "en" : {
+        "pt-BR" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Countdown widget for %1$@, %2$@, %3$@ days remaining"
+            "state" : "translated",
+            "value" : "Countdown"
           }
         }
       }
     },
-    "Countdown: %@ days" : {
-
+    "Countdown widget for %@, %@, %@ %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Countdown widget for %1$@, %2$@, %3$@ %4$@"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Widget de Countdown para %@, %@, %@ %@"
+          }
+        }
+      }
     },
     "Create a new event with a title, date, icon, and color." : {
       "extractionState" : "manual",
@@ -122,8 +143,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Crie uma nova contagem regressiva com título, data, ícone e cor."
+            "state" : "translated",
+            "value" : "Crie um novo evento com título, data, ícone e cor."
           }
         }
       }
@@ -139,8 +160,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Criar contagem regressiva"
+            "state" : "translated",
+            "value" : "Criar evento"
           }
         }
       }
@@ -161,9 +182,6 @@
           }
         }
       }
-    },
-    "Date: %@" : {
-
     },
     "Delete" : {
       "extractionState" : "manual",
@@ -193,8 +211,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Excluir contagem regressiva?"
+            "state" : "translated",
+            "value" : "Excluir evento?"
           }
         }
       }
@@ -210,20 +228,31 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Editar contagem regressiva"
+            "state" : "translated",
+            "value" : "Editar evento"
           }
         }
       }
     },
     "Event" : {
-
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Evento"
+          }
+        }
+      }
     },
     "Event: %@" : {
-
-    },
-    "Favorite Emoji" : {
-
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Evento: %@"
+          }
+        }
+      }
     },
     "Icon" : {
       "extractionState" : "manual",
@@ -253,8 +282,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Nova contagem regressiva"
+            "state" : "translated",
+            "value" : "Novo Evento"
           }
         }
       }
@@ -270,8 +299,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Nenhuma contagem regressiva ainda"
+            "state" : "translated",
+            "value" : "Nenhum evento ainda"
           }
         }
       }
@@ -355,10 +384,31 @@
       }
     },
     "Select Event" : {
-
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Selecione evento"
+          }
+        }
+      }
     },
-    "Shows a countdown for a selected date." : {
-
+    "Shows a countdown for a selected event." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shows a countdown for a selected event."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostra a contagem regressiva para um evento selecionado."
+          }
+        }
+      }
     },
     "This action cannot be undone." : {
       "extractionState" : "manual",
@@ -376,9 +426,6 @@
           }
         }
       }
-    },
-    "This is an example widget." : {
-
     },
     "Title" : {
       "extractionState" : "manual",
@@ -459,8 +506,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Atualize o título, a data, o ícone e a cor desta contagem regressiva."
+            "state" : "translated",
+            "value" : "Atualize o título, a data, o ícone e a cor deste evento."
           }
         }
       }

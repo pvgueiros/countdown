@@ -14,7 +14,9 @@ struct Provider: AppIntentTimelineProvider {
         SimpleEntry(date: Date(),
                     title: "Countdown",
                     dateText: DateFormatter.localizedString(from: Date(), dateStyle: .medium, timeStyle: .none),
-                    countdownText: "0")
+                    countdownText: "0",
+                    iconSymbolName: "calendar",
+                    eventColorHex: "#3B82F6")
     }
 
     func snapshot(for configuration: SelectEventIntent, in context: Context) async -> SimpleEntry {
@@ -36,7 +38,9 @@ struct Provider: AppIntentTimelineProvider {
                 date: Date(),
                 title: "No date selected",
                 dateText: "",
-                countdownText: "—"
+                countdownText: "—",
+                iconSymbolName: "calendar",
+                eventColorHex: "#3B82F6"
             )
         }
         // Calculate display strings matching app semantics
@@ -62,7 +66,9 @@ struct Provider: AppIntentTimelineProvider {
             date: now,
             title: selected.title,
             dateText: dateText,
-            countdownText: countdownText
+            countdownText: countdownText,
+            iconSymbolName: selected.iconSymbolName,
+            eventColorHex: selected.eventColorHex
         )
     }
 }
@@ -72,6 +78,8 @@ struct SimpleEntry: TimelineEntry {
     let title: String
     let dateText: String
     let countdownText: String
+    let iconSymbolName: String
+    let eventColorHex: String
 }
 
 // Entry view is defined in Views/CountdownWidgetEntryView.swift
@@ -82,17 +90,27 @@ struct CountdownWidget: Widget {
     var body: some WidgetConfiguration {
         AppIntentConfiguration(kind: kind, intent: SelectEventIntent.self, provider: Provider()) { entry in
             CountdownWidgetEntryView(entry: entry)
-                .containerBackground(.fill.secondary, for: .widget)
+                .containerBackground(containerBackground(for: entry), for: .widget)
         }
         .configurationDisplayName("Countdown")
-        .description("Shows a countdown for a selected date.")
+        .description("Shows a countdown for a selected event.")
         .supportedFamilies([.systemSmall])
+    }
+    
+    private func containerBackground(for entry: SimpleEntry) -> Color {
+        let isPastEvent = entry.countdownText.contains("-")
+        if isPastEvent {
+            return Color(hex: "#F3F4F6") ?? .red
+        } else {
+            return Color(hex: entry.eventColorHex) ?? .black
+        }
     }
 }
 
 #Preview(as: .systemSmall) {
     CountdownWidget()
 } timeline: {
-    SimpleEntry(date: .now, title: "Vacation", dateText: "Nov 19, 2025", countdownText: "10")
-    SimpleEntry(date: .now, title: "Today", dateText: "Nov 19, 2025", countdownText: "Today")
+    SimpleEntry(date: .now, title: "Summer Vacation", dateText: "Jul 14, 2025", countdownText: "- 129", iconSymbolName: "airplane", eventColorHex: "#3B82F6")
+    SimpleEntry(date: .now, title: "Important Meeting", dateText: "Nov 20, 2025", countdownText: "Today", iconSymbolName: "briefcase", eventColorHex: "#A855F7")
+    SimpleEntry(date: .now, title: "Birthday Party", dateText: "Dec 24, 2025", countdownText: "34", iconSymbolName: "birthday.cake", eventColorHex: "#EC4899")
 }
