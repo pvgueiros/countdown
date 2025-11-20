@@ -55,8 +55,8 @@ struct Provider: AppIntentTimelineProvider {
         let countdownText = isToday ? "Today" : (isFuture ? "\(daysNumber)" : "- \(daysNumber)")
         let dateText = DateFormatter.localizedString(from: selected.date, dateStyle: .medium, timeStyle: .none)
 
-        // Persist snapshots (per-contract keys; single-widget fallback id)
-        let widgetId = "default"
+        // Persist snapshots keyed by selected date id (supports multiple widgets via AppIntent config)
+        let widgetId = selected.id.uuidString
         let suite = UserDefaults(suiteName: "group.com.bluecode.CountdownApp") ?? .standard
         suite.set(selected.id.uuidString, forKey: "widget.selection.\(widgetId).dateId")
         suite.set(selected.title, forKey: "widget.selection.\(widgetId).title")

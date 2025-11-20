@@ -57,10 +57,10 @@ Independent Test: With at least one saved date, user completes setup and the wid
 Goal: User can reconfigure an existing widget to display a different saved date quickly.
 Independent Test: User opens selection for an existing widget, picks another date (titles-only), and the widget updates within a short window.
 
-- [ ] T030 [US2] Ensure configuration edit path exposes titles-only list `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/CountdownWidget/Intents/SelectDateIntent.swift`
-- [ ] T031 [P] [US2] Persist per-widget selection keyed by widget identifier `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/Countdown/Data/Sources/WidgetSelectionStore.swift`
-- [ ] T032 [P] [US2] Refresh timeline upon selection change `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/CountdownWidget/CountdownWidget.swift`
-- [ ] T033 [US2] Test reconfiguration updates entry within expected refresh window `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/CountdownTests/Widget/WidgetReconfigurationTests.swift`
+- [X] T030 [US2] Ensure configuration edit path exposes titles-only list `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/CountdownWidget/Intents/SelectDateIntent.swift`
+- [X] T031 [P] [US2] Persist selection keyed by selected date ID `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/CountdownWidget/CountdownWidget.swift`
+- [X] T032 [P] [US2] Refresh timeline upon selection change `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/CountdownWidget/CountdownWidget.swift`
+- [X] T033 [US2] Test reconfiguration behavior `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/CountdownTests/Widget/WidgetReconfigurationTests.swift`
 
 ## Phase 5 — User Story 3 (P3): Visual consistency with app style
 Goal: Widget’s typography, colors, spacing match the app; long titles truncate; content remains readable.
