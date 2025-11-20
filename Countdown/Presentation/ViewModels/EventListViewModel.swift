@@ -3,7 +3,7 @@ import Combine
 internal import os
 
 @MainActor
-public final class DateListViewModel: ObservableObject {
+public final class EventListViewModel: ObservableObject {
     
     // MARK: - Row Model
     
@@ -14,7 +14,7 @@ public final class DateListViewModel: ObservableObject {
         public let iconSymbolName: String
         public let title: String
         public let dateText: String
-        public let entryColorHex: String
+        public let eventColorHex: String
         public let daysNumberText: String
         public let backgroundColorHex: String
         public let hasClockIcon: Bool
@@ -22,7 +22,7 @@ public final class DateListViewModel: ObservableObject {
 
     // MARK: - Dependencies
     
-    private let repository: any DateOfInterestRepository
+    private let repository: any EventRepository
     private let dateString: (Date) -> String
 
     // MARK: - State
@@ -30,12 +30,12 @@ public final class DateListViewModel: ObservableObject {
     @Published public private(set) var rows: [Row] = []
     @Published public private(set) var upcomingRows: [Row] = []
     @Published public private(set) var pastRows: [Row] = []
-    @Published public private(set) var items: [DateOfInterest] = []
+    @Published public private(set) var items: [Event] = []
 
     // MARK: - Init
     
     public init(
-        repository: any DateOfInterestRepository,
+        repository: any EventRepository,
         dateString: @escaping (Date) -> String = { DateFormatterProvider.mediumLocaleFormatter().string(from: $0) }
     ) {
         self.repository = repository
@@ -50,7 +50,7 @@ public final class DateListViewModel: ObservableObject {
             self.rows = mapRows(from: items)
             self.items = items
             
-            let partitions = GetDatesPartitionedUseCase().execute(items: items)
+            let partitions = GetEventsPartitionedUseCase().execute(items: items)
             self.upcomingRows = mapRows(from: partitions.upcoming)
             self.pastRows = mapRows(from: partitions.past)
         } catch {
@@ -62,18 +62,18 @@ public final class DateListViewModel: ObservableObject {
         }
     }
 
-    public func setItems(_ items: [DateOfInterest]) {
+    public func setItems(_ items: [Event]) {
         self.rows = mapRows(from: items)
         self.items = items
         
-        let partitions = GetDatesPartitionedUseCase().execute(items: items)
+        let partitions = GetEventsPartitionedUseCase().execute(items: items)
         self.upcomingRows = mapRows(from: partitions.upcoming)
         self.pastRows = mapRows(from: partitions.past)
     }
 
     // MARK: - Mapping
     
-    private func mapRows(from items: [DateOfInterest]) -> [Row] {
+    private func mapRows(from items: [Event]) -> [Row] {
         let calendar = Calendar.current
         let startOfToday = calendar.startOfDay(for: Date())
         
@@ -87,14 +87,14 @@ public final class DateListViewModel: ObservableObject {
             
             let daysNumber = isToday ? 0 : abs(delta)
             let daysNumberText = isToday ? "Today" : (isFuture ? "\(daysNumber)" : "- \(daysNumber)")
-            let backgroundColorHex = (isToday || isFuture) ? item.entryColorHex : Row.grayBackgroundColorHex
+            let backgroundColorHex = (isToday || isFuture) ? item.eventColorHex : Row.grayBackgroundColorHex
             
             return Row(
                 id: item.id,
                 iconSymbolName: item.iconSymbolName,
                 title: item.title,
                 dateText: dateString(item.date),
-                entryColorHex: item.entryColorHex,
+                eventColorHex: item.eventColorHex,
                 daysNumberText: daysNumberText,
                 backgroundColorHex: backgroundColorHex,
                 hasClockIcon: isFuture
@@ -103,7 +103,7 @@ public final class DateListViewModel: ObservableObject {
     }
 
     // MARK: - Actions
-    public func item(for id: UUID) -> DateOfInterest? {
+    public func item(for id: UUID) -> Event? {
         items.first(where: { $0.id == id })
     }
 

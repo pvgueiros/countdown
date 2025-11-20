@@ -2,7 +2,7 @@ import Foundation
 
 public struct WidgetSelection {
     public let widgetId: String
-    public let selectedDateId: String
+    public let selectedEventId: String
     public let lastDisplayTitle: String
     public let lastDisplayDateString: String
 }
@@ -18,28 +18,28 @@ public final class WidgetSelectionStore {
         "widget.selection.\(widgetId).\(suffix)"
     }
 
-    public func saveSelection(widgetId: String, dateId: String, titleSnapshot: String, dateStringSnapshot: String) {
-        userDefaults.set(dateId, forKey: key(widgetId, "dateId"))
+    public func saveSelection(widgetId: String, eventId: String, titleSnapshot: String, dateStringSnapshot: String) {
+        userDefaults.set(eventId, forKey: key(widgetId, "eventId"))
         userDefaults.set(titleSnapshot, forKey: key(widgetId, "title"))
         userDefaults.set(dateStringSnapshot, forKey: key(widgetId, "dateString"))
     }
 
     public func loadSelection(widgetId: String) -> WidgetSelection? {
         guard
-            let dateId = userDefaults.string(forKey: key(widgetId, "dateId")),
+            let eventId = userDefaults.string(forKey: key(widgetId, "eventId")),
             let title = userDefaults.string(forKey: key(widgetId, "title")),
             let dateString = userDefaults.string(forKey: key(widgetId, "dateString"))
         else { return nil }
         return WidgetSelection(
             widgetId: widgetId,
-            selectedDateId: dateId,
+            selectedEventId: eventId,
             lastDisplayTitle: title,
             lastDisplayDateString: dateString
         )
     }
 
     public func clearSelection(widgetId: String) {
-        userDefaults.removeObject(forKey: key(widgetId, "dateId"))
+        userDefaults.removeObject(forKey: key(widgetId, "eventId"))
         userDefaults.removeObject(forKey: key(widgetId, "title"))
         userDefaults.removeObject(forKey: key(widgetId, "dateString"))
     }

@@ -1,14 +1,14 @@
 import SwiftUI
 
 public struct CountdownListScreen: View {
-    @StateObject private var viewModel: DateListViewModel
+    @StateObject private var viewModel: EventListViewModel
     @State private var selectedTab: Int = 0
     @State private var showingAddSheet: Bool = false
-    @State private var editingItem: DateOfInterest? = nil
+    @State private var editingItem: Event? = nil
     @State private var pendingDeleteId: UUID? = nil
     @State private var showingDeleteAlert: Bool = false
 
-    public init(viewModel: DateListViewModel) {
+    public init(viewModel: EventListViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
 
@@ -50,9 +50,9 @@ public struct CountdownListScreen: View {
         .sheet(isPresented: $showingAddSheet, onDismiss: {
             Task { await viewModel.load() }
         }) {
-            AddEditDateSheet(
-                viewModel: AddEditDateViewModel(
-                    repository: UserDefaultsDateOfInterestRepository(userDefaults: AppGroupUserDefaults.make()),
+            AddEditEventSheet(
+                viewModel: AddEditEventViewModel(
+                    repository: UserDefaultsEventRepository(userDefaults: AppGroupUserDefaults.make()),
                     mode: .add,
                     onCompleted: { showingAddSheet = false }
                 )
@@ -61,9 +61,9 @@ public struct CountdownListScreen: View {
         .sheet(item: $editingItem, onDismiss: {
             Task { await viewModel.load() }
         }) { item in
-            AddEditDateSheet(
-                viewModel: AddEditDateViewModel(
-                    repository: UserDefaultsDateOfInterestRepository(userDefaults: AppGroupUserDefaults.make()),
+            AddEditEventSheet(
+                viewModel: AddEditEventViewModel(
+                    repository: UserDefaultsEventRepository(userDefaults: AppGroupUserDefaults.make()),
                     mode: .edit(item),
                     onCompleted: { editingItem = nil }
                 )
@@ -156,7 +156,7 @@ public struct CountdownListScreen: View {
         .accessibilityIdentifier("empty_state_message")
     }
 
-    private var currentRows: [DateListViewModel.Row] {
+    private var currentRows: [EventListViewModel.Row] {
         selectedTab == 0 ? viewModel.upcomingRows : viewModel.pastRows
     }
 
@@ -165,49 +165,49 @@ public struct CountdownListScreen: View {
     }
 }
 
-#Preview("List of Dates") {
+#Preview("List of Events") {
     let repo = PreviewRepository(items: [
-        DateOfInterest(
+        Event(
             title: "My Birthday",
             date: Date().addingTimeInterval(60 * 60 * 24 * 30),
             iconSymbolName: "gift.fill",
-            entryColorHex: "#FF4D9F"
+            eventColorHex: "#FF4D9F"
         ),
-        DateOfInterest(
+        Event(
             title: "Conference",
             date: Date().addingTimeInterval(60 * 60 * 24 * 7),
             iconSymbolName: "calendar",
-            entryColorHex: "#0A84FF"
+            eventColorHex: "#0A84FF"
         ),
-        DateOfInterest(
+        Event(
             title: "Travel",
             date: Date().addingTimeInterval(-60 * 60 * 24 * 41),
             iconSymbolName: "airplane.up.right",
-            entryColorHex: "#00C300"
+            eventColorHex: "#00C300"
         )
     ])
     return CountdownListScreen(
-        viewModel: DateListViewModel(
+        viewModel: EventListViewModel(
             repository: repo
         )
     )
 }
 
-#Preview("Empty Date List") {
+#Preview("Empty Event List") {
     CountdownListScreen(
-        viewModel: DateListViewModel(
+        viewModel: EventListViewModel(
             repository: PreviewRepository(items: [])
         )
     )
 }
 
 // MARK: - Previews Support
-internal struct PreviewRepository: DateOfInterestRepository {
-    let items: [DateOfInterest]
-    init(items: [DateOfInterest]) { self.items = items }
-    func fetchAll() async throws -> [DateOfInterest] { items }
-    func add(_ item: DateOfInterest) async throws {}
-    func update(_ item: DateOfInterest) async throws {}
+internal struct PreviewRepository: EventRepository {
+    let items: [Event]
+    init(items: [Event]) { self.items = items }
+    func fetchAll() async throws -> [Event] { items }
+    func add(_ event: Event) async throws {}
+    func update(_ event: Event) async throws {}
     func delete(_ id: UUID) async throws {}
 }
 

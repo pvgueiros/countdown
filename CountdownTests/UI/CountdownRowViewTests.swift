@@ -4,34 +4,34 @@ import SwiftUI
 
 final class CountdownRowViewTests: XCTestCase {
     func testRowBodyExecutesForFutureTodayPast() {
-        let futureRow = DateListViewModel.Row(
+        let futureRow = EventListViewModel.Row(
             id: UUID(),
             iconSymbolName: "airplane",
             title: "Future",
             dateText: "Jan 1, 2030",
-            entryColorHex: "#0A84FF",
+            eventColorHex: "#0A84FF",
             daysNumberText: "5",
             backgroundColorHex: "#0A84FF",
             hasClockIcon: true
         )
-        let todayRow = DateListViewModel.Row(
+        let todayRow = EventListViewModel.Row(
             id: UUID(),
             iconSymbolName: "calendar",
             title: "Today",
             dateText: "Today",
-            entryColorHex: "#34C759",
+            eventColorHex: "#34C759",
             daysNumberText: "Today",
             backgroundColorHex: "#34C759",
             hasClockIcon: false
         )
-        let pastRow = DateListViewModel.Row(
+        let pastRow = EventListViewModel.Row(
             id: UUID(),
             iconSymbolName: "clock",
             title: "Past",
             dateText: "Yesterday",
-            entryColorHex: "#FF3B30",
+            eventColorHex: "#FF3B30",
             daysNumberText: "- 1",
-            backgroundColorHex: DateListViewModel.Row.grayBackgroundColorHex,
+            backgroundColorHex: EventListViewModel.Row.grayBackgroundColorHex,
             hasClockIcon: false
         )
         

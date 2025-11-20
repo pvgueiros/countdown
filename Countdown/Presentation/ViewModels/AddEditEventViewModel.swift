@@ -3,10 +3,10 @@ import Combine
 internal import os
 
 @MainActor
-public final class AddEditDateViewModel: ObservableObject {
+public final class AddEditEventViewModel: ObservableObject {
     public enum Mode {
         case add
-        case edit(DateOfInterest)
+        case edit(Event)
     }
 
     // Inputs
@@ -14,25 +14,25 @@ public final class AddEditDateViewModel: ObservableObject {
     @Published public var date: Date = Date()
     @Published public var hasCustomDate: Bool = false
     @Published public var iconSymbolName: String = "star"
-    @Published public var entryColorHex: String = "#FF9500"
+    @Published public var eventColorHex: String = "#FF9500"
 
     // State
     @Published public private(set) var isSubmitting: Bool = false
 
-    private let repository: any DateOfInterestRepository
-    private let addUseCase: AddDateOfInterestUseCase
-    private let updateUseCase: UpdateDateOfInterestUseCase
+    private let repository: any EventRepository
+    private let addUseCase: AddEventUseCase
+    private let updateUseCase: UpdateEventUseCase
     private let mode: Mode
     private let onCompleted: () -> Void
 
     public init(
-        repository: any DateOfInterestRepository,
+        repository: any EventRepository,
         mode: Mode,
         onCompleted: @escaping () -> Void
     ) {
         self.repository = repository
-        self.addUseCase = AddDateOfInterestUseCase(repository: repository)
-        self.updateUseCase = UpdateDateOfInterestUseCase(repository: repository)
+        self.addUseCase = AddEventUseCase(repository: repository)
+        self.updateUseCase = UpdateEventUseCase(repository: repository)
         self.mode = mode
         self.onCompleted = onCompleted
 
@@ -40,12 +40,12 @@ public final class AddEditDateViewModel: ObservableObject {
         case .add:
             // Accept today's date by default for add mode
             self.hasCustomDate = true
-        case .edit(let item):
-            self.title = item.title
-            self.date = item.date
+        case .edit(let event):
+            self.title = event.title
+            self.date = event.date
             self.hasCustomDate = true
-            self.iconSymbolName = item.iconSymbolName
-            self.entryColorHex = item.entryColorHex
+            self.iconSymbolName = event.iconSymbolName
+            self.eventColorHex = event.eventColorHex
         }
     }
 
@@ -72,7 +72,7 @@ public final class AddEditDateViewModel: ObservableObject {
                     title: title.trimmingCharacters(in: .whitespacesAndNewlines),
                     date: date,
                     iconSymbolName: iconSymbolName,
-                    entryColorHex: entryColorHex
+                    eventColorHex: eventColorHex
                 )
                 onCompleted()
             } catch {
@@ -80,12 +80,12 @@ public final class AddEditDateViewModel: ObservableObject {
             }
         case .edit(let existing):
             do {
-                let updated = DateOfInterest(
+                let updated = Event(
                     id: existing.id,
                     title: title.trimmingCharacters(in: .whitespacesAndNewlines),
                     date: date,
                     iconSymbolName: iconSymbolName,
-                    entryColorHex: entryColorHex,
+                    eventColorHex: eventColorHex,
                     createdAt: existing.createdAt
                 )
                 try await updateUseCase.execute(updated)

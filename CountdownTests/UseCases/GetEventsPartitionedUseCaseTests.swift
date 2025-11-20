@@ -1,7 +1,7 @@
 import XCTest
 @testable import Countdown
 
-final class GetDatesPartitionedUseCaseTests: XCTestCase {
+final class GetEventsPartitionedUseCaseTests: XCTestCase {
     func testPartitionsUpcomingAndPastWithSortAndTieBreaker() {
         let calendar = Calendar.current
         let today = calendar.startOfDay(for: Date())
@@ -14,15 +14,15 @@ final class GetDatesPartitionedUseCaseTests: XCTestCase {
         let createdOld = Date(timeIntervalSince1970: 1_700_000_000)
         let createdNew = Date(timeIntervalSince1970: 1_800_000_000)
 
-        let items: [DateOfInterest] = [
-            .init(id: UUID(), title: "Past 5", date: dPast2, iconSymbolName: "calendar", entryColorHex: "#AAAAAA", createdAt: createdOld),
-            .init(id: UUID(), title: "Past 1", date: dPast1, iconSymbolName: "calendar", entryColorHex: "#BBBBBB", createdAt: createdNew),
-            .init(id: UUID(), title: "Today old", date: dFuture1, iconSymbolName: "calendar", entryColorHex: "#CCCCCC", createdAt: createdOld),
-            .init(id: UUID(), title: "Today new", date: dFuture1, iconSymbolName: "calendar", entryColorHex: "#DDDDDD", createdAt: createdNew),
-            .init(id: UUID(), title: "Future 3", date: dFuture2, iconSymbolName: "calendar", entryColorHex: "#EEEEEE", createdAt: createdOld),
+        let items: [Event] = [
+            .init(id: UUID(), title: "Past 5", date: dPast2, iconSymbolName: "calendar", eventColorHex: "#AAAAAA", createdAt: createdOld),
+            .init(id: UUID(), title: "Past 1", date: dPast1, iconSymbolName: "calendar", eventColorHex: "#BBBBBB", createdAt: createdNew),
+            .init(id: UUID(), title: "Today old", date: dFuture1, iconSymbolName: "calendar", eventColorHex: "#CCCCCC", createdAt: createdOld),
+            .init(id: UUID(), title: "Today new", date: dFuture1, iconSymbolName: "calendar", eventColorHex: "#DDDDDD", createdAt: createdNew),
+            .init(id: UUID(), title: "Future 3", date: dFuture2, iconSymbolName: "calendar", eventColorHex: "#EEEEEE", createdAt: createdOld),
         ]
 
-        let uc = GetDatesPartitionedUseCase()
+        let uc = GetEventsPartitionedUseCase()
         let (upcoming, past) = uc.execute(items: items, calendar: calendar)
 
         // Upcoming sorted: today (oldest created first), then future ascending

@@ -1,7 +1,7 @@
 import SwiftUI
 
-public struct AddEditDateSheet: View {
-    @StateObject private var viewModel: AddEditDateViewModel
+public struct AddEditEventSheet: View {
+    @StateObject private var viewModel: AddEditEventViewModel
 
     private let availableIcons: [String] = [
         "calendar", "gift.fill", "airplane", "heart", "graduationcap", "gift",
@@ -15,7 +15,7 @@ public struct AddEditDateSheet: View {
         "#FF3B30", "#FF375F", "#5856D6", "#32ADE6"
     ]
 
-    public init(viewModel: AddEditDateViewModel) {
+    public init(viewModel: AddEditEventViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
 
@@ -71,7 +71,7 @@ public struct AddEditDateSheet: View {
                                             RoundedRectangle(cornerRadius: 10)
                                                 .fill(
                                                     viewModel.iconSymbolName == symbol
-                                                    ? (Color(hex: viewModel.entryColorHex) ?? .orange)
+                                                    ? (Color(hex: viewModel.eventColorHex) ?? .orange)
                                                     : Color(.systemGray6)
                                                 )
                                         )
@@ -88,7 +88,7 @@ public struct AddEditDateSheet: View {
                         LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 12), count: 4), spacing: 12) {
                             ForEach(colorHexes, id: \.self) { hex in
                                 Button {
-                                    viewModel.entryColorHex = hex
+                                    viewModel.eventColorHex = hex
                                 } label: {
                                     RoundedRectangle(cornerRadius: 14)
                                         .fill(LinearGradient(
@@ -99,7 +99,7 @@ public struct AddEditDateSheet: View {
                                         .frame(height: 44)
                                         .overlay(
                                             RoundedRectangle(cornerRadius: 14)
-                                                .stroke(viewModel.entryColorHex == hex ? Color.black.opacity(0.6) : .clear, lineWidth: 2)
+                                                .stroke(viewModel.eventColorHex == hex ? Color.black.opacity(0.6) : .clear, lineWidth: 2)
                                         )
                                 }
                                 .buttonStyle(.plain)
@@ -144,13 +144,14 @@ public struct AddEditDateSheet: View {
 }
 
 #Preview {
-    AddEditDateSheet(
-        viewModel: AddEditDateViewModel(
+    AddEditEventSheet(
+        viewModel: AddEditEventViewModel(
             repository: PreviewRepository(items: []),
             mode: .add,
             onCompleted: {}
         )
     )
 }
+
 
 

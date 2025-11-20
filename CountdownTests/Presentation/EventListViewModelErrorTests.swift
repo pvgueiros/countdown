@@ -1,18 +1,18 @@
 import XCTest
 @testable import Countdown
 
-final class DateListViewModelErrorTests: XCTestCase {
+final class EventListViewModelErrorTests: XCTestCase {
     private enum FakeError: Error { case boom }
     
-    private actor ThrowingRepo: DateOfInterestRepository {
-        func fetchAll() async throws -> [DateOfInterest] { throw FakeError.boom }
-        func add(_ item: DateOfInterest) async throws {}
-        func update(_ item: DateOfInterest) async throws {}
+    private actor ThrowingRepo: EventRepository {
+        func fetchAll() async throws -> [Event] { throw FakeError.boom }
+        func add(_ event: Event) async throws {}
+        func update(_ event: Event) async throws {}
         func delete(_ id: UUID) async throws {}
     }
     
     func testLoadFailureClearsState() async {
-        let vm = await DateListViewModel(repository: ThrowingRepo())
+        let vm = await EventListViewModel(repository: ThrowingRepo())
         await vm.load()
         
         let (rows, items, upcoming, past) = await MainActor.run {

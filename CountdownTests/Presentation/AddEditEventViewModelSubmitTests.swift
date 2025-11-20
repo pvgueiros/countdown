@@ -1,19 +1,19 @@
 import XCTest
 @testable import Countdown
 
-final class AddEditDateViewModelSubmitTests: XCTestCase {
-    private actor SpyRepo: DateOfInterestRepository {
-        private(set) var added: [DateOfInterest] = []
-        private(set) var updated: [DateOfInterest] = []
-        func fetchAll() async throws -> [DateOfInterest] { [] }
-        func add(_ item: DateOfInterest) async throws { added.append(item) }
-        func update(_ item: DateOfInterest) async throws { updated.append(item) }
+final class AddEditEventViewModelSubmitTests: XCTestCase {
+    private actor SpyRepo: EventRepository {
+        private(set) var added: [Event] = []
+        private(set) var updated: [Event] = []
+        func fetchAll() async throws -> [Event] { [] }
+        func add(_ event: Event) async throws { added.append(event) }
+        func update(_ event: Event) async throws { updated.append(event) }
         func delete(_ id: UUID) async throws {}
     }
     
     func testSubmitAddCallsRepository() async {
         let repo = SpyRepo()
-        let vm = await AddEditDateViewModel(repository: repo, mode: .add, onCompleted: {})
+        let vm = await AddEditEventViewModel(repository: repo, mode: .add, onCompleted: {})
         await MainActor.run {
             vm.title = "New"
             vm.hasCustomDate = true
@@ -25,8 +25,8 @@ final class AddEditDateViewModelSubmitTests: XCTestCase {
     
     func testSubmitEditCallsRepositoryUpdate() async {
         let repo = SpyRepo()
-        let item = DateOfInterest(title: "Old", date: Date(), iconSymbolName: "star", entryColorHex: "#FF0000")
-        let vm = await AddEditDateViewModel(repository: repo, mode: .edit(item), onCompleted: {})
+        let item = Event(title: "Old", date: Date(), iconSymbolName: "star", eventColorHex: "#FF0000")
+        let vm = await AddEditEventViewModel(repository: repo, mode: .edit(item), onCompleted: {})
         await MainActor.run {
             vm.title = "Updated"
         }
@@ -37,7 +37,7 @@ final class AddEditDateViewModelSubmitTests: XCTestCase {
     
     func testCTATitleChangesWhenSubmitting() async {
         let repo = SpyRepo()
-        let vm = await AddEditDateViewModel(repository: repo, mode: .add, onCompleted: {})
+        let vm = await AddEditEventViewModel(repository: repo, mode: .add, onCompleted: {})
         await MainActor.run {
             vm.title = "New"
             vm.hasCustomDate = true

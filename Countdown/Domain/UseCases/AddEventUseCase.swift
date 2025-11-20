@@ -1,28 +1,29 @@
 import Foundation
 
-public struct AddDateOfInterestUseCase {
-    private let repository: DateOfInterestRepository
-
-    public init(repository: DateOfInterestRepository) {
+public struct AddEventUseCase {
+    private let repository: EventRepository
+    
+    public init(repository: EventRepository) {
         self.repository = repository
     }
-
+    
     public func execute(
         title: String,
         date: Date,
         iconSymbolName: String,
-        entryColorHex: String,
+        eventColorHex: String,
         createdAt: Date = Date()
     ) async throws {
-        let item = DateOfInterest(
+        let event = Event(
             title: title,
             date: date,
             iconSymbolName: iconSymbolName,
-            entryColorHex: entryColorHex,
+            eventColorHex: eventColorHex,
             createdAt: createdAt
         )
-        try await repository.add(item)
+        try await repository.add(event)
     }
 }
-
+    
+    
 

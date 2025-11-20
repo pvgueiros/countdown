@@ -17,11 +17,11 @@ struct Provider: AppIntentTimelineProvider {
                     countdownText: "0")
     }
 
-    func snapshot(for configuration: SelectDateIntent, in context: Context) async -> SimpleEntry {
+    func snapshot(for configuration: SelectEventIntent, in context: Context) async -> SimpleEntry {
         await entry(for: configuration)
     }
     
-    func timeline(for configuration: SelectDateIntent, in context: Context) async -> Timeline<SimpleEntry> {
+    func timeline(for configuration: SelectEventIntent, in context: Context) async -> Timeline<SimpleEntry> {
         let entry = await entry(for: configuration)
         // Update daily at midnight for days-only countdown (avoid cross-target dependency)
         let cal = Calendar.current
@@ -30,11 +30,11 @@ struct Provider: AppIntentTimelineProvider {
         return Timeline(entries: [entry], policy: .after(nextMidnight))
     }
 
-//    func relevances() async -> WidgetRelevances<SelectDateIntent> {
+//    func relevances() async -> WidgetRelevances<SelectEventIntent> {
 //        // Generate a list containing the contexts this widget is relevant in.
 //    }
     
-    private func entry(for configuration: SelectDateIntent) async -> SimpleEntry {
+    private func entry(for configuration: SelectEventIntent) async -> SimpleEntry {
         guard let selected = configuration.selected else {
             return SimpleEntry(
                 date: Date(),
@@ -58,7 +58,7 @@ struct Provider: AppIntentTimelineProvider {
         // Persist snapshots keyed by selected date id (supports multiple widgets via AppIntent config)
         let widgetId = selected.id.uuidString
         let suite = UserDefaults(suiteName: "group.com.bluecode.CountdownApp") ?? .standard
-        suite.set(selected.id.uuidString, forKey: "widget.selection.\(widgetId).dateId")
+        suite.set(selected.id.uuidString, forKey: "widget.selection.\(widgetId).eventId")
         suite.set(selected.title, forKey: "widget.selection.\(widgetId).title")
         suite.set(dateText, forKey: "widget.selection.\(widgetId).dateString")
 
@@ -84,7 +84,7 @@ struct CountdownWidget: Widget {
     let kind: String = "CountdownWidget"
 
     var body: some WidgetConfiguration {
-        AppIntentConfiguration(kind: kind, intent: SelectDateIntent.self, provider: Provider()) { entry in
+        AppIntentConfiguration(kind: kind, intent: SelectEventIntent.self, provider: Provider()) { entry in
             CountdownWidgetEntryView(entry: entry)
                 .containerBackground(.fill.secondary, for: .widget)
         }

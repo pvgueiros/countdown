@@ -1,27 +1,27 @@
 import Foundation
 
-public struct GetDatesPartitionedUseCase {
+public struct GetEventsPartitionedUseCase {
     public init() {}
-
+    
     public func execute(
-        items: [DateOfInterest],
+        items: [Event],
         calendar: Calendar = .current
-    ) -> (upcoming: [DateOfInterest], past: [DateOfInterest]) {
+    ) -> (upcoming: [Event], past: [Event]) {
         let startOfToday = calendar.startOfDay(for: Date())
         func startOfDay(_ date: Date) -> Date { calendar.startOfDay(for: date) }
-
-        var upcoming: [DateOfInterest] = []
-        var past: [DateOfInterest] = []
-
-        for item in items {
-            let d = startOfDay(item.date)
+        
+        var upcoming: [Event] = []
+        var past: [Event] = []
+        
+        for event in items {
+            let d = startOfDay(event.date)
             if d >= startOfToday {
-                upcoming.append(item)
+                upcoming.append(event)
             } else {
-                past.append(item)
+                past.append(event)
             }
         }
-
+        
         upcoming.sort {
             let d0 = startOfDay($0.date)
             let d1 = startOfDay($1.date)
@@ -37,5 +37,6 @@ public struct GetDatesPartitionedUseCase {
         return (upcoming, past)
     }
 }
-
+    
+    
 

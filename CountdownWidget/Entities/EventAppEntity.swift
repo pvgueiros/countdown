@@ -1,10 +1,10 @@
 import Foundation
 import AppIntents
 
-struct DateOfInterestAppEntity: AppEntity, Identifiable {
-    static var typeDisplayRepresentation: TypeDisplayRepresentation = "Date of Interest"
+struct EventAppEntity: AppEntity, Identifiable {
+    static var typeDisplayRepresentation: TypeDisplayRepresentation = "Event"
 
-    static var defaultQuery = DateOfInterestQuery()
+    static var defaultQuery = EventQuery()
 
     let id: UUID
     let title: String
@@ -15,31 +15,32 @@ struct DateOfInterestAppEntity: AppEntity, Identifiable {
     }
 }
 
-struct DateOfInterestQuery: EntityQuery {
+struct EventQuery: EntityQuery {
     struct DTO: Codable, Identifiable {
         let id: UUID
         let title: String
         let date: Date
     }
 
-    func entities(for identifiers: [UUID]) async throws -> [DateOfInterestAppEntity] {
+    func entities(for identifiers: [UUID]) async throws -> [EventAppEntity] {
         let all = try await suggestedEntities()
         let set = Set(identifiers)
         return all.filter { set.contains($0.id) }
     }
 
-    func suggestedEntities() async throws -> [DateOfInterestAppEntity] {
+    func suggestedEntities() async throws -> [EventAppEntity] {
         // Read from shared App Group storage
         let suite = UserDefaults(suiteName: "group.com.bluecode.CountdownApp") ?? .standard
-        guard let data = suite.data(forKey: "datesOfInterest") else { return [] }
+        guard let data = suite.data(forKey: "events") else { return [] }
         // Decode only fields we need
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
         guard let dtos = try? decoder.decode([DTO].self, from: data) else { return [] }
         return dtos.map { dto in
-            DateOfInterestAppEntity(id: dto.id, title: dto.title, date: dto.date)
+            EventAppEntity(id: dto.id, title: dto.title, date: dto.date)
         }
     }
 }
+
 
 

@@ -1,9 +1,9 @@
 import SwiftUI
 
 public struct CountdownRowView: View {
-    public let row: DateListViewModel.Row
+    public let row: EventListViewModel.Row
 
-    public init(row: DateListViewModel.Row) {
+    public init(row: EventListViewModel.Row) {
         self.row = row
     }
 
@@ -56,7 +56,7 @@ public struct CountdownRowView: View {
     }
 
     private var entryColor: Color {
-        Color(hex: row.entryColorHex) ?? .gray
+        Color(hex: row.eventColorHex) ?? .gray
     }
 
     private var iconContainer: some View {
@@ -85,7 +85,7 @@ public struct CountdownRowView: View {
 
     private var badgeForeground: some ShapeStyle {
         // If the badge background is gray (past), use the system primary color for optimal contrast.
-        if row.backgroundColorHex == DateListViewModel.Row.grayBackgroundColorHex {
+        if row.backgroundColorHex == EventListViewModel.Row.grayBackgroundColorHex {
             return AnyShapeStyle(Color.primary)
         }
         // For colored backgrounds (today/future), adjust the entry color to ensure sufficient contrast
@@ -132,7 +132,7 @@ public struct CountdownRowView: View {
             iconSymbolName: "airplane",
             title: "Sample Event",
             dateText: "Jan 1, 2026",
-            entryColorHex: "#3366FF",
+            eventColorHex: "#3366FF",
             daysNumberText: "10",
             backgroundColorHex: "#3366FF",
             hasClockIcon: true

@@ -13,8 +13,8 @@ final class WidgetDisplayFormatterTests: XCTestCase {
         return calendar.date(from: comps)!
     }
 
-    private func makeItem(title: String, date: Date) -> DateOfInterest {
-        DateOfInterest(title: title, date: date, iconSymbolName: "calendar", entryColorHex: "#FF00FF")
+    private func makeItem(title: String, date: Date) -> Event {
+        Event(title: title, date: date, iconSymbolName: "calendar", eventColorHex: "#FF00FF")
     }
 
     func testTodayDisplaysToday() {

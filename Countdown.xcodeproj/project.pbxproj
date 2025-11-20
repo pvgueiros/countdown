@@ -84,7 +84,6 @@
 		CAA374912ECE6E1B00C3E22D /* Exceptions for "Countdown" folder in "CountdownWidgetExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				"Presentation/Colors/EntryColor+Hex.swift",
 				Presentation/Colors/RowStylingRules.swift,
 				Presentation/Formatters/DateFormatterProvider.swift,
 				Resources/Localizable.xcstrings,

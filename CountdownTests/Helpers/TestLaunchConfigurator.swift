@@ -13,7 +13,7 @@ internal import os
 enum TestLaunchConfigurator {
     static func applyFromLaunchArguments(_ arguments: [String] = ProcessInfo.processInfo.arguments) {
         if arguments.contains("UITEST_CLEAR_DATA") {
-            UserDefaults.standard.removeObject(forKey: "datesOfInterest")
+            UserDefaults.standard.removeObject(forKey: "events")
         }
         if arguments.contains("UITEST_PRELOAD_DATA") {
             TestDataPreloader.preloadSampleData()
@@ -28,13 +28,13 @@ enum TestDataPreloader {
     static func preloadSampleData() {
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
-        let items: [DateOfInterestMapper.DTO] = [
+        let items: [EventMapper.DTO] = [
             .init(
                 id: UUID(),
                 title: "My Birthday",
                 date: Calendar.current.date(byAdding: .day, value: 10, to: Date()) ?? Date(),
                 iconSymbolName: "gift.fill",
-                entryColorHex: "#FF3B30",
+                eventColorHex: "#FF3B30",
                 createdAt: Date()
             ),
             .init(
@@ -42,7 +42,7 @@ enum TestDataPreloader {
                 title: "Conference",
                 date: Calendar.current.date(byAdding: .day, value: 30, to: Date()) ?? Date(),
                 iconSymbolName: "calendar",
-                entryColorHex: "#0A84FF",
+                eventColorHex: "#0A84FF",
                 createdAt: Date()
             ),
             .init(
@@ -50,13 +50,13 @@ enum TestDataPreloader {
                 title: "Travel",
                 date: Calendar.current.date(byAdding: .day, value: -7, to: Date()) ?? Date(),
                 iconSymbolName: "airplane.up.right",
-                entryColorHex: "#00C300",
+                eventColorHex: "#00C300",
                 createdAt: Date()
             )
         ]
         do {
             let data = try encoder.encode(items)
-            UserDefaults.standard.set(data, forKey: "datesOfInterest")
+            UserDefaults.standard.set(data, forKey: "events")
         } catch {
             Log.general.error("Failed to preload test data: \(String(describing: error), privacy: .public)")
         }
@@ -65,7 +65,7 @@ enum TestDataPreloader {
     static func preload(count: Int) {
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
-        var items: [DateOfInterestMapper.DTO] = []
+        var items: [EventMapper.DTO] = []
         let calendar = Calendar.current
         let now = Date()
         for i in 0..<count {
@@ -80,13 +80,13 @@ enum TestDataPreloader {
                 title: "Item \(i + 1)",
                 date: date,
                 iconSymbolName: symbol,
-                entryColorHex: color,
+                eventColorHex: color,
                 createdAt: now.addingTimeInterval(TimeInterval(i))
             ))
         }
         do {
             let data = try encoder.encode(items)
-            UserDefaults.standard.set(data, forKey: "datesOfInterest")
+            UserDefaults.standard.set(data, forKey: "events")
         } catch {
             Log.general.error("Failed to preload \(count) items: \(String(describing: error), privacy: .public)")
         }

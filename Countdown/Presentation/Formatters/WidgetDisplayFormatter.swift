@@ -14,7 +14,7 @@ public struct WidgetDisplayFormatter {
         return calendar.date(byAdding: .day, value: 1, to: startOfToday) ?? now.addingTimeInterval(60 * 60 * 24)
     }
 
-    public func makeDisplay(for item: DateOfInterest, now: Date = Date(), calendar: Calendar = .current) -> Display {
+    public func makeDisplay(for item: Event, now: Date = Date(), calendar: Calendar = .current) -> Display {
         let startOfToday = calendar.startOfDay(for: now)
         let startTarget = calendar.startOfDay(for: item.date)
         let delta = calendar.dateComponents([.day], from: startOfToday, to: startTarget).day ?? 0

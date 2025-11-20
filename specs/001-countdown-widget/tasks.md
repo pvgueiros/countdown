@@ -71,13 +71,6 @@ Independent Test: Visual inspection confirms use of app tokens; titles truncate 
 - [X] T036 [P] [US3] VoiceOver: concise labels for title/date/countdown `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/CountdownWidget/Views/CountdownWidgetEntryView.swift`
 - [X] T037 [US3] Localization checks (date format/locale) via formatter `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/Countdown/Presentation/Formatters/WidgetDisplayFormatter.swift`
 
-## Final Phase — Polish & Cross-Cutting Concerns
-
-- [ ] T038 Add widget resources to CI build matrix `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/scripts/ci/build-and-test.sh`
-- [ ] T039 [P] Validate ≥80% coverage gates include widget tests `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/scripts/ci/check-coverage.sh`
-- [ ] T040 [P] Performance: ensure zero layout jank on smallest size `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/CountdownWidget/Views/CountdownWidgetEntryView.swift`
-- [ ] T041 Accessibility: dynamic type/readability verification `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/CountdownWidget/Views/CountdownWidgetEntryView.swift`
-
 ---
 
 ## Dependencies (Story Order)

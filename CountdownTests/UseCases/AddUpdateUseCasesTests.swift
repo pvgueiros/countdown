@@ -2,13 +2,13 @@ import XCTest
 @testable import Countdown
 
 final class AddUpdateUseCasesTests: XCTestCase {
-    actor InMemoryRepo: DateOfInterestRepository {
-        var items: [DateOfInterest] = []
-        func fetchAll() async throws -> [DateOfInterest] { items }
-        func add(_ item: DateOfInterest) async throws { items.append(item) }
-        func update(_ item: DateOfInterest) async throws {
-            if let idx = items.firstIndex(where: { $0.id == item.id }) {
-                items[idx] = item
+    actor InMemoryRepo: EventRepository {
+        var items: [Event] = []
+        func fetchAll() async throws -> [Event] { items }
+        func add(_ event: Event) async throws { items.append(event) }
+        func update(_ event: Event) async throws {
+            if let idx = items.firstIndex(where: { $0.id == event.id }) {
+                items[idx] = event
             }
         }
         func delete(_ id: UUID) async throws {
@@ -18,7 +18,7 @@ final class AddUpdateUseCasesTests: XCTestCase {
 
     func testAddUseCaseAppendsItemAndSetsCreatedAt() async throws {
         let repo = InMemoryRepo()
-        let add = await AddDateOfInterestUseCase(repository: repo)
+        let add = await AddEventUseCase(repository: repo)
         let before = try await repo.fetchAll()
         XCTAssertTrue(before.isEmpty)
 
@@ -26,7 +26,7 @@ final class AddUpdateUseCasesTests: XCTestCase {
             title: "New",
             date: Date(),
             iconSymbolName: "star",
-            entryColorHex: "#FF9500"
+            eventColorHex: "#FF9500"
         )
         let after = try await repo.fetchAll()
         XCTAssertEqual(after.count, 1)
@@ -37,10 +37,10 @@ final class AddUpdateUseCasesTests: XCTestCase {
 
     func testUpdateUseCaseModifiesExistingItem() async throws {
         let repo = InMemoryRepo()
-        let initial = DateOfInterest(title: "Old", date: Date(), iconSymbolName: "star", entryColorHex: "#FF9500")
+        let initial = Event(title: "Old", date: Date(), iconSymbolName: "star", eventColorHex: "#FF9500")
         try await repo.add(initial)
 
-        let update = await UpdateDateOfInterestUseCase(repository: repo)
+        let update = await UpdateEventUseCase(repository: repo)
         var updated = initial
         updated.title = "Updated"
         try await update.execute(updated)

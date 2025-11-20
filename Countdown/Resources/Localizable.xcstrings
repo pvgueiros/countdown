@@ -72,7 +72,7 @@
         }
       }
     },
-    "Choose a saved date of interest to display." : {
+    "Choose a saved event to display." : {
 
     },
     "Color" : {
@@ -179,9 +179,6 @@
         }
       }
     },
-    "Date of Interest" : {
-
-    },
     "Date: %@" : {
 
     },
@@ -235,6 +232,9 @@
           }
         }
       }
+    },
+    "Event" : {
+
     },
     "Event: %@" : {
 
@@ -371,7 +371,7 @@
         }
       }
     },
-    "Select Date" : {
+    "Select Event" : {
 
     },
     "Shows a countdown for a selected date." : {

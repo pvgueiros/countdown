@@ -8,8 +8,8 @@ public protocol Coordinator {
 public struct AppCoordinator: Coordinator {
     public init() {}
     public func rootView() -> some View {
-        let repository = UserDefaultsDateOfInterestRepository(userDefaults: AppGroupUserDefaults.make())
-        let viewModel = DateListViewModel(repository: repository)
+        let repository = UserDefaultsEventRepository(userDefaults: AppGroupUserDefaults.make())
+        let viewModel = EventListViewModel(repository: repository)
         return CountdownListScreen(viewModel: viewModel)
     }
 }
