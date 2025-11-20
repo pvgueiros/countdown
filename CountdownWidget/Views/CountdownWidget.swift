@@ -30,10 +30,6 @@ struct Provider: AppIntentTimelineProvider {
         return Timeline(entries: [entry], policy: .after(nextMidnight))
     }
 
-//    func relevances() async -> WidgetRelevances<SelectEventIntent> {
-//        // Generate a list containing the contexts this widget is relevant in.
-//    }
-    
     private func entry(for configuration: SelectEventIntent) async -> SimpleEntry {
         guard let selected = configuration.selected else {
             return SimpleEntry(
