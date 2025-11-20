@@ -54,8 +54,8 @@ public final class AddEditEventViewModel: ObservableObject {
         return false
     }
 
-    public var headerTitle: String { isEditMode ? "Edit Countdown" : "New Countdown" }
-    public var ctaTitle: String { isSubmitting ? (isEditMode ? "Saving..." : "Adding...") : (isEditMode ? "Save Changes" : "Add Countdown") }
+    public var headerTitle: String { isEditMode ? "Edit Event" : "New Event" }
+    public var ctaTitle: String { isSubmitting ? (isEditMode ? "Saving..." : "Adding...") : (isEditMode ? "Save Changes" : "Add Event") }
 
     public var isValid: Bool {
         !title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && hasCustomDate

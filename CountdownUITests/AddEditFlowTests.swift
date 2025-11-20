@@ -17,7 +17,7 @@ final class AddEditFlowTests: XCTestCase {
         titleField.typeText("Vacation")
 
         // Tap Add
-        let addButton = app.buttons["add_countdown_cta"]
+        let addButton = app.buttons["add_event_cta"]
         XCTAssertTrue(addButton.waitForExistence(timeout: 5))
         addButton.tap()
 

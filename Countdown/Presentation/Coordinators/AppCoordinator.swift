@@ -10,7 +10,7 @@ public struct AppCoordinator: Coordinator {
     public func rootView() -> some View {
         let repository = UserDefaultsEventRepository(userDefaults: AppGroupUserDefaults.make())
         let viewModel = EventListViewModel(repository: repository)
-        return CountdownListScreen(viewModel: viewModel)
+        return EventListScreen(viewModel: viewModel)
     }
 }
 

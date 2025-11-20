@@ -4,35 +4,35 @@
     "%@" : {
 
     },
-    "Add Countdown" : {
+    "Add Event" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add Countdown"
+            "value" : "Add Event"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Adicionar contagem regressiva"
           }
         }
       }
     },
-    "Add your first countdown to get started" : {
+    "Add your first event to get started" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add your first countdown to get started"
+            "value" : "Add your first event to get started"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Adicione sua primeira contagem regressiva para começar"
           }
         }
@@ -111,52 +111,35 @@
     "Countdown: %@ days" : {
 
     },
-    "Countdowns" : {
+    "Create a new event with a title, date, icon, and color." : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Countdowns"
+            "value" : "Create a new event with a title, date, icon, and color."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Contagens regressivas"
-          }
-        }
-      }
-    },
-    "Create a new countdown with a title, date, icon, and color." : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Create a new countdown with a title, date, icon, and color."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Crie uma nova contagem regressiva com título, data, ícone e cor."
           }
         }
       }
     },
-    "Create Countdown" : {
+    "Create Event" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Create Countdown"
+            "value" : "Create Event"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Criar contagem regressiva"
           }
         }
@@ -199,35 +182,35 @@
         }
       }
     },
-    "Delete Countdown?" : {
+    "Delete Event?" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Delete Countdown?"
+            "value" : "Delete Event?"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Excluir contagem regressiva?"
           }
         }
       }
     },
-    "Edit Countdown" : {
+    "Edit Event" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Edit Countdown"
+            "value" : "Edit Event"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Editar contagem regressiva"
           }
         }
@@ -259,35 +242,35 @@
         }
       }
     },
-    "New Countdown" : {
+    "New Event" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "New Countdown"
+            "value" : "New Event"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Nova contagem regressiva"
           }
         }
       }
     },
-    "No Countdowns Yet" : {
+    "No Events Yet" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No Countdowns Yet"
+            "value" : "No Events Yet"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Nenhuma contagem regressiva ainda"
           }
         }
@@ -465,18 +448,18 @@
         }
       }
     },
-    "Update this countdown’s title, date, icon, and color." : {
+    "Update this event’s title, date, icon, and color." : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Update this countdown’s title, date, icon, and color."
+            "value" : "Update this event’s title, date, icon, and color."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Atualize o título, a data, o ícone e a cor desta contagem regressiva."
           }
         }

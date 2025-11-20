@@ -26,7 +26,7 @@ public struct AddEditEventSheet: View {
                     Text(LocalizedStringKey(viewModel.headerTitle))
                         .font(.title2.weight(.bold))
                         .frame(maxWidth: .infinity, alignment: .center)
-                    Text(viewModel.isEditMode ? "Update this countdown’s title, date, icon, and color." : "Create a new countdown with a title, date, icon, and color.")
+                    Text(viewModel.isEditMode ? "Update this event’s title, date, icon, and color." : "Create a new event with a title, date, icon, and color.")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
@@ -122,7 +122,7 @@ public struct AddEditEventSheet: View {
                             .clipShape(RoundedRectangle(cornerRadius: 12))
                     }
                     .disabled(!viewModel.isValid || viewModel.isSubmitting)
-                    .accessibilityIdentifier("add_countdown_cta")
+                    .accessibilityIdentifier("add_event_cta")
                 }
                 .padding(16)
             }

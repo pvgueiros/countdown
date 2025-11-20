@@ -1,13 +1,13 @@
 import XCTest
 
-final class CountdownListRenderingTests: XCTestCase {
+final class EventListRenderingTests: XCTestCase {
     func testListRendersWithPreloadedData() throws {
         let app = XCUIApplication()
         app.launchArguments.append("UITEST_PRELOAD_DATA")
         app.launch()
 
         // Title/subtitle exist
-        XCTAssertTrue(app.staticTexts["Countdowns"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["Countdown"].waitForExistence(timeout: 5))
         XCTAssertTrue(app.staticTexts["Track your special moments"].exists)
 
         // At least one known row appears

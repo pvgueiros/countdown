@@ -2,7 +2,7 @@ import XCTest
 import SwiftUI
 @testable import Countdown
 
-final class CountdownRowViewTests: XCTestCase {
+final class EventRowViewTests: XCTestCase {
     func testRowBodyExecutesForFutureTodayPast() {
         let futureRow = EventListViewModel.Row(
             id: UUID(),
@@ -35,9 +35,9 @@ final class CountdownRowViewTests: XCTestCase {
             hasClockIcon: false
         )
         
-        _ = CountdownRowView(row: futureRow).body
-        _ = CountdownRowView(row: todayRow).body
-        _ = CountdownRowView(row: pastRow).body
+        _ = EventRowView(row: futureRow).body
+        _ = EventRowView(row: todayRow).body
+        _ = EventRowView(row: pastRow).body
         
         // No assertion needed; executing body covers view logic branches.
         XCTAssertTrue(true)

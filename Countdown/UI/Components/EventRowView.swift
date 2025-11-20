@@ -1,6 +1,6 @@
 import SwiftUI
 
-public struct CountdownRowView: View {
+public struct EventRowView: View {
     public let row: EventListViewModel.Row
 
     public init(row: EventListViewModel.Row) {
@@ -126,7 +126,7 @@ public struct CountdownRowView: View {
 }
 
 #Preview {
-    CountdownRowView(
+    EventRowView(
         row: .init(
             id: UUID(),
             iconSymbolName: "airplane",

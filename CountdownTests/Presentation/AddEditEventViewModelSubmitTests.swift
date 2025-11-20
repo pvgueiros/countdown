@@ -43,11 +43,11 @@ final class AddEditEventViewModelSubmitTests: XCTestCase {
             vm.hasCustomDate = true
         }
         let before = await vm.ctaTitle
-        XCTAssertEqual(before, "Add Countdown")
+        XCTAssertEqual(before, "Add Event")
         // We cannot easily intercept mid-submit without adding hooks; ensure it ends
         await vm.submit()
         let after = await vm.ctaTitle
-        XCTAssertEqual(after, "Add Countdown")
+        XCTAssertEqual(after, "Add Event")
     }
 }
 

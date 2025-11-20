@@ -1,6 +1,6 @@
 import SwiftUI
 
-public struct CountdownListScreen: View {
+public struct EventListScreen: View {
     @StateObject private var viewModel: EventListViewModel
     @State private var selectedTab: Int = 0
     @State private var showingAddSheet: Bool = false
@@ -69,7 +69,7 @@ public struct CountdownListScreen: View {
                 )
             )
         }
-        .alert("Delete Countdown?", isPresented: $showingDeleteAlert) {
+        .alert("Delete Event?", isPresented: $showingDeleteAlert) {
             Button("Delete", role: .destructive) {
                 if let id = pendingDeleteId {
                     Task { await viewModel.delete(id: id) }
@@ -84,7 +84,7 @@ public struct CountdownListScreen: View {
 
     @ViewBuilder
     private var headerView: some View {
-        Text("Countdowns")
+        Text("Countdown")
             .font(.largeTitle.bold())
             .padding(.trailing, 72) // Reserve space for floating '+' button
         Text("Track your special moments")
@@ -104,7 +104,7 @@ public struct CountdownListScreen: View {
             Button {
                 if let item = viewModel.item(for: row.id) { editingItem = item }
             } label: {
-                CountdownRowView(row: row)
+                EventRowView(row: row)
             }
             .buttonStyle(.plain)
             .listRowInsets(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
@@ -123,17 +123,17 @@ public struct CountdownListScreen: View {
 
     private var emptyStateView: some View {
         VStack(alignment: .center, spacing: 16) {
-            Text("No Countdowns Yet")
+            Text("No Events Yet")
                 .font(.headline)
                 .multilineTextAlignment(.center)
 
-            Text("Add your first countdown to get started")
+            Text("Add your first event to get started")
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
 
             Button(action: { showingAddSheet = true }) {
-                Text("Create Countdown")
+                Text("Create Event")
                     .font(.headline)
                     .foregroundStyle(.white)
                     .padding(.horizontal, 20)
@@ -186,7 +186,7 @@ public struct CountdownListScreen: View {
             eventColorHex: "#00C300"
         )
     ])
-    return CountdownListScreen(
+    return EventListScreen(
         viewModel: EventListViewModel(
             repository: repo
         )
@@ -194,7 +194,7 @@ public struct CountdownListScreen: View {
 }
 
 #Preview("Empty Event List") {
-    CountdownListScreen(
+    EventListScreen(
         viewModel: EventListViewModel(
             repository: PreviewRepository(items: [])
         )

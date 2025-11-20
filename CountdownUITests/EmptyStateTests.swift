@@ -7,7 +7,7 @@ final class EmptyStateTests: XCTestCase {
         // DO NOT add preload arg so dataset stays empty
         app.launch()
 
-        XCTAssertTrue(app.staticTexts["Countdowns"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["Countdown"].waitForExistence(timeout: 5))
         XCTAssertTrue(app.otherElements["empty_state_message"].waitForExistence(timeout: 5))
     }
 }
