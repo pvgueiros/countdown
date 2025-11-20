@@ -66,7 +66,7 @@ struct CountdownWidgetEntryView_Previews: PreviewProvider {
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
                 .containerBackground(.fill.secondary, for: .widget)
                 .previewDisplayName("Future Event")
-            CountdownWidgetEntryView(entry: SimpleEntry(date: .now, title: "Conference Talk", dateText: "Nov 15, 2025", countdownText: "- 4"))
+            CountdownWidgetEntryView(entry: SimpleEntry(date: .now, title: "Summer Vacation", dateText: "Jul 14, 2025", countdownText: "- 129"))
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
                 .containerBackground(.fill.secondary, for: .widget)
                 .previewDisplayName("Past Event")
