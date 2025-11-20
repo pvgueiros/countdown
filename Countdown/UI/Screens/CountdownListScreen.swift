@@ -52,7 +52,7 @@ public struct CountdownListScreen: View {
         }) {
             AddEditDateSheet(
                 viewModel: AddEditDateViewModel(
-                    repository: UserDefaultsDateOfInterestRepository(),
+                    repository: UserDefaultsDateOfInterestRepository(userDefaults: AppGroupUserDefaults.make()),
                     mode: .add,
                     onCompleted: { showingAddSheet = false }
                 )
@@ -63,7 +63,7 @@ public struct CountdownListScreen: View {
         }) { item in
             AddEditDateSheet(
                 viewModel: AddEditDateViewModel(
-                    repository: UserDefaultsDateOfInterestRepository(),
+                    repository: UserDefaultsDateOfInterestRepository(userDefaults: AppGroupUserDefaults.make()),
                     mode: .edit(item),
                     onCompleted: { editingItem = nil }
                 )

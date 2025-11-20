@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%@" : {
+
+    },
     "Add Countdown" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -69,6 +72,9 @@
         }
       }
     },
+    "Choose a saved date of interest to display." : {
+
+    },
     "Color" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -85,6 +91,12 @@
           }
         }
       }
+    },
+    "Configuration" : {
+
+    },
+    "Countdown" : {
+
     },
     "Countdowns" : {
       "extractionState" : "manual",
@@ -154,6 +166,9 @@
         }
       }
     },
+    "Date of Interest" : {
+
+    },
     "Delete" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -204,6 +219,12 @@
           }
         }
       }
+    },
+    "Favorite Emoji" : {
+
+    },
+    "Hello, world!" : {
+
     },
     "Icon" : {
       "extractionState" : "manual",
@@ -334,6 +355,12 @@
         }
       }
     },
+    "Select Date" : {
+
+    },
+    "Shows a countdown for a selected date." : {
+
+    },
     "This action cannot be undone." : {
       "extractionState" : "manual",
       "localizations" : {
@@ -350,6 +377,9 @@
           }
         }
       }
+    },
+    "This is an example widget." : {
+
     },
     "Title" : {
       "extractionState" : "manual",
