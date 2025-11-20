@@ -2,14 +2,20 @@ import Foundation
 
 public actor UserDefaultsEventRepository: EventRepository {
     private let key = "events"
-    private let encoder = JSONEncoder()
-    private let decoder = JSONDecoder()
-    private let userDefaults: UserDefaults
+    private nonisolated let encoder: JSONEncoder = {
+        let enc = JSONEncoder()
+        enc.dateEncodingStrategy = .iso8601
+        return enc
+    }()
+    private nonisolated let decoder: JSONDecoder = {
+        let dec = JSONDecoder()
+        dec.dateDecodingStrategy = .iso8601
+        return dec
+    }()
+    private nonisolated(unsafe) let userDefaults: UserDefaults
     
-    public init(userDefaults: UserDefaults = .standard) {
+    public init(userDefaults: UserDefaults) {
         self.userDefaults = userDefaults
-        self.encoder.dateEncodingStrategy = .iso8601
-        self.decoder.dateDecodingStrategy = .iso8601
     }
     
     public func fetchAll() async throws -> [Event] {

@@ -15,7 +15,7 @@ final class UserDefaultsRepositoryTests: XCTestCase {
     }
     
     func testAddFetchUpdateDelete() async throws {
-        let repo = await UserDefaultsEventRepository()
+        let repo = await UserDefaultsEventRepository(userDefaults: .standard)
         
         // Initially empty
         var items = try await repo.fetchAll()

@@ -4,6 +4,9 @@
     "%@" : {
 
     },
+    "%lld" : {
+
+    },
     "Add Event" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -92,23 +95,7 @@
         }
       }
     },
-    "Configuration" : {
-
-    },
     "Countdown" : {
-
-    },
-    "Countdown widget for %@, %@, %@ days remaining" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Countdown widget for %1$@, %2$@, %3$@ days remaining"
-          }
-        }
-      }
-    },
-    "Countdown: %@ days" : {
 
     },
     "Create a new event with a title, date, icon, and color." : {
@@ -220,9 +207,6 @@
 
     },
     "Event: %@" : {
-
-    },
-    "Favorite Emoji" : {
 
     },
     "Icon" : {
@@ -377,9 +361,6 @@
         }
       }
     },
-    "This is an example widget." : {
-
-    },
     "Title" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -461,6 +442,54 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Atualize o título, a data, o ícone e a cor desta contagem regressiva."
+          }
+        }
+      }
+    },
+    "widget.countdown.ago" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ago"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "atrás"
+          }
+        }
+      }
+    },
+    "widget.countdown.days" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "days"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "dias"
+          }
+        }
+      }
+    },
+    "widget.countdown.today" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Today"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hoje"
           }
         }
       }

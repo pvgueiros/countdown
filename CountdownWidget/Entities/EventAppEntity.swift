@@ -9,6 +9,8 @@ struct EventAppEntity: AppEntity, Identifiable {
     let id: UUID
     let title: String
     let date: Date
+    let iconSymbolName: String
+    let eventColorHex: String
 
     var displayRepresentation: DisplayRepresentation {
         DisplayRepresentation(title: "\(title)")
@@ -20,6 +22,8 @@ struct EventQuery: EntityQuery {
         let id: UUID
         let title: String
         let date: Date
+        let iconSymbolName: String
+        let eventColorHex: String
     }
 
     func entities(for identifiers: [UUID]) async throws -> [EventAppEntity] {
@@ -37,7 +41,13 @@ struct EventQuery: EntityQuery {
         decoder.dateDecodingStrategy = .iso8601
         guard let dtos = try? decoder.decode([DTO].self, from: data) else { return [] }
         return dtos.map { dto in
-            EventAppEntity(id: dto.id, title: dto.title, date: dto.date)
+            EventAppEntity(
+                id: dto.id,
+                title: dto.title,
+                date: dto.date,
+                iconSymbolName: dto.iconSymbolName,
+                eventColorHex: dto.eventColorHex
+            )
         }
     }
 }

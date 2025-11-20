@@ -52,8 +52,22 @@ struct Provider: AppIntentTimelineProvider {
         let isToday = startTarget == startOfToday
         let isFuture = delta > 0
         let daysNumber = isToday ? 0 : abs(delta)
-        let countdownText = isToday ? "Today" : (isFuture ? "\(daysNumber)" : "- \(daysNumber)")
+        let countdownText = isToday ? localized("widget.countdown.today", default: "Today")
+            : (isFuture ? "\(daysNumber)" : "- \(daysNumber)")
         let dateText = DateFormatter.localizedString(from: selected.date, dateStyle: .medium, timeStyle: .none)
+        
+        // Classification and labels
+        let classification: SimpleEntry.Classification = isToday ? .today : (isFuture ? .future : .past)
+        let labelText: String = {
+            switch classification {
+            case .past:
+                return localized("widget.countdown.ago", default: "ago")
+            case .future:
+                return localized("widget.countdown.days", default: "days")
+            case .today:
+                return localized("widget.countdown.today", default: "Today")
+            }
+        }()
 
         // Persist snapshots keyed by selected date id (supports multiple widgets via AppIntent config)
         let widgetId = selected.id.uuidString
@@ -66,8 +80,19 @@ struct Provider: AppIntentTimelineProvider {
             date: now,
             title: selected.title,
             dateText: dateText,
-            countdownText: countdownText
+            countdownText: countdownText,
+            iconSymbolName: selected.iconSymbolName,
+            eventColorHex: selected.eventColorHex,
+            classification: classification,
+            labelText: labelText,
+            dayCount: daysNumber
         )
+    }
+    
+    private func localized(_ key: String, default fallback: String) -> String {
+        let value = NSLocalizedString(key, comment: "")
+        if value == key { return fallback }
+        return value
     }
 }
 
@@ -76,6 +101,12 @@ struct SimpleEntry: TimelineEntry {
     let title: String
     let dateText: String
     let countdownText: String
+    var iconSymbolName: String = "calendar"
+    var eventColorHex: String = "#808080"
+    enum Classification: String { case past, today, future }
+    var classification: Classification = .future
+    var labelText: String = ""
+    var dayCount: Int = 0
 }
 
 // Entry view is defined in Views/CountdownWidgetEntryView.swift
