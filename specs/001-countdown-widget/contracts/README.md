@@ -12,12 +12,12 @@ This app feature does not introduce a remote API. Contracts below define module 
 
 ### Data Persistence
 - Selection store keys
-  - key: `widget.selection.<widgetId>.dateId` → String
+  - key: `widget.selection.<widgetId>.eventId` → String
   - key: `widget.selection.<widgetId>.title` → String (snapshot)
   - key: `widget.selection.<widgetId>.dateString` → String (snapshot)
 
 ### Error/Invalidation Handling
-- If `dateId` no longer resolves to a DateOfInterest:
+- If `eventId` no longer resolves to an Event:
   - Widget renders neutral placeholder
   - On tap, open selection flow to reselect
 

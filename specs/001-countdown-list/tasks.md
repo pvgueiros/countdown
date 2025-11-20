@@ -34,17 +34,17 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [x] T007 Create entity `DateOfInterest` in `Countdown/Domain/Entities/DateOfInterest.swift` (id, title, date, iconSymbolName, entryColorHex, createdAt)
-- [x] T008 Create repository protocol in `Countdown/Domain/Repositories/DateOfInterestRepository.swift` (CRUD: list/add/update)
-- [x] T009 Implement UserDefaults repository `UserDefaultsDateOfInterestRepository` in `Countdown/Data/Sources/UserDefaultsDateOfInterestRepository.swift` (JSON encode/decode under key `datesOfInterest`)
-- [x] T010 [P] Create mapper helpers in `Countdown/Data/Mappers/DateOfInterestMapper.swift` (entity <-> DTO)
-- [x] T011 Create use case `GetDatesPartitionedUseCase` in `Countdown/UseCases/GetDatesPartitionedUseCase.swift` (upcoming/past, sorting + tie-breaker)
-- [x] T012 Create use case `AddDateOfInterestUseCase` in `Countdown/UseCases/AddDateOfInterestUseCase.swift`
-- [x] T013 Create use case `UpdateDateOfInterestUseCase` in `Countdown/UseCases/UpdateDateOfInterestUseCase.swift`
+- [x] T007 Create entity `Event` in `Countdown/Domain/Entities/Event.swift` (id, title, date, iconSymbolName, eventColorHex, createdAt)
+- [x] T008 Create repository protocol in `Countdown/Domain/Repositories/EventRepository.swift` (CRUD: list/add/update)
+- [x] T009 Implement UserDefaults repository `UserDefaultsEventRepository` in `Countdown/Data/Sources/UserDefaultsEventRepository.swift` (JSON encode/decode under key `events`)
+- [x] T010 [P] Create mapper helpers in `Countdown/Data/Mappers/EventMapper.swift` (entity <-> DTO)
+- [x] T011 Create use case `GetEventsPartitionedUseCase` in `Countdown/UseCases/GetEventsPartitionedUseCase.swift` (upcoming/past, sorting + tie-breaker)
+- [x] T012 Create use case `AddEventUseCase` in `Countdown/UseCases/AddEventUseCase.swift`
+- [x] T013 Create use case `UpdateEventUseCase` in `Countdown/UseCases/UpdateEventUseCase.swift`
 - [x] T014 [P] Create `CountdownFormatter` in `Countdown/Presentation/Formatters/CountdownFormatter.swift` ("X"/"-X"/"Today", device time zone)
 - [x] T015 [P] Create `DateFormatterProvider` in `Countdown/Presentation/Formatters/DateFormatterProvider.swift` (localized date)
 - [x] T016 Create Coordinator base + AppCoordinator in `Countdown/Presentation/Coordinators/AppCoordinator.swift`
-- [x] T017 [P] Add color utility `EntryColor+Hex.swift` in `Countdown/Presentation/Colors/EntryColor+Hex.swift` (parse `entryColorHex` to Color; gray fallback)
+- [x] T017 [P] Add color utility `EntryColor+Hex.swift` in `Countdown/Presentation/Colors/EntryColor+Hex.swift` (parse `eventColorHex` to Color; gray fallback)
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
@@ -63,7 +63,7 @@
 
 ### Implementation for User Story 1
 
-- [x] T020 [US1] Create `DateListViewModel` in `Countdown/Presentation/ViewModels/DateListViewModel.swift` (observable state, rows)
+- [x] T020 [US1] Create `EventListViewModel` in `Countdown/Presentation/ViewModels/DateListViewModel.swift` (observable state, rows)
 - [x] T021 [P] [US1] Create `CountdownRowView` in `Countdown/UI/Components/CountdownRowView.swift` (layouts, alignment)
 - [x] T022 [US1] Create `CountdownListScreen` in `Countdown/UI/Screens/CountdownListScreen.swift` (title/subtitle + list)
 - [x] T023 [US1] Wire AppCoordinator to initial screen in `Countdown/Presentation/Coordinators/AppCoordinator.swift`
@@ -85,7 +85,7 @@
 
 ### Implementation for User Story 2
 
-- [x] T026 [US2] Compute countdown number and sign in `DateListViewModel` in `Countdown/Presentation/ViewModels/DateListViewModel.swift`
+- [x] T026 [US2] Compute countdown number and sign in `EventListViewModel` in `Countdown/Presentation/ViewModels/DateListViewModel.swift`
 - [x] T027 [US2] Update `CountdownRowView` to remove qualifier label and show number-only pill in `Countdown/UI/Components/CountdownRowView.swift`
 
 **Checkpoint**: US1 + US2 independently testable
@@ -106,7 +106,7 @@
 ### Implementation for User Story 5
 
 - [x] T030 [US5] Add two tabs (using `SegmentedControl`) to `CountdownListScreen` in `Countdown/UI/Screens/CountdownListScreen.swift`
-- [x] T031 [US5] Expose partitioned sections from `DateListViewModel` in `Countdown/Presentation/ViewModels/DateListViewModel.swift`
+- [x] T031 [US5] Expose partitioned sections from `EventListViewModel` in `Countdown/Presentation/ViewModels/DateListViewModel.swift`
 
 **Checkpoint**: P1 scope complete and demoable
 
@@ -130,9 +130,9 @@
 
 ---
 
-## Phase 7: User Story 4 - Manage dates (Priority: P2)
+## Phase 7: User Story 4 - Manage events (Priority: P2)
 
-**Goal**: Add and edit entries; persist across relaunch
+**Goal**: Add and edit events; persist across relaunch
 
 **Independent Test**: Add then relaunch; entry persists. Edit then relaunch; changes persist.
 
@@ -143,13 +143,13 @@
 
 ### Implementation for User Story 4
 
-- [x] T036 [US4] Add `AddEditDateViewModel` in `Countdown/Presentation/ViewModels/AddEditDateViewModel.swift`
-- [x] T037 [P] [US4] Add `AddEditDateSheet` in `Countdown/UI/Screens/AddEditDateSheet.swift` (fields: title, date, iconSymbolName, entryColor)
-- [x] T038 [US4] Wire add/edit actions in `DateListViewModel` and `AppCoordinator` (`Countdown/Presentation/ViewModels/DateListViewModel.swift`, `Countdown/Presentation/Coordinators/AppCoordinator.swift`)
-- [x] T039 [US4] Persist via repository; set `createdAt` when adding; update fields when editing in `Countdown/Data/Sources/UserDefaultsDateOfInterestRepository.swift`
- - [x] T050 [US4] Add delete to repository protocol and implementation in `DateOfInterestRepository` and `UserDefaultsDateOfInterestRepository`
+- [x] T036 [US4] Add `AddEditEventViewModel` in `Countdown/Presentation/ViewModels/AddEditDateViewModel.swift`
+- [x] T037 [P] [US4] Add `AddEditEventSheet` in `Countdown/UI/Screens/AddEditEventSheet.swift` (fields: title, date, iconSymbolName, eventColor)
+- [x] T038 [US4] Wire add/edit actions in `EventListViewModel` and `AppCoordinator` (`Countdown/Presentation/ViewModels/DateListViewModel.swift`, `Countdown/Presentation/Coordinators/AppCoordinator.swift`)
+- [x] T039 [US4] Persist via repository; set `createdAt` when adding; update fields when editing in `Countdown/Data/Sources/UserDefaultsEventRepository.swift`
+ - [x] T050 [US4] Add delete to repository protocol and implementation in `EventRepository` and `UserDefaultsEventRepository`
  - [x] T051 [US4] Add swipe-to-delete with confirmation alert on rows in `Countdown/UI/Screens/CountdownListScreen.swift`
- - [x] T052 [US4] Tap row to open edit sheet with adjusted header/CTA in `Countdown/UI/Screens/CountdownListScreen.swift` and `AddEditDateSheet`
+ - [x] T052 [US4] Tap row to open edit sheet with adjusted header/CTA in `Countdown/UI/Screens/CountdownListScreen.swift` and `AddEditEventSheet`
 
 **Checkpoint**: US4 independently testable
 

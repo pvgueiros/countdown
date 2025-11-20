@@ -5,7 +5,7 @@
 
 ## Summary
 
-Add the ability to set up a smallest-size home screen widget that displays a selected Date of Interest (title, date, countdown), matching the app’s countdown semantics and visual style. Follow existing architecture: Domain entities and Use Cases remain the source of truth; Presentation/ViewModels provide formatted strings; a widget configuration surface lets users choose a date (titles-only) and updates the widget content accordingly.
+Add the ability to set up a smallest-size home screen widget that displays a selected Event (title, date, countdown), matching the app’s countdown semantics and visual style. Follow existing architecture: Domain entities and Use Cases remain the source of truth; Presentation/ViewModels provide formatted strings; a widget configuration surface lets users choose an event (titles-only) and updates the widget content accordingly.
 
 ## Technical Context
 
@@ -17,7 +17,7 @@ Add the ability to set up a smallest-size home screen widget that displays a sel
 **Project Type**: Mobile (iOS app + widget extension)  
 **Performance Goals**: Lightweight rendering; instantaneous widget load; no layout jank on smallest size  
 **Constraints**: Match app countdown text exactly; respect locale; zero warnings; ≥80% coverage  
-**Scale/Scope**: Multiple widgets supported (each configured to a different date)
+**Scale/Scope**: Multiple widgets supported (each configured to a different event)
 
 ## Constitution Check
 

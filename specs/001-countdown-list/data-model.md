@@ -5,12 +5,12 @@ Branch: 001-countdown-list
 
 ## Entities
 
-### DateOfInterest
+### Event
 - id: UUID (unique, immutable)
 - title: String (1…80 chars)
 - date: Date (truncated to calendar day in device time zone)
 - iconSymbolName: String (SF Symbol name)
-- entryColorHex: String (e.g., #RRGGBB or named color key)
+- eventColorHex: String (e.g., #RRGGBB or named color key)
 - createdAt: Date (for tie-breaker ordering)
 - updatedAt: Date (optional)
 
@@ -18,7 +18,7 @@ Branch: 001-countdown-list
 - title is non-empty, max 80 chars
 - iconSymbolName must map to available symbol on min iOS target; use fallback if unavailable
 - date stored as full `Date` but comparisons use calendar-day granularity in device time zone
-- entryColorHex must parse to a valid color
+- eventColorHex must parse to a valid color
 
 ## Relationships
 - None (MVP)
@@ -32,7 +32,7 @@ Branch: 001-countdown-list
   - today: "Today"
 
 ## Persistence
-- MVP: UserDefaults under key `datesOfInterest`, JSON-encoded array
-- Future: SwiftData model with `@Model DateOfInterestEntity` mapped 1:1 to fields above
+- MVP: UserDefaults under key `events`, JSON-encoded array
+- Future: SwiftData model with `@Model EventEntity` mapped 1:1 to fields above
 
 

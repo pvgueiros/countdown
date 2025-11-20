@@ -31,7 +31,7 @@
 
 ### User Story 1 - View countdown list (Priority: P1)
 
-As a user, I open the app and see a titled screen with a subtitle and a list of my dates of interest, each showing an icon, a title, a date (left-aligned), and a right-aligned countdown pill.
+As a user, I open the app and see a titled screen with a subtitle and a list of my events, each showing an icon, a title, a date (left-aligned), and a right-aligned countdown pill.
 
 **Why this priority**: This is the core value proposition of the app and must function as the MVP.
 
@@ -40,7 +40,7 @@ As a user, I open the app and see a titled screen with a subtitle and a list of 
 **Acceptance Scenarios**:
 
 1. Given the app launches, when the main screen loads, then the title reads "Countdown" and the subtitle reads "Track your special moments".
-2. Given at least one date of interest exists, when the list renders, then each row shows an icon, a title, a left-justified date, and a right-justified countdown pill.
+2. Given at least one event exists, when the list renders, then each row shows an icon, a title, a left-justified date, and a right-justified countdown pill.
 3. Note: US1 verifies presence and alignment only; the exact pill semantics (number vs “Today”, colors) are finalized in US2.
 
 ---
@@ -63,7 +63,7 @@ As a user, I can quickly understand how many days remain until a future date or 
 
 ### User Story 3 - Empty state communication (Priority: P2)
 
-As a user with no saved dates of interest, I see a friendly empty state message explaining that no dates are available yet.
+As a user with no saved events, I see a friendly empty state message explaining that no events are available yet.
 
 **Why this priority**: Prevents confusion and sets expectations when the list is empty.
 
@@ -71,15 +71,15 @@ As a user with no saved dates of interest, I see a friendly empty state message 
 
 **Acceptance Scenarios**:
 
-1. Given no dates exist, when the main screen loads, then an empty state message appears instead of the list.
+1. Given no events exist, when the main screen loads, then an empty state message appears instead of the list.
 
 ---
 
 [Add more user stories as needed, each with an assigned priority]
 
-### User Story 4 - Manage dates (Priority: P2)
+### User Story 4 - Manage events (Priority: P2)
 
-As a user, I can add a new date of interest, edit an existing one by tapping its row, and delete an entry via swipe with confirmation. Changes persist across app launches.
+As a user, I can add a new event, edit an existing one by tapping its row, and delete an event via swipe with confirmation. Changes persist across app launches.
 
 **Why this priority**: Basic manageability of the list supports real-world usefulness while keeping scope small.
 
@@ -87,9 +87,9 @@ As a user, I can add a new date of interest, edit an existing one by tapping its
 
 **Acceptance Scenarios**:
 
-1. Given a valid new date entry, when I add it, then it appears in the list and is present after relaunch.
-2. Given an existing entry, when I tap its row, then I see the same sheet configured for Edit (header/CTA reflect editing) and when I save, the corresponding row updates and persists after relaunch.
-3. Given an existing entry, when I swipe left on its row and choose Delete, then I’m asked to confirm; when I confirm, the item is removed and remains removed after relaunch.
+1. Given a valid new event, when I add it, then it appears in the list and is present after relaunch.
+2. Given an existing event, when I tap its row, then I see the same sheet configured for Edit (header/CTA reflect editing) and when I save, the corresponding row updates and persists after relaunch.
+3. Given an existing event, when I swipe left on its row and choose Delete, then I’m asked to confirm; when I confirm, the item is removed and remains removed after relaunch.
 
 ---
 
@@ -124,8 +124,8 @@ As a user, I can switch between two tabs: Upcoming (Today and future dates) and 
 ### Functional Requirements
 
 - **FR-001**: The main screen MUST display the title "Countdown" and subtitle "Track your special moments".
-- **FR-002**: The main screen MUST show a list of dates of interest; each row MUST display: an icon, a title, a left-justified date, and a right-justified countdown pill.
-- **FR-003**: Entries MUST support an entry color per item; icons may remain monochrome while UI elements (e.g., row or countdown label background) use the entry color.
+- **FR-002**: The main screen MUST show a list of events; each row MUST display: an icon, a title, a left-justified date, and a right-justified countdown pill.
+- **FR-003**: Events MUST support a color per item; icons may remain monochrome while UI elements (e.g., row or countdown label background) use the item color.
 - **FR-004**: For future dates, the countdown pill’s background color MUST visually match the associated entry color.
 - **FR-005**: For past dates, the countdown pill’s background color MUST be gray.
 - **FR-006**: The countdown pill MUST show the number of whole calendar days between “today” and the target date as a NUMBER ONLY; past dates MUST be prefixed with “-”. If the target date is today, the pill MUST display the string “Today” instead of a number.  
@@ -135,9 +135,9 @@ As a user, I can switch between two tabs: Upcoming (Today and future dates) and 
 - **FR-008**: When no dates are available, the screen MUST display a clear empty state message in place of the list.
 - **FR-009**: Visual presentation SHOULD be consistent with the provided design reference while not requiring pixel-perfect matching; use SwiftUI material (e.g., `.ultraThinMaterial`) for list or row backgrounds to achieve the “liquid glass” style and ensure text contrast passes accessibility checks.
 - **FR-010**: The interface MUST maintain sufficient contrast for readability of the countdown pill on both colored and gray backgrounds.
-- **FR-011**: The app MUST persist dates of interest on-device (e.g., UserDefaults or Core Data) so entries survive app relaunches.
-- **FR-012**: The app MUST support basic add and edit operations for dates of interest (no delete required for MVP).
-  - Update: Delete is now required. Users MUST be able to delete an entry via swipe with a confirmation alert.
+- **FR-011**: The app MUST persist events on-device (e.g., UserDefaults or Core Data) so items survive app relaunches.
+- **FR-012**: The app MUST support basic add and edit operations for events (no delete required for MVP).
+  - Update: Delete is now required. Users MUST be able to delete an event via swipe with a confirmation alert.
 - **FR-017**: Tapping a row MUST open the add/edit sheet in Edit mode with fields pre-filled; header and CTA strings SHOULD reflect Edit (“Edit Countdown”, “Save Changes”).
 - **FR-018**: In the add/edit sheet, the selected icon tile background MUST reflect the currently selected color choice.
 - **FR-013**: Icons MUST use SF Symbols; each item stores an SF Symbol name and an entry color. The countdown label background MUST match the entry color for future dates (icons may remain monochrome).
@@ -151,7 +151,7 @@ As a user, I can switch between two tabs: Upcoming (Today and future dates) and 
 
 ### Key Entities *(include if feature involves data)*
 
-- **Date of Interest**: Represents a user-relevant date. Attributes include: title (string), date (calendar date), iconSymbolName (SF Symbol identifier), entryColor (color identifier).
+- **Event**: Represents a user-relevant date. Attributes include: title (string), date (calendar date), iconSymbolName (SF Symbol identifier), eventColor (color identifier).
 
 ## Success Criteria *(mandatory)*
 
@@ -160,4 +160,4 @@ As a user, I can switch between two tabs: Upcoming (Today and future dates) and 
 - **SC-001**: 100% of rows display all four elements (icon, title, date left-aligned, countdown right-aligned) in usability tests.
 - **SC-002**: In test scenarios with at least one past and one future date, countdown backgrounds follow the specified color rules with 100% accuracy.
 - **SC-003**: In moderated tests, 90% of participants can correctly state the days remaining/past for a given item within 5 seconds of viewing.
-- **SC-004**: Empty state is shown 100% of the time when no dates exist and is not shown when dates exist.
+- **SC-004**: Empty state is shown 100% of the time when no events exist and is not shown when events exist.

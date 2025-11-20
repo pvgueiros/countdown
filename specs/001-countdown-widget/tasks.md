@@ -8,8 +8,8 @@ Plan: `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/specs/001-countdow
 
 - Phase 1: Setup (project initialization and target wiring)
 - Phase 2: Foundational (shared code access, persistence boundary)
-- Phase 3: US1 — Configure a widget for a chosen date (P1)
-- Phase 4: US2 — Change the widget’s selected date (P2)
+- Phase 3: US1 — Configure a widget for a chosen event (P1)
+- Phase 4: US2 — Change the widget’s selected event (P2)
 - Phase 5: US3 — Visual consistency with app style (P3)
 - Final Phase: Polish & Cross-Cutting Concerns
 
@@ -32,33 +32,33 @@ Plan: `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/specs/001-countdow
 
 - [X] T013 Create App Group UserDefaults helper `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/Countdown/Data/Sources/AppGroupUserDefaults.swift`
 - [X] T014 Create WidgetSelection persistence store `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/Countdown/Data/Sources/WidgetSelectionStore.swift`
-- [X] T015 Update repository to accept injected UserDefaults suite `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/Countdown/Data/Sources/UserDefaultsDateOfInterestRepository.swift`
+- [X] T015 Update repository to accept injected UserDefaults suite `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/Countdown/Data/Sources/UserDefaultsEventRepository.swift`
 - [X] T016 Share date formatting provider with widget (enable target membership) `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/Countdown/Presentation/Formatters/DateFormatterProvider.swift`
 - [X] T017 [P] Share color/style tokens with widget (enable target membership) `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/Countdown/Presentation/Colors/RowStylingRules.swift`
 - [X] T018 [P] Share hex color utilities with widget (enable target membership) `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/Countdown/Presentation/Colors/EntryColor+Hex.swift`
 - [X] T019 Add widget-facing display formatter (title/date/countdown) `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/Countdown/Presentation/Formatters/WidgetDisplayFormatter.swift`
 
-## Phase 3 — User Story 1 (P1): Configure a widget for a chosen date
-Goal: User can add the smallest-size widget, select a Date of Interest (titles-only), and see title, formatted date, and countdown that exactly matches the app.
-Independent Test: With at least one saved date, user completes setup and the widget shows correct title, date, and countdown.
+## Phase 3 — User Story 1 (P1): Configure a widget for a chosen event
+Goal: User can add the smallest-size widget, select an Event (titles-only), and see title, formatted date, and countdown that exactly matches the app.
+Independent Test: With at least one saved event, user completes setup and the widget shows correct title, date, and countdown.
 
-- [X] T020 [US1] Implement AppEntity for titles-only selection `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/CountdownWidget/Entities/DateOfInterestAppEntity.swift`
-- [X] T021 [P] [US1] Implement AppIntent for widget configuration parameter `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/CountdownWidget/Intents/SelectDateIntent.swift`
+- [X] T020 [US1] Implement AppEntity for titles-only selection `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/CountdownWidget/Entities/EventAppEntity.swift`
+- [X] T021 [P] [US1] Implement AppIntent for widget configuration parameter `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/CountdownWidget/Intents/SelectEventIntent.swift`
 - [X] T022 [P] [US1] Implement AppIntentConfiguration in widget `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/CountdownWidget/CountdownWidget.swift`
 - [X] T023 [US1] Implement Timeline provider to load selection and format display `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/CountdownWidget/CountdownWidget.swift`
 - [X] T024 [P] [US1] Implement smallest-size widget view `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/CountdownWidget/Views/CountdownWidgetEntryView.swift`
 - [X] T025 [P] [US1] Persist selection snapshots (title/dateString) on configure `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/CountdownWidget/CountdownWidget.swift`
-- [X] T026 [US1] Placeholder & empty-state handling when no dates exist `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/CountdownWidget/CountdownWidget.swift`
+- [X] T026 [US1] Placeholder & empty-state handling when no events exist `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/CountdownWidget/CountdownWidget.swift`
 - [X] T027 [P] [US1] Add widget tap URL deep-link to open app `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/CountdownWidget/CountdownWidget.swift`
 - [X] T028 [US1] Unit tests for display formatter (match app semantics) `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/CountdownTests/Widget/WidgetDisplayFormatterTests.swift`
 - [X] T029 [P] [US1] Unit tests for Timeline provider happy/empty states `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/CountdownTests/Widget/CountdownWidgetTimelineTests.swift`
 
-## Phase 4 — User Story 2 (P2): Change the widget’s selected date
-Goal: User can reconfigure an existing widget to display a different saved date quickly.
-Independent Test: User opens selection for an existing widget, picks another date (titles-only), and the widget updates within a short window.
+## Phase 4 — User Story 2 (P2): Change the widget’s selected event
+Goal: User can reconfigure an existing widget to display a different saved event quickly.
+Independent Test: User opens selection for an existing widget, picks another event (titles-only), and the widget updates within a short window.
 
-- [X] T030 [US2] Ensure configuration edit path exposes titles-only list `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/CountdownWidget/Intents/SelectDateIntent.swift`
-- [X] T031 [P] [US2] Persist selection keyed by selected date ID `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/CountdownWidget/CountdownWidget.swift`
+- [X] T030 [US2] Ensure configuration edit path exposes titles-only list `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/CountdownWidget/Intents/SelectEventIntent.swift`
+- [X] T031 [P] [US2] Persist selection keyed by selected event ID `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/CountdownWidget/CountdownWidget.swift`
 - [X] T032 [P] [US2] Refresh timeline upon selection change `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/CountdownWidget/CountdownWidget.swift`
 - [X] T033 [US2] Test reconfiguration behavior `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/CountdownTests/Widget/WidgetReconfigurationTests.swift`
 
@@ -95,14 +95,14 @@ Graph (high-level):
 
 ## Implementation Strategy (MVP First)
 
-- MVP: Complete US1 (Phase 3) after Setup and Foundational. Ship a smallest-size widget that can be configured to any existing Date of Interest and shows correct title/date/countdown matching the app.
+- MVP: Complete US1 (Phase 3) after Setup and Foundational. Ship a smallest-size widget that can be configured to any existing Event and shows correct title/date/countdown matching the app.
 - Increment 2: US2 (reconfiguration) to improve usability without recreation.
 - Increment 3: US3 (visual polish, accessibility refinements).
 - Final: CI/coverage/performance polish.
 
 ## Validation
 
-- US1 Independent Test: Add widget, pick date from titles-only list, verify exact title/date/countdown.
+- US1 Independent Test: Add widget, pick event from titles-only list, verify exact title/date/countdown.
 - US2 Independent Test: Edit selection for existing widget, verify refresh within a short window.
 - US3 Independent Test: Visual tokens align with app; long titles truncate; VoiceOver reads concise labels.
 
