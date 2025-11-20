@@ -64,12 +64,15 @@ struct CountdownWidgetEntryView_Previews: PreviewProvider {
         Group {
             CountdownWidgetEntryView(entry: SimpleEntry(date: .now, title: "Birthday Party", dateText: "Dec 25, 2025", countdownText: "36"))
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
+                .containerBackground(.fill.secondary, for: .widget)
                 .previewDisplayName("Future Event")
             CountdownWidgetEntryView(entry: SimpleEntry(date: .now, title: "Conference Talk", dateText: "Nov 15, 2025", countdownText: "- 4"))
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
+                .containerBackground(.fill.secondary, for: .widget)
                 .previewDisplayName("Past Event")
             CountdownWidgetEntryView(entry: SimpleEntry(date: .now, title: "Very Long Event Title That Should Truncate", dateText: "Jan 1, 2026", countdownText: "43"))
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
+                .containerBackground(.fill.secondary, for: .widget)
                 .previewDisplayName("Long Title")
         }
     }
