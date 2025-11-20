@@ -78,26 +78,7 @@ struct SimpleEntry: TimelineEntry {
     let countdownText: String
 }
 
-struct CountdownWidgetEntryView : View {
-    var entry: Provider.Entry
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text(entry.title)
-                .font(.headline)
-                .lineLimit(1)
-                .minimumScaleFactor(0.8)
-            Text(entry.dateText)
-                .font(.caption)
-                .foregroundStyle(.secondary)
-                .lineLimit(1)
-            Text(entry.countdownText)
-                .font(.title)
-                .bold()
-        }
-        .widgetURL(URL(string: "countdown://open"))
-    }
-}
+// Entry view is defined in Views/CountdownWidgetEntryView.swift
 
 struct CountdownWidget: Widget {
     let kind: String = "CountdownWidget"

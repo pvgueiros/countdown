@@ -98,6 +98,19 @@
     "Countdown" : {
 
     },
+    "Countdown widget for %@, %@, %@ days remaining" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Countdown widget for %1$@, %2$@, %3$@ days remaining"
+          }
+        }
+      }
+    },
+    "Countdown: %@ days" : {
+
+    },
     "Countdowns" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -169,6 +182,9 @@
     "Date of Interest" : {
 
     },
+    "Date: %@" : {
+
+    },
     "Delete" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -219,6 +235,9 @@
           }
         }
       }
+    },
+    "Event: %@" : {
+
     },
     "Favorite Emoji" : {
 

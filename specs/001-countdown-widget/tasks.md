@@ -66,10 +66,10 @@ Independent Test: User opens selection for an existing widget, picks another dat
 Goal: Widget’s typography, colors, spacing match the app; long titles truncate; content remains readable.
 Independent Test: Visual inspection confirms use of app tokens; titles truncate with ellipsis; date/countdown legible in smallest widget.
 
-- [ ] T034 [US3] Apply RowStylingRules and color tokens to widget view `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/CountdownWidget/Views/CountdownWidgetEntryView.swift`
-- [ ] T035 [P] [US3] Truncation rules for long titles (single-line, tail ellipsis) `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/CountdownWidget/Views/CountdownWidgetEntryView.swift`
-- [ ] T036 [P] [US3] VoiceOver: concise labels for title/date/countdown `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/CountdownWidget/Views/CountdownWidgetEntryView.swift`
-- [ ] T037 [US3] Localization checks (date format/locale) via formatter `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/Countdown/Presentation/Formatters/WidgetDisplayFormatter.swift`
+- [X] T034 [US3] Apply RowStylingRules and color tokens to widget view `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/CountdownWidget/Views/CountdownWidgetEntryView.swift`
+- [X] T035 [P] [US3] Truncation rules for long titles (single-line, tail ellipsis) `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/CountdownWidget/Views/CountdownWidgetEntryView.swift`
+- [X] T036 [P] [US3] VoiceOver: concise labels for title/date/countdown `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/CountdownWidget/Views/CountdownWidgetEntryView.swift`
+- [X] T037 [US3] Localization checks (date format/locale) via formatter `/Users/paulavasconcelosgueiros/Developer/iOS/countdown/Countdown/Presentation/Formatters/WidgetDisplayFormatter.swift`
 
 ## Final Phase — Polish & Cross-Cutting Concerns
 
