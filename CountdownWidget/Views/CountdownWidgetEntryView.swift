@@ -8,7 +8,7 @@ struct CountdownWidgetEntryView: View {
         eventView
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             .accessibilityElement(children: .combine)
-            .accessibilityLabel("Countdown widget for \(entry.title), \(entry.dateText), \(countdownText) \(countdownSubtext)")
+            .accessibilityLabel("Countdown widget for \(entry.title ?? "No event selected"), \(formattedDate), \(countdownText) \(countdownSubtext)")
     }
     
     // MARK: - Past Event Layout
@@ -18,7 +18,7 @@ struct CountdownWidgetEntryView: View {
             HStack(alignment: .top) {
                 // Icon in rounded rectangle
                 ZStack {
-                    RoundedRectangle(cornerRadius: 8)
+                    RoundedRectangle(cornerRadius: 10)
                         .fill(iconContainerColor)
                         .frame(width: 36, height: 36)
                     Image(systemName: entry.iconSymbolName)
@@ -30,33 +30,35 @@ struct CountdownWidgetEntryView: View {
             .padding(.bottom, 8)
             
             // Event title
-            Text(entry.title)
+            Text(entry.title ?? "No event selected")
                 .font(.system(size: 15, weight: .medium))
                 .foregroundColor(eventTitleColor)
                 .lineLimit(2)
                 .minimumScaleFactor(0.5)
                 .truncationMode(.tail)
-                .accessibilityLabel("Event: \(entry.title)")
+                .accessibilityLabel("Event: \(entry.title ?? "No event selected")")
             
             Spacer()
             
             // Date and countdown row
             HStack(alignment: .bottom) {
                 // Month and day
-                VStack(alignment: .leading) {
-                    Spacer()
-                    Text(monthAbbreviation)
-                        .font(.system(size: 9, weight: .medium))
-                        .foregroundColor(monthTextColor)
-                        .textCase(.uppercase)
-                    Text(dayOfMonth)
-                        .font(.system(size: 21, weight: .medium))
-                        .foregroundColor(dayOfMonthTextColor)
+                if !isNoDateSelected {
+                    VStack(alignment: .leading) {
+                        Spacer()
+                        Text(monthAbbreviation)
+                            .font(.system(size: 9, weight: .medium))
+                            .foregroundColor(monthTextColor)
+                            .textCase(.uppercase)
+                        Text(dayOfMonth)
+                            .font(.system(size: 21, weight: .medium))
+                            .foregroundColor(dayOfMonthTextColor)
+                    }
                 }
                 
                 Spacer()
                 
-                // Countdown number and "ago" label
+                // Countdown number and label
                 VStack(alignment: .trailing) {
                     Text(countdownText)
                         .font(.system(size: countdownTextSize, weight: .medium))
@@ -73,16 +75,23 @@ struct CountdownWidgetEntryView: View {
     
     // MARK: - Computed State Properties
     
+    private var isNoDateSelected: Bool {
+        entry.title == nil || entry.eventDate == nil
+    }
+    
     private var isPastEvent: Bool {
-        entry.countdownText.contains("-")
+        guard let countdownDays = entry.countdownDays else { return false }
+        return countdownDays < 0
     }
     
     private var isToday: Bool {
-        entry.countdownText == "Today"
+        guard let countdownDays = entry.countdownDays else { return false }
+        return countdownDays == 0
     }
     
     private var isFutureEvent: Bool {
-        !isPastEvent && !isToday
+        guard let countdownDays = entry.countdownDays else { return false }
+        return countdownDays > 0
     }
     
     // MARK: - Computed UI Properties
@@ -99,9 +108,19 @@ struct CountdownWidgetEntryView: View {
         isPastEvent ? Color(hex: "#4B5563") : Color.white
     }
     
+    private var formattedDate: String {
+        guard let eventDate = entry.eventDate else { return "" }
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        return formatter.string(from: eventDate)
+    }
+    
     private var monthAbbreviation: String {
-        let components = entry.dateText.components(separatedBy: " ")
-        return components.first?.uppercased() ?? ""
+        guard let eventDate = entry.eventDate else { return "" }
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM"
+        return formatter.string(from: eventDate).uppercased()
     }
     
     private var monthTextColor: Color? {
@@ -109,9 +128,10 @@ struct CountdownWidgetEntryView: View {
     }
     
     private var dayOfMonth: String {
-        let components = entry.dateText.components(separatedBy: " ")
-        guard components.count >= 2 else { return "" }
-        return components[1].replacingOccurrences(of: ",", with: "")
+        guard let eventDate = entry.eventDate else { return "" }
+        let calendar = Calendar.current
+        let day = calendar.component(.day, from: eventDate)
+        return "\(day)"
     }
     
     private var dayOfMonthTextColor: Color? {
@@ -121,8 +141,10 @@ struct CountdownWidgetEntryView: View {
     private var countdownText: String {
         if isToday {
             return "TODAY"
+        } else if let countdownDays = entry.countdownDays {
+            return "\(abs(countdownDays))"
         } else {
-            return entry.countdownText.replacingOccurrences(of: "-", with: "").trimmingCharacters(in: .whitespaces)
+            return "--"
         }
     }
     
@@ -133,10 +155,10 @@ struct CountdownWidgetEntryView: View {
     private var countdownSubtext: String {
         if isToday {
             return "✨"
-        } else if isFutureEvent {
-            return "days left"
-        } else {
+        } else if isPastEvent {
             return "days ago"
+        } else {
+            return "days left"
         }
     }
     
@@ -147,19 +169,27 @@ struct CountdownWidgetEntryView: View {
 
 struct CountdownWidgetEntryView_Previews: PreviewProvider {
     static var previews: some View {
+        let calendar = Calendar.current
+        let pastDate = calendar.date(byAdding: .day, value: -129, to: Date()) ?? Date()
+        let futureDate = calendar.date(byAdding: .day, value: 34, to: Date()) ?? Date()
+        
         Group {
-            CountdownWidgetEntryView(entry: SimpleEntry(date: .now, title: "Birthday Party", dateText: "Dec 25, 2025", countdownText: "36", iconSymbolName: "birthday.cake", eventColorHex: "#EC4899"))
+            CountdownWidgetEntryView(entry: SimpleEntry(date: .now, title: "Birthday Party", eventDate: futureDate, countdownDays: 34, iconSymbolName: "birthday.cake", eventColorHex: "#EC4899"))
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
                 .containerBackground(Color(hex: "#EC4899") ?? .blue, for: .widget)
                 .previewDisplayName("Future Event")
-            CountdownWidgetEntryView(entry: SimpleEntry(date: .now, title: "Summer Vacation", dateText: "Jul 14, 2025", countdownText: "- 129", iconSymbolName: "airplane", eventColorHex: "#3B82F6"))
+            CountdownWidgetEntryView(entry: SimpleEntry(date: .now, title: "Summer Vacation", eventDate: pastDate, countdownDays: -129, iconSymbolName: "airplane", eventColorHex: "#3B82F6"))
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
                 .containerBackground(Color(hex: "#F3F4F6") ?? .secondary, for: .widget)
                 .previewDisplayName("Past Event")
-            CountdownWidgetEntryView(entry: SimpleEntry(date: .now, title: "Important Meeting", dateText: "Nov 20, 2025", countdownText: "Today", iconSymbolName: "briefcase", eventColorHex: "#A855F7"))
+            CountdownWidgetEntryView(entry: SimpleEntry(date: .now, title: "Important Meeting", eventDate: Date(), countdownDays: 0, iconSymbolName: "briefcase", eventColorHex: "#A855F7"))
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
                 .containerBackground(Color(hex: "#A855F7") ?? .purple, for: .widget)
                 .previewDisplayName("Today Event")
+            CountdownWidgetEntryView(entry: SimpleEntry(date: .now, title: nil, eventDate: nil, countdownDays: nil, iconSymbolName: "calendar", eventColorHex: "#3B82F6"))
+                .previewContext(WidgetPreviewContext(family: .systemSmall))
+                .containerBackground(Color(hex: "#3B82F6") ?? .blue, for: .widget)
+                .previewDisplayName("No Event Selected")
         }
     }
 }

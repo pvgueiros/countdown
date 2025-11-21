@@ -1,4 +1,5 @@
 import Foundation
+import WidgetKit
 
 public actor UserDefaultsEventRepository: EventRepository {
     private let key = "events"
@@ -28,6 +29,7 @@ public actor UserDefaultsEventRepository: EventRepository {
         var items = try await fetchAll()
         items.append(event)
         try saveAll(items)
+        await reloadWidgets()
     }
     
     public func update(_ event: Event) async throws {
@@ -35,6 +37,7 @@ public actor UserDefaultsEventRepository: EventRepository {
         if let idx = items.firstIndex(where: { $0.id == event.id }) {
             items[idx] = event
             try saveAll(items)
+            await reloadWidgets()
         }
     }
     
@@ -42,8 +45,15 @@ public actor UserDefaultsEventRepository: EventRepository {
         var items = try await fetchAll()
         items.removeAll { $0.id == id }
         try saveAll(items)
+        await reloadWidgets()
     }
-}
+    
+    private func reloadWidgets() async {
+        await MainActor.run {
+            WidgetCenter.shared.reloadAllTimelines()
+        }
+    }
+}    
     
     
 

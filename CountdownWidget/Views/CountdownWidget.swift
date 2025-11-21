@@ -12,61 +12,61 @@ import AppIntents
 struct Provider: AppIntentTimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
         SimpleEntry(date: Date(),
-                    title: "Countdown",
-                    dateText: DateFormatter.localizedString(from: Date(), dateStyle: .medium, timeStyle: .none),
-                    countdownText: "0",
+                    title: nil,
+                    eventDate: nil,
+                    countdownDays: nil,
                     iconSymbolName: "calendar",
                     eventColorHex: "#3B82F6")
     }
 
     func snapshot(for configuration: SelectEventIntent, in context: Context) async -> SimpleEntry {
-        await entry(for: configuration)
+        await entry(for: configuration, at: Date())
     }
     
     func timeline(for configuration: SelectEventIntent, in context: Context) async -> Timeline<SimpleEntry> {
-        let entry = await entry(for: configuration)
-        // Update daily at midnight for days-only countdown (avoid cross-target dependency)
+        let now = Date()
         let cal = Calendar.current
-        let startOfToday = cal.startOfDay(for: Date())
-        let nextMidnight = cal.date(byAdding: .day, value: 1, to: startOfToday) ?? Date().addingTimeInterval(60 * 60 * 24)
-        return Timeline(entries: [entry], policy: .after(nextMidnight))
+        let startOfToday = cal.startOfDay(for: now)
+        let nextMidnight = cal.date(byAdding: .day, value: 1, to: startOfToday) ?? now.addingTimeInterval(60 * 60 * 24)
+        
+        // Generate entries for now and midnight to ensure accurate countdown updates
+        let currentEntry = await entry(for: configuration, at: now)
+        let midnightEntry = await entry(for: configuration, at: nextMidnight)
+        
+        // Request reload after midnight for the next day's countdown
+        return Timeline(entries: [currentEntry, midnightEntry], policy: .after(nextMidnight))
     }
 
-    private func entry(for configuration: SelectEventIntent) async -> SimpleEntry {
+    private func entry(for configuration: SelectEventIntent, at date: Date) async -> SimpleEntry {
         guard let selected = configuration.selected else {
             return SimpleEntry(
-                date: Date(),
-                title: "No date selected",
-                dateText: "",
-                countdownText: "—",
+                date: date,
+                title: nil,
+                eventDate: nil,
+                countdownDays: nil,
                 iconSymbolName: "calendar",
                 eventColorHex: "#3B82F6"
             )
         }
-        // Calculate display strings matching app semantics
-        let now = Date()
+        // Calculate countdown days
         let cal = Calendar.current
-        let startOfToday = cal.startOfDay(for: now)
+        let startOfReferenceDay = cal.startOfDay(for: date)
         let startTarget = cal.startOfDay(for: selected.date)
-        let delta = cal.dateComponents([.day], from: startOfToday, to: startTarget).day ?? 0
-        let isToday = startTarget == startOfToday
-        let isFuture = delta > 0
-        let daysNumber = isToday ? 0 : abs(delta)
-        let countdownText = isToday ? "Today" : (isFuture ? "\(daysNumber)" : "- \(daysNumber)")
-        let dateText = DateFormatter.localizedString(from: selected.date, dateStyle: .medium, timeStyle: .none)
+        let countdownDays = cal.dateComponents([.day], from: startOfReferenceDay, to: startTarget).day ?? 0
 
         // Persist snapshots keyed by selected date id (supports multiple widgets via AppIntent config)
         let widgetId = selected.id.uuidString
         let suite = UserDefaults(suiteName: "group.com.bluecode.CountdownApp") ?? .standard
         suite.set(selected.id.uuidString, forKey: "widget.selection.\(widgetId).eventId")
         suite.set(selected.title, forKey: "widget.selection.\(widgetId).title")
+        let dateText = DateFormatter.localizedString(from: selected.date, dateStyle: .medium, timeStyle: .none)
         suite.set(dateText, forKey: "widget.selection.\(widgetId).dateString")
 
         return SimpleEntry(
-            date: now,
+            date: date,
             title: selected.title,
-            dateText: dateText,
-            countdownText: countdownText,
+            eventDate: selected.date,
+            countdownDays: countdownDays,
             iconSymbolName: selected.iconSymbolName,
             eventColorHex: selected.eventColorHex
         )
@@ -75,9 +75,9 @@ struct Provider: AppIntentTimelineProvider {
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
-    let title: String
-    let dateText: String
-    let countdownText: String
+    let title: String?
+    let eventDate: Date?
+    let countdownDays: Int?
     let iconSymbolName: String
     let eventColorHex: String
 }
@@ -98,7 +98,10 @@ struct CountdownWidget: Widget {
     }
     
     private func containerBackground(for entry: SimpleEntry) -> Color {
-        let isPastEvent = entry.countdownText.contains("-")
+        guard let countdownDays = entry.countdownDays else {
+            return Color(hex: entry.eventColorHex) ?? .black
+        }
+        let isPastEvent = countdownDays < 0
         if isPastEvent {
             return Color(hex: "#F3F4F6") ?? .red
         } else {
@@ -110,7 +113,12 @@ struct CountdownWidget: Widget {
 #Preview(as: .systemSmall) {
     CountdownWidget()
 } timeline: {
-    SimpleEntry(date: .now, title: "Summer Vacation", dateText: "Jul 14, 2025", countdownText: "- 129", iconSymbolName: "airplane", eventColorHex: "#3B82F6")
-    SimpleEntry(date: .now, title: "Important Meeting", dateText: "Nov 20, 2025", countdownText: "Today", iconSymbolName: "briefcase", eventColorHex: "#A855F7")
-    SimpleEntry(date: .now, title: "Birthday Party", dateText: "Dec 24, 2025", countdownText: "34", iconSymbolName: "birthday.cake", eventColorHex: "#EC4899")
+    let calendar = Calendar.current
+    let pastDate = calendar.date(byAdding: .day, value: -129, to: Date()) ?? Date()
+    let futureDate = calendar.date(byAdding: .day, value: 34, to: Date()) ?? Date()
+    
+    SimpleEntry(date: .now, title: "Summer Vacation", eventDate: pastDate, countdownDays: -129, iconSymbolName: "airplane", eventColorHex: "#3B82F6")
+    SimpleEntry(date: .now, title: "Important Meeting", eventDate: Date(), countdownDays: 0, iconSymbolName: "briefcase", eventColorHex: "#A855F7")
+    SimpleEntry(date: .now, title: "Birthday Party", eventDate: futureDate, countdownDays: 34, iconSymbolName: "birthday.cake", eventColorHex: "#EC4899")
+    SimpleEntry(date: .now, title: nil, eventDate: nil, countdownDays: nil, iconSymbolName: "calendar", eventColorHex: "3B82F6")
 }
