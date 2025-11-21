@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CA0BE19F2ECFCBC300E189F2 /* Countdown.icon in Resources */ = {isa = PBXBuildFile; fileRef = CA0BE19E2ECFCBC300E189F2 /* Countdown.icon */; };
+		CA5B10C32ED0CCC400C9B172 /* Countdown.icon in Resources */ = {isa = PBXBuildFile; fileRef = CA5B10C22ED0CCC400C9B172 /* Countdown.icon */; };
 		CAA374792ECE615900C3E22D /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAA374782ECE615900C3E22D /* WidgetKit.framework */; };
 		CAA3747B2ECE615900C3E22D /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAA3747A2ECE615900C3E22D /* SwiftUI.framework */; };
 		CAA374882ECE615A00C3E22D /* CountdownWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = CAA374762ECE615900C3E22D /* CountdownWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -52,10 +52,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		CA0BE19E2ECFCBC300E189F2 /* Countdown.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = Countdown.icon; sourceTree = "<group>"; };
 		CA2FCBFB2E90A001006F8324 /* Countdown.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Countdown.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA2FCC0A2E90A004006F8324 /* CountdownTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CountdownTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA2FCC142E90A004006F8324 /* CountdownUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CountdownUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA5B10C22ED0CCC400C9B172 /* Countdown.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = Countdown.icon; sourceTree = "<group>"; };
 		CAA374762ECE615900C3E22D /* CountdownWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CountdownWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAA374782ECE615900C3E22D /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		CAA3747A2ECE615900C3E22D /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -170,7 +170,7 @@
 				CAA3747C2ECE615900C3E22D /* CountdownWidget */,
 				CAA374772ECE615900C3E22D /* Frameworks */,
 				CA2FCBFC2E90A001006F8324 /* Products */,
-				CA0BE19E2ECFCBC300E189F2 /* Countdown.icon */,
+				CA5B10C22ED0CCC400C9B172 /* Countdown.icon */,
 			);
 			sourceTree = "<group>";
 		};
@@ -343,7 +343,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA0BE19F2ECFCBC300E189F2 /* Countdown.icon in Resources */,
+				CA5B10C32ED0CCC400C9B172 /* Countdown.icon in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
