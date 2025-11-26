@@ -3,7 +3,7 @@ import XCTest
 final class EventListRenderingTests: XCTestCase {
     func testListRendersWithPreloadedData() throws {
         let app = XCUIApplication()
-        app.launchArguments.append("UITEST_PRELOAD_DATA")
+        app.launchArguments += ["UITEST_CLEAR_DATA", "UITEST_PRELOAD_DATA"]
         app.launch()
 
         // Title/subtitle exist

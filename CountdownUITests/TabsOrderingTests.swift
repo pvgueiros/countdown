@@ -3,7 +3,7 @@ import XCTest
 final class TabsOrderingTests: XCTestCase {
     func testSwitchingTabsShowsDifferentContent() {
         let app = XCUIApplication()
-        app.launchArguments.append("UITEST_PRELOAD_DATA")
+        app.launchArguments += ["UITEST_CLEAR_DATA", "UITEST_PRELOAD_DATA"]
         app.launch()
 
         // Expect segment exists

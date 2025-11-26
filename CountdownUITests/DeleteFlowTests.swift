@@ -3,7 +3,7 @@ import XCTest
 final class DeleteFlowTests: XCTestCase {
     func testSwipeToDeleteRemovesItem() {
         let app = XCUIApplication()
-        app.launchArguments += ["UITEST_PRELOAD_DATA"]
+        app.launchArguments += ["UITEST_CLEAR_DATA", "UITEST_PRELOAD_DATA"]
         app.launch()
         
         // Ensure an item exists (from preload)

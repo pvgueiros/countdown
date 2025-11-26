@@ -5,7 +5,7 @@ public actor UserDefaultsEventRepository: EventRepository {
     private let key = "events"
     private let encoder = JSONEncoder()
     private let decoder = JSONDecoder()
-    private let userDefaults: UserDefaults
+    private nonisolated(unsafe) let userDefaults: UserDefaults
     
     public init(userDefaults: UserDefaults = .standard) {
         self.userDefaults = userDefaults

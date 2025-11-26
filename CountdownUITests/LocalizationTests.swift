@@ -7,7 +7,7 @@ final class LocalizationTests: XCTestCase {
         app.launch()
         
         // Header localized
-        XCTAssertTrue(app.staticTexts["Contagens regressivas"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["Acompanhe seus momentos especiais"].waitForExistence(timeout: 5))
     }
 }
 

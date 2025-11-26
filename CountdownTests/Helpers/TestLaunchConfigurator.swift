@@ -12,20 +12,24 @@ internal import os
 
 enum TestLaunchConfigurator {
     static func applyFromLaunchArguments(_ arguments: [String] = ProcessInfo.processInfo.arguments) {
+        // Use the same UserDefaults suite as the app (App Group for widget sharing)
+        let userDefaults = UserDefaults(suiteName: "group.com.bluecode.CountdownApp") ?? .standard
+        
         if arguments.contains("UITEST_CLEAR_DATA") {
-            UserDefaults.standard.removeObject(forKey: "events")
+            userDefaults.removeObject(forKey: "events")
+            userDefaults.synchronize() // Force write to disk
         }
         if arguments.contains("UITEST_PRELOAD_DATA") {
-            TestDataPreloader.preloadSampleData()
+            TestDataPreloader.preloadSampleData(to: userDefaults)
         }
         if arguments.contains("UITEST_PRELOAD_100") {
-            TestDataPreloader.preload(count: 100)
+            TestDataPreloader.preload(count: 100, to: userDefaults)
         }
     }
 }
 
 enum TestDataPreloader {
-    static func preloadSampleData() {
+    static func preloadSampleData(to userDefaults: UserDefaults = UserDefaults(suiteName: "group.com.bluecode.CountdownApp") ?? .standard) {
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
         let items: [EventMapper.DTO] = [
@@ -56,13 +60,14 @@ enum TestDataPreloader {
         ]
         do {
             let data = try encoder.encode(items)
-            UserDefaults.standard.set(data, forKey: "events")
+            userDefaults.set(data, forKey: "events")
+            userDefaults.synchronize() // Force write to disk
         } catch {
             Log.general.error("Failed to preload test data: \(String(describing: error), privacy: .public)")
         }
     }
     
-    static func preload(count: Int) {
+    static func preload(count: Int, to userDefaults: UserDefaults = UserDefaults(suiteName: "group.com.bluecode.CountdownApp") ?? .standard) {
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
         var items: [EventMapper.DTO] = []
@@ -86,7 +91,8 @@ enum TestDataPreloader {
         }
         do {
             let data = try encoder.encode(items)
-            UserDefaults.standard.set(data, forKey: "events")
+            userDefaults.set(data, forKey: "events")
+            userDefaults.synchronize() // Force write to disk
         } catch {
             Log.general.error("Failed to preload \(count) items: \(String(describing: error), privacy: .public)")
         }
