@@ -31,6 +31,10 @@ public final class EventListViewModel: ObservableObject {
     @Published public private(set) var upcomingRows: [Row] = []
     @Published public private(set) var pastRows: [Row] = []
     @Published public private(set) var items: [Event] = []
+    
+    // MARK: - iPad Split-View Selection State
+    
+    @Published public var selectedEventId: UUID? = nil
 
     // MARK: - Init
     
@@ -103,6 +107,7 @@ public final class EventListViewModel: ObservableObject {
     }
 
     // MARK: - Actions
+    
     public func item(for id: UUID) -> Event? {
         items.first(where: { $0.id == id })
     }
@@ -114,5 +119,24 @@ public final class EventListViewModel: ObservableObject {
         } catch {
             Log.general.error("Failed to delete: \(String(describing: error), privacy: .public)")
         }
+    }
+    
+    // MARK: - iPad Selection Management
+    
+    public func selectEvent(id: UUID) {
+        guard items.contains(where: { $0.id == id }) else {
+            selectedEventId = nil
+            return
+        }
+        selectedEventId = id
+    }
+    
+    public func clearSelection() {
+        selectedEventId = nil
+    }
+    
+    public func selectedEvent() -> Event? {
+        guard let id = selectedEventId else { return nil }
+        return items.first(where: { $0.id == id })
     }
 }

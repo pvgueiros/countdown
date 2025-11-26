@@ -33,10 +33,10 @@ This is an iOS/iPadOS app with WidgetKit extension:
 
 **Purpose**: Project initialization and validation
 
-- [ ] T001 Verify Xcode 14+ with iOS 16+ SDK installed and iPad simulator configured
-- [ ] T002 Review existing architecture (CLEAN + MVVM + Coordinator) in Countdown/ to understand patterns
-- [ ] T003 [P] Configure SwiftLint rules for new iPad-specific files (if needed)
-- [ ] T004 [P] Run existing test suite to establish baseline (all tests passing before changes)
+- [x] T001 Verify Xcode 14+ with iOS 16+ SDK installed and iPad simulator configured
+- [x] T002 Review existing architecture (CLEAN + MVVM + Coordinator) in Countdown/ to understand patterns
+- [x] T003 [P] Configure SwiftLint rules for new iPad-specific files (if needed)
+- [x] T004 [P] Run existing test suite to establish baseline (all tests passing before changes)
 
 ---
 
@@ -46,16 +46,16 @@ This is an iOS/iPadOS app with WidgetKit extension:
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T005 Add selection state properties to EventListViewModel in Countdown/Presentation/ViewModels/EventListViewModel.swift (@Published selectedEventId: UUID?)
-- [ ] T006 Add selectEvent(id:) method to EventListViewModel in Countdown/Presentation/ViewModels/EventListViewModel.swift
-- [ ] T007 [P] Add clearSelection() method to EventListViewModel in Countdown/Presentation/ViewModels/EventListViewModel.swift
-- [ ] T008 [P] Add selectedEvent() query method to EventListViewModel in Countdown/Presentation/ViewModels/EventListViewModel.swift
-- [ ] T009 Create EventListViewModelIPadTests.swift in CountdownTests/Presentation/ for selection state unit tests
-- [ ] T010 [P] Write unit test for selectEvent with valid ID in EventListViewModelIPadTests.swift
-- [ ] T011 [P] Write unit test for selectEvent with invalid ID in EventListViewModelIPadTests.swift
-- [ ] T012 [P] Write unit test for clearSelection in EventListViewModelIPadTests.swift
-- [ ] T013 [P] Write unit test for selectedEvent query in EventListViewModelIPadTests.swift
-- [ ] T014 Run selection state unit tests and verify all pass (coverage ≥80% on new methods)
+- [x] T005 Add selection state properties to EventListViewModel in Countdown/Presentation/ViewModels/EventListViewModel.swift (@Published selectedEventId: UUID?)
+- [x] T006 Add selectEvent(id:) method to EventListViewModel in Countdown/Presentation/ViewModels/EventListViewModel.swift
+- [x] T007 [P] Add clearSelection() method to EventListViewModel in Countdown/Presentation/ViewModels/EventListViewModel.swift
+- [x] T008 [P] Add selectedEvent() query method to EventListViewModel in Countdown/Presentation/ViewModels/EventListViewModel.swift
+- [x] T009 Create EventListViewModelIPadTests.swift in CountdownTests/Presentation/ for selection state unit tests
+- [x] T010 [P] Write unit test for selectEvent with valid ID in EventListViewModelIPadTests.swift
+- [x] T011 [P] Write unit test for selectEvent with invalid ID in EventListViewModelIPadTests.swift
+- [x] T012 [P] Write unit test for clearSelection in EventListViewModelIPadTests.swift
+- [x] T013 [P] Write unit test for selectedEvent query in EventListViewModelIPadTests.swift
+- [x] T014 Run selection state unit tests and verify all pass (coverage ≥80% on new methods)
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
